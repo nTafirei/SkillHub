@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app
+        version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.marotech.skillhub.components.session.SessionListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-config.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>appname</param-name>
+        <param-value>hub</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>
+            jakarta.servlet.jsp.jstl.fmt.localizationContext
+        </param-name>
+        <param-value>StripesResources</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>StripesFilter</filter-name>
+        <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+        <init-param>
+            <param-name>ActionResolver.Packages</param-name>
+            <param-value>com.marotech.skillhub.action</param-value>
+        </init-param>
+        <init-param>
+            <param-name>Extension.Packages</param-name>
+            <param-value>com.marotech.skillhub.extensions, com.marotech.skillhub.reload.extensions,
+                net.sourceforge.stripes.integration.spring
+            </param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>ActionBeanContext.Class</param-name>
+            <param-value>
+                com.marotech.skillhub.util.HubActionBeanContext
+            </param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>LocalePicker.Locales</param-name>
+            <param-value>en_GB,en_US,fr_FR</param-value>
+        </init-param>
+        <init-param>
+            <param-name>MultipartWrapper.Class</param-name>
+            <param-value>net.sourceforge.stripes.controller.multipart.CommonsMultipartWrapper</param-value>
+        </init-param>
+        <init-param>
+            <param-name>Interceptor.Classes</param-name>
+            <param-value>
+                com.marotech.skillhub.action.user.LoginInterceptor,
+                com.marotech.skillhub.action.user.RoleInterceptor
+            </param-value>
+        </init-param>
+    </filter>
+
+    <!-- hibernate filter configuration -->
+    <filter>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--  end hibernate filter configuration -->
+   <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!--
+    <servlet>
+        <servlet-name>cxf</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>-->
+
+    <filter-mapping>
+        <filter-name>StripesFilter</filter-name>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/web/*</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/web/error</location>
+    </error-page>
+
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+</web-app>
+

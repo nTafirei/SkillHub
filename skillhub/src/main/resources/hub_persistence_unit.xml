@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="hub_persistence_unit">
+        <class>com.marotech.skillhub.model.User</class>
+        <class>com.marotech.skillhub.model.Org</class>
+        <class>com.marotech.skillhub.model.Attachment</class>
+        <class>com.marotech.skillhub.model.UserRole</class>
+        <class>com.marotech.skillhub.model.AuthUser</class>
+        <class>com.marotech.skillhub.model.Feature</class>
+        <class>com.marotech.skillhub.model.JDBCDataSource</class>
+        <class>com.marotech.skillhub.model.Notification</class>
+        <class>com.marotech.skillhub.model.InstanceCount</class>
+        <class>com.marotech.skillhub.model.Worker</class>
+        <class>com.marotech.skillhub.model.Publication</class>
+        <class>com.marotech.skillhub.model.Showcase</class>
+        <class>com.marotech.skillhub.model.Comment</class>
+        <class>com.marotech.skillhub.model.Embedding</class>
+        <class>com.marotech.skillhub.model.LanguageModel</class>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.globally_quoted_identifiers" value="true"/>
+            <property name="hibernate.connection.autoReconnect" value="true"/>
+            <property name="hibernate.connection.autoReconnectForPools" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,174 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .node {
+      width: auto;
+      height: auto;
+      background-color: #61B7CF;
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 5px;
+      draggable:true
+      cursor: pointer; /* Change to pointer */
+      position: relative; /* Add position relative */
+    }
+
+    .highlight {
+      border: 2px solid red;
+      box-shadow: 0 0 10px red;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      bottom: 0;
+      left: 20%; /* Adjusted to account for the left panel */
+      width: 80%;
+    }
+
+    .button-container button {
+      padding: 10px 20px;
+      margin: 0 10px; /* Space between buttons */
+      border: none;
+      background-color: #4CAF50; /* Green background */
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button-container button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+    #palette {
+      width: 50%;
+      float: left;
+      border: 3px #888B90 solid;
+      height: 550px;
+      border-radius: 20px;
+    }
+
+    #palette-table {
+      width: 100%;
+      height:100%;
+      border-collapse: collapse;
+      border: 1px solid black; /* Add border to palette table */
+    }
+
+    #palette-table th, #palette-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    #palette-table th {
+      background-color: #f0f0f0;
+    }
+    #canvas-table {
+      width: 100%;
+      height: 520px;
+      border-collapse: collapse;
+    }
+
+    #canvas-table td {
+      vertical-align: top;
+    }
+    #diagramContainer {
+      width: 98%;
+      height: 95%;
+      border-radius: 20px;
+      position: relative;
+      background-color: #f9f9f9;
+      margin-left: 10px;
+    }
+    .outer-table {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+    }
+    .outer-table td {
+      vertical-align: top;
+    }
+    .canvas-container {
+      height: 100%;
+    }
+    #canvas {
+      height: 100%;
+    }
+
+    #inner-canvas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 100px;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      justify-content: top;
+    }
+
+    #inner-canvas > div {
+      display: block;
+      position: relative;
+      justify-content: top;
+    }
+
+/* Style the container div */
+.popup-container {
+  position: relative;
+  width: 300px;
+  height: 20px;
+  border: 1px solid #ccc;
+  background-color: yellow;
+  border-radius: 10px;
+}
+
+/* Style the popup content */
+.popup-content {
+  display: none;
+  position: absolute;
+  top: 20px; /* Adjust this value */
+  left: 0px; /* Adjust this value */
+  overflow: auto;
+  color: #000;
+  border-radius: 10px;
+  width: 700px;
+  height: 900px;
+  background-color: yellow; /* Set background color */
+  border: 1px solid #ccc;
+  padding: 10px;
+  opacity: 1; /* Set opacity to 1 (fully opaque) */
+  z-index: 1; /* Ensure popup is on top of other elements */
+}
+
+/* Show the popup content on hover */
+.popup-container:hover .popup-content {
+  display: block;
+}
+
+.palette-table .hidden-text {
+  display: none;
+  position: absolute;
+  top: 100px;
+  left: 300px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.hidden-text {
+  display: none;
+}
+
+.inner-canvas .node .hidden-text {
+  display: none;
+  position: absolute;
+  top: 100px;
+  left: 300px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}

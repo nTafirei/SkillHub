@@ -1,0 +1,5 @@
+rm -rf *.db.script		
+rm *.lobs
+rm -rf *.db.properties	
+rm *.log
+rm -rf *.tmp

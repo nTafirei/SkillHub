@@ -1,0 +1,29 @@
+# Intellij
+**/.idea/
+**/dist/tomcat11/
+*.iml
+*.iws
+*.tar
+*.zip
+*.lobs
+*.jar
+*.class
+*.exe
+*orchestrator.db.script
+*orchestrator.db.properties
+*.log
+.DS_Store
+marotech.com/
+
+# Atlassian IDE plugin
+atlassian-ide-plugin.xml
+
+
+# Mac
+._*
+.Spotlight-V100
+.Trashes
+
+# Maven
+**/target/
+

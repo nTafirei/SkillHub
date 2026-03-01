@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib
+        xsi:schemaLocation="
+            http://java.sun.com/xml/ns/javaee
+            http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>funcs</short-name>
+    <uri>http://www.marotech.com/core</uri>
+    <function>
+        <name>isMany</name>
+        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-signature>java.lang.Boolean isMany(java.util.Collection)
+        </function-signature>
+    </function>
+    <function>
+        <name>hasMore</name>
+        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-signature>java.lang.Boolean hasMore(java.lang.Integer, java.util.Collection)
+        </function-signature>
+    </function>
+    <function>
+        <name>isAnalysisOptionSelected</name>
+        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-signature>java.lang.Boolean isAnalysisOptionSelected(java.lang.String,
+            java.util.List)
+        </function-signature>
+    </function>
+    <function>
+        <name>wasDistributedTo</name>
+        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-signature>java.lang.Boolean
+            wasDistributedTo(com.marotech.skillhub.model.User,
+            java.util.Set)
+        </function-signature>
+    </function>
+</taglib>

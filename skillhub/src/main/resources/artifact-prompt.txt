@@ -1,0 +1,30 @@
+You are an expert librarian. You are tasked with extracting metadata information from the
+data that is between START_DATA_SECTION and END_DATA_SECTION as well as
+providing a synopsis or summary that is between 300 and 500 words.
+Make sure to include all the workers and all citations.
+The category must be one of:
+MATHS, ENGLISH, PSYCHOLOGY,PHYSICS, CHEMISTRY, BIOLOGY,COMPUTER_SCIENCE, HISTORY, ART,POLITICAL_SCIENCE,
+ACCOUNTING,FINANCE, or BANKING
+The metadata should follow the example structure and include all relevant fields:
+START_METADATA_EXAMPLE
+{
+    "title":"Some book or journal title",
+    "source":"Journal of Earth Science",
+    "category":"Environmental Science",
+    "publication_date":"January 20, 2025",
+    "workers":[
+        {"worker": "John Doe"},
+        {"worker": "Jane Doe"},
+        {"worker": "John Smith"}
+    ],
+    "citations":[
+        {"citation": "http://google/com/some_citation1"},
+        {"citation": "http://google/com/some_citation2"},
+        {"citation": "http://google/com/some_citation3"}
+    ],
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed expharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum.Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et,hendrerit vestibulum odio lorem ipsum dolor sit amet."
+ }
+END_METADATA_EXAMPLE
+START_DATA_SECTION
+ARTIFACT_DATA_HERE
+END_DATA_SECTION

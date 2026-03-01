@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<protected-elements>
+    <protected-element name="manage-showcases">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="manage-workers">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="manage-roles">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="manage-publications">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="edit-workers">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="view-publications">
+        <role name="User"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="show-tools">
+        <role name="User"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="view-workers">
+        <role name="User"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="verify-users">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="list-users">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="list-reports">
+        <role name="User"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="assign-roles">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+</protected-elements>
