@@ -25,7 +25,7 @@ public class DataSourcesActionBean extends UserBaseActionBean {
 
     @DefaultHandler
     public Resolution list() {
-        dataSources = repositoryService.findDataSourcesByOrg(getCurrentUser().getOrg());
+        dataSources = repositoryService.findAllJDBCDataSources();
         return new ForwardResolution(LIST_JSP);
     }
 

@@ -59,7 +59,7 @@ public class InactivePubsActionBean extends UserBaseActionBean {
     }
 
     public List<Category> getCategories() {
-        return Category.getSortedValues();
+        return repositoryService.fetchAllCategories();
     }
 
     @Override

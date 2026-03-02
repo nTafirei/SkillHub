@@ -33,9 +33,6 @@ public class JDBCDataSource extends BaseEntity {
     private int prepStmtCacheSize = 250;
     @Column(length = (8))
     private int prepStmtCacheSqlLimit = 2048;
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Org org;
 
     public HikariDataSource getDataSource() {
         HikariConfig config = new HikariConfig();

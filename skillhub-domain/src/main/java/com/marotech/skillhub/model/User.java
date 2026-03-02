@@ -1,7 +1,9 @@
 package com.marotech.skillhub.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -36,24 +38,25 @@ public class User extends BaseEntity {
     private String country;
     @Column(length = 16)
     private String mobilePhone;
+    @Column(length = 512)
+    private String profile;
     @Column(length = 32)
     private String nationalId = "";
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
     @Enumerated(EnumType.STRING)
     private Verified verified = Verified.NO;
     @Enumerated(EnumType.STRING)
     private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Org org;
+    @OneToOne(fetch = FetchType.EAGER)
+    private Attachment picture;
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Showcase showcase = Showcase.NO;
     @ToString.Exclude
     @ManyToMany(targetEntity = UserRole.class, fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRole> userRoles = new HashSet<>();
-    @Enumerated(EnumType.STRING)
-    private UserType userType;
     @Column
     private LocalDate dateOfBirth;
 
@@ -68,7 +71,6 @@ public class User extends BaseEntity {
         this.nationalId = nationalId;
         this.mobilePhone = mobile;
     }
-
     public boolean getHasRoles() {
         return userRoles != null && userRoles.size() > 0;
     }

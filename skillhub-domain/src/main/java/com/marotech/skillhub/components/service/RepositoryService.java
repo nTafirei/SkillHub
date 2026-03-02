@@ -19,8 +19,6 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +46,12 @@ public class RepositoryService {
                 .setParameter("roleNames", roleNames)
                 .getResultList();
     }
+    public List<User> findAllUsers() {
+        return entityManager.createQuery(
+                        "SELECT r FROM User r ", User.class)
+                .getResultList();
+    }
+
 
     public List<User> fetchUsersWithRoleIds(List<String> roleIds) {
         return entityManager.createQuery(
@@ -55,28 +59,6 @@ public class RepositoryService {
                                 "WHERE r.id IN :roleIds", User.class)
                 .setParameter("roleIds", roleIds)
                 .getResultList();
-    }
-
-    public List<JDBCDataSource> findDataSourcesByOrg(Org org) {
-        if (org == null) {
-            return new ArrayList<>();
-        }
-        String jpql = "SELECT t FROM JDBCDataSource t WHERE t.org = :org";
-
-        TypedQuery<JDBCDataSource> query = entityManager.createQuery(jpql, JDBCDataSource.class);
-        query.setParameter(ORG, org);
-        return query.getResultList();
-    }
-
-    public List<Notification> findNotificationsByOrg(Org org) {
-        if (org == null) {
-            return new ArrayList<>();
-        }
-        String jpql = "SELECT t FROM Notification t WHERE t.org = :org";
-
-        TypedQuery<Notification> query = entityManager.createQuery(jpql, Notification.class);
-        query.setParameter(ORG, org);
-        return query.getResultList();
     }
 
     public List<Notification> findNotificationsByRecipient(User recipient) {
@@ -88,50 +70,6 @@ public class RepositoryService {
         TypedQuery<Notification> query = entityManager.createQuery(jpql, Notification.class);
         query.setParameter("recipient", recipient);
         return query.getResultList();
-    }
-
-    public List<User> findAllAgents(Org org) {
-        try {
-            return entityManager.createQuery("SELECT u from User u WHERE u.userType =?1 and u.org =?2", User.class)
-                    .setParameter(1, UserType.AGENT)
-                    .setParameter(2, org)
-                    .getResultList();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public List<User> findAllHumanAgents(Org org) {
-        try {
-            return entityManager.createQuery("SELECT u from User u WHERE u.userType =?1 and u.org =?2", User.class)
-                    .setParameter(1, UserType.HUMAN)
-                    .setParameter(2, org)
-                    .getResultList();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-
-    public Org findOrgByName(String orgName) {
-        try {
-            return entityManager.createQuery("SELECT u from Org u WHERE u.name =?1", Org.class)
-                    .setParameter(1, orgName)
-                    .getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public User findAgentByName(String name) {
-        try {
-            return entityManager.createQuery("SELECT u from User u WHERE u.userType =?1 and u.firstName =?2", User.class)
-                    .setParameter(1, UserType.AGENT)
-                    .setParameter(2, name)
-                    .getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     public User findUserByEmail(String email) {
@@ -183,15 +121,15 @@ public class RepositoryService {
                 setParameter(1, id).getSingleResult();
     }
 
-    public List<Publication> findPublicationsForWorker(Worker worker) {
+    public List<Publication> findPublicationsForUser(User worker) {
         return entityManager.createQuery(
                         "SELECT p FROM Publication p JOIN p.workers a WHERE a = :worker", Publication.class)
                 .setParameter("worker", worker)
                 .getResultList();
     }
 
-    public Worker findWorkerById(String id) {
-        return entityManager.createQuery("SELECT u from Worker u where u.id = ?1", Worker.class).
+    public User findUserById(String id) {
+        return entityManager.createQuery("SELECT u from User u where u.id = ?1", User.class).
                 setParameter(1, id).getSingleResult();
     }
 
@@ -199,10 +137,8 @@ public class RepositoryService {
         return entityManager.createQuery("SELECT u from JDBCDataSource u where u.id = ?1", JDBCDataSource.class).
                 setParameter(1, id).getSingleResult();
     }
-
-    public User findUserById(String id) {
-        return entityManager.createQuery("SELECT u from User u where u.id = ?1", User.class).
-                setParameter(1, id).getSingleResult();
+    public List<JDBCDataSource> findAllJDBCDataSources() {
+        return entityManager.createQuery("SELECT u from JDBCDataSource u ", JDBCDataSource.class).getResultList();
     }
 
     public UserRole findUserRoleById(String id) {
@@ -213,14 +149,6 @@ public class RepositoryService {
     public Notification findNotificationById(String id) {
         return entityManager.createQuery("SELECT u from Notification u where u.id = ?1", Notification.class).
                 setParameter(1, id).getSingleResult();
-    }
-
-    public List<User> findAllUsers() {
-        return entityManager.createQuery("SELECT u from User u", User.class).getResultList();
-    }
-
-    public Iterable<Worker> findAllWorkers() {
-        return entityManager.createQuery("SELECT u from Worker u", Worker.class).getResultList();
     }
 
     public Iterable<Publication> findAllPublications() {
@@ -249,8 +177,8 @@ public class RepositoryService {
         }
     }
 
-    public Long countOrgs() {
-        TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(u) FROM Org u", Long.class);
+    public Long countUsers() {
+        TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(u) FROM User u", Long.class);
         return query.getSingleResult();
     }
 
@@ -756,10 +684,10 @@ public class RepositoryService {
         }
     }
 
-    public List<Worker> findInnovators(int start, int limit) {
+    public List<User> findInnovators(int start, int limit) {
         try {
-            return entityManager.createQuery("SELECT u from Worker u WHERE u.showcase =?1",
-                            Worker.class).
+            return entityManager.createQuery("SELECT u from User u WHERE u.showcase =?1",
+                            User.class).
                     setParameter(1, Showcase.YES).
                     getResultList();
         } catch (Exception e) {
@@ -809,7 +737,10 @@ public class RepositoryService {
             return null;
         }
     }
-
+    public List<Category> fetchAllCategories() {
+        return entityManager.createQuery("SELECT u from Category u ", Category.class).
+        getResultList();
+    }
     public Feature findFeatureByName(String name) {
         if (StringUtils.isBlank(name)) {
             return null;
@@ -822,12 +753,12 @@ public class RepositoryService {
         }
     }
 
-    public List<Worker> findWorkerByNames(String firstName, String lastName) {
+    public List<User> findUsersByNames(String firstName, String lastName) {
         if (StringUtils.isBlank(firstName) && StringUtils.isBlank(lastName)) {
             return new ArrayList<>();
         }
         try {
-            return entityManager.createQuery("SELECT u from Worker u WHERE u.firstName =?1 AND u.lastName =?2", Worker.class).
+            return entityManager.createQuery("SELECT u from User u WHERE u.firstName =?1 AND u.lastName =?2", User.class).
                     setParameter(1, firstName).
                     setParameter(2, lastName).
                     getResultList();
@@ -836,12 +767,12 @@ public class RepositoryService {
         }
     }
 
-    public List<Worker> findWorkersByFirstOrLastName(String firstName, String lastName) {
+    public List<User> findUsersByFirstOrLastName(String firstName, String lastName) {
         if (StringUtils.isBlank(firstName) && StringUtils.isBlank(lastName)) {
             return new ArrayList<>();
         }
         try {
-            return entityManager.createQuery("SELECT u from Worker u WHERE u.firstName LIKE?1 OR u.lastName LIKE?2", Worker.class).
+            return entityManager.createQuery("SELECT u from User u WHERE u.firstName LIKE?1 OR u.lastName LIKE?2", User.class).
                     setParameter(1, "%" + firstName + "%").
                     setParameter(2, "%" + lastName + "%").
                     getResultList();
@@ -905,6 +836,7 @@ public class RepositoryService {
     public static final String ORG = "org";
     public static final String NAME = "name";
     private static final Logger LOG = LoggerFactory.getLogger(RepositoryService.class);
+
 
 
 }

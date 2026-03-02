@@ -4,12 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.marotech.skillhub.components.config.Config;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.gson.CustomExclusionStrategy;
 import com.marotech.skillhub.llm.ChatService;
 import com.marotech.skillhub.llm.MockChatService;
 import com.marotech.skillhub.llm.OllamaChatService;
 import com.marotech.skillhub.model.*;
-import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.util.TextChunker;
 import io.github.ollama4j.exceptions.OllamaBaseException;
 import io.github.ollama4j.models.embeddings.OllamaEmbedResponseModel;
@@ -86,7 +86,7 @@ public class PublicationFileProcessor implements Processor {
         pub.setAttachment(attachment);
         pub.setTitle(jsonPub.getTitle());
         pub.setSource(jsonPub.getSource());
-        pub.setCategory(Category.valueOf(jsonPub.getCategory()));
+        //pub.setCategory(Category.valueOf(jsonPub.getCategory()));
         pub.setPubDate(jsonPub.getPublication_date());
 
         for (JsonPub.Citation citation : jsonPub.getCitations()) {
@@ -102,17 +102,14 @@ public class PublicationFileProcessor implements Processor {
                 lastNames.append(names[i]).append(" ");
             }
             //TODO: there could be more than 1 worker with the same name!!!
-            List<Worker> theWorkers = repositoryService.findWorkerByNames(firstName,
+            List<User> theWorkers = repositoryService.findUsersByNames(firstName,
                     lastNames.toString());
-            if (!theWorkers.isEmpty()) {
-                pub.getWorkers().addAll(theWorkers);
-            } else {
-                Worker worker1 = new Worker();
-                worker1.setFirstName(firstName);
-                worker1.setLastName(lastNames.toString());
-                repositoryService.save(worker1);
-                pub.getWorkers().add(worker1);
-            }
+
+            User worker1 = new User();
+            worker1.setFirstName(firstName);
+            worker1.setLastName(lastNames.toString());
+            repositoryService.save(worker1);
+            pub.setWorker(worker1);
         }
 
         repositoryService.save(pub);
@@ -173,7 +170,6 @@ public class PublicationFileProcessor implements Processor {
         for (User user : users) {
             Notification notification = new Notification();
             notification.setRecipient(user);
-            notification.setOrg(user.getOrg());
             notification.setSubject("Publication " + publication.getTitle() + " has been processed");
             notification.setBody("Publication " + publication.getTitle()
                     + " has been processed at " + LocalDateTime.now());

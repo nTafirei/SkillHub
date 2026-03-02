@@ -16,6 +16,8 @@
         <class>com.marotech.skillhub.model.InstanceCount</class>
         <class>com.marotech.skillhub.model.Worker</class>
         <class>com.marotech.skillhub.model.Publication</class>
+        <class>com.marotech.skillhub.model.Category</class>
+        <class>com.marotech.skillhub.model.Skill</class>
         <class>com.marotech.skillhub.model.Showcase</class>
         <class>com.marotech.skillhub.model.Comment</class>
         <class>com.marotech.skillhub.model.Embedding</class>

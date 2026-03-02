@@ -32,7 +32,7 @@ public class Publication extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @NotNull
     private PubType pubType = PubType.BOOK;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     private Category category;
     @Enumerated(EnumType.STRING)
@@ -46,46 +46,14 @@ public class Publication extends BaseEntity {
     @ToString.Exclude
     @OneToOne(fetch = FetchType.EAGER)
     private Attachment attachment;
-    @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "pub_workers", joinColumns = @JoinColumn(name = "pub_id"),
-            inverseJoinColumns = @JoinColumn(name = "auth_id"))
-    private List<Worker> workers = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull
+    private User worker;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private List<String> citations = new ArrayList<>();
-    @ToString.Exclude
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Comment> comments = new ArrayList<>();
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Org org;
 
     public Boolean getIsShowcased() {
         return showcase == Showcase.YES;
-    }
-
-    public String getWorkerNames() {
-        if (workers.isEmpty()) {
-            return "";
-        }
-        StringBuilder builder = new StringBuilder();
-        int index = 0;
-        for (Worker worker : workers) {
-            builder.append(worker.getFullName());
-            index = index + 1;
-            if (index < (workers.size() - 1)) {
-                builder.append(",");
-            }
-        }
-        return builder.toString();
-    }
-
-    public List<Comment> getSortedComments() {
-        if (comments.isEmpty()) {
-            return comments;
-        }
-        Collections.sort(comments, new CommentComparator());
-        return comments;
     }
 
     public String getFormattedPubDate() {

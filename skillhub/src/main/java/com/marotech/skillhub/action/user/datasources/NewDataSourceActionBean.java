@@ -50,7 +50,6 @@ public class NewDataSourceActionBean extends UserBaseActionBean {
     @HandlesEvent(SAVE)
     public Resolution save() {
         JDBCDataSource dataSource = new JDBCDataSource();
-        dataSource.setOrg(getCurrentUser().getOrg());
         dataSource.setName(name);
         dataSource.setPassword(password);
         dataSource.setJdbcUrl(jdbcUrl);

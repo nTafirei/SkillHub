@@ -91,8 +91,6 @@ public class RegisterActionBeanPart extends UserBaseActionBean {
                 middleName, lastName, address,
                 town, mobilephone, nationalId, country);
         String orgName = config.getProperty("orgId");
-        Org org = repositoryService.findOrgByName(orgName);
-        user.setOrg(org);
         repositoryService.save(user);
         authUser.setSystemUser(user);
         repositoryService.save(authUser);

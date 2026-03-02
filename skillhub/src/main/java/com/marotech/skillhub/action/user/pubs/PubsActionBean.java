@@ -57,7 +57,7 @@ public class PubsActionBean extends UserBaseActionBean {
         return LIST_JSP;
     }
     public List<Category> getCategories() {
-        return Category.getSortedValues();
+        return repositoryService.fetchAllCategories();
     }
     @Override
     public String getNavSection() {

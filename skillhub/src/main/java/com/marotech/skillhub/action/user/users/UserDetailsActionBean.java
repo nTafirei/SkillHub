@@ -4,7 +4,6 @@ import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.model.User;
-import com.marotech.skillhub.model.UserType;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -24,11 +23,7 @@ public class UserDetailsActionBean extends UserBaseActionBean {
 
     @DefaultHandler
     public Resolution view() {
-        if (user.getUserType() == UserType.HUMAN) {
             return new ForwardResolution(USER_DETAIL_JSP);
-        } else {
-            return new ForwardResolution(AGENT_DETAIL_JSP);
-        }
     }
 
     @Override
@@ -45,9 +40,6 @@ public class UserDetailsActionBean extends UserBaseActionBean {
 
     @Override
     public String getNavSection() {
-        if (user.getUserType() == UserType.AGENT) {
-            return "agents";
-        }
         return "users";
     }
 
@@ -60,5 +52,4 @@ public class UserDetailsActionBean extends UserBaseActionBean {
     }
 
     public static final String USER_DETAIL_JSP = "/WEB-INF/jsp/user/users/user-details.jsp";
-    public static final String AGENT_DETAIL_JSP = "/WEB-INF/jsp/user/agents/agent-details.jsp";
 }

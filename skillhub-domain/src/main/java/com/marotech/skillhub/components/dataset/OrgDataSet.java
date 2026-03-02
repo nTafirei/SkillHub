@@ -44,16 +44,10 @@ public class OrgDataSet {
             String ext = config.getProperty("current.country.initials");
 
             String adminEmail = "system_admin@skillhub.co." + ext;
-            long num = repositoryService.countOrgs();
+            long num = repositoryService.countUsers();
             if (num > 0) {
                 return;
             }
-
-            Org org = new Org();
-            org.setAddress("80 Samora Machel Avenue");
-            org.setName("MaroTech");
-            org.setEmail("admin@marotech.co");
-            repository.save(org);
 
             User superAdmin = null;
 
@@ -65,8 +59,6 @@ public class OrgDataSet {
 
                 repository.save(authUser);
                 superAdmin = new User();
-                //superAdmin.setDescription("Super Admin");
-                superAdmin.setUserType(UserType.HUMAN);
                 superAdmin.setVerified(Verified.YES);
                 superAdmin.setNationalId("12345001");
 
@@ -75,11 +67,9 @@ public class OrgDataSet {
                 superAdmin.setMiddleName("System Admin");
                 superAdmin.setEmail(adminEmail);
                 superAdmin.setAddress("80 Samora Machel Avenue");
-                superAdmin.setGender(Gender.MALE);
                 superAdmin.setCity("Harare");
                 superAdmin.setCountry("Zimbabwe");
                 superAdmin.setMobilePhone("0712374658");
-                superAdmin.setOrg(org);
                 repository.save(superAdmin);
 
                 Iterable<UserRole> roles = repositoryService.findAllRoles();
@@ -94,17 +84,17 @@ public class OrgDataSet {
                 authUser.setSystemUser(superAdmin);
                 repository.save(authUser);
 
-                createWorkers(superAdmin);
+                createUsers(superAdmin);
             }
 
-            createOrgUsers(org);
+            createUsers();
         } catch (Exception e) {
             LOG.error("Error building basic data :", e);
             System.exit(0);
         }
     }
 
-    private void createWorkers(User user) throws IOException {
+    private void createUsers(User user) throws IOException {
         byte[] bytes = readFileFromClasspath("pubs.json");
         Gson gson = new GsonBuilder()
                 .setExclusionStrategies(new CustomExclusionStrategy())
@@ -134,12 +124,9 @@ public class OrgDataSet {
 
             PubJson.Worker[] workerList = p.getWorkers();
             for (PubJson.Worker a : workerList) {
-                Worker worker =
-                        new Worker();
+                User worker =
+                        new User();
                 String aStr = a.getWorker();
-                if (aStr.contains("Dr. ")) {
-                    worker.setTitle("Dr.");
-                }
                 if (index % 2 == 0) {
                     worker.setShowcase(Showcase.YES);
                 }
@@ -149,16 +136,16 @@ public class OrgDataSet {
                 worker.setLastName(names[1]);
                 worker.setEmail((worker.getLastName() + "@gmail.com").toLowerCase());
                 worker.setProfile(PROFILE.replaceAll("MUNHU", worker.getFullName()));
-                List<Worker> tmp = repositoryService.findWorkerByNames(worker.getFirstName(), worker.getLastName());
+                List<User> tmp = repositoryService.findUsersByNames(worker.getFirstName(), worker.getLastName());
                 if (tmp.isEmpty()) {
                     repositoryService.save(worker);
                 } else {
                     worker = tmp.get(0);
                 }
-                pub.getWorkers().add(worker);
+                pub.setWorker(worker);
             }
 
-            Category cat = Category.fromString(p.getCategory());
+            Category cat = null;
             pub.setCategory(cat);
             PubType pubType = PubType.fromString(p.getPublicationType());
             pub.setPubType(pubType);
@@ -183,8 +170,6 @@ public class OrgDataSet {
             comment.setTitle("Commenting on : " + pub.getTitle());
             comment.setBody("this is a test comment");
             repositoryService.save(comment);
-            pub.getComments().add(comment);
-            pub.setOrg(user.getOrg());
             repositoryService.save(pub);
         }
     }
@@ -200,7 +185,7 @@ public class OrgDataSet {
         }
     }
 
-    private void createOrgUsers(Org org) throws Exception {
+    private void createUsers() throws Exception {
 
         if (!isDev) {
             return;
@@ -218,8 +203,6 @@ public class OrgDataSet {
                 authUser.setPassword(newPassword);
                 repository.save(authUser);
                 user0 = new User();
-                user0.setUserType(UserType.HUMAN);
-                user0.setOrg(org);
                 user0.setVerified(Verified.YES);
                 user0.setNationalId("" + random.nextInt(1012450000));
 
@@ -228,7 +211,6 @@ public class OrgDataSet {
                 user0.setNationalId("11123561");
                 user0.setEmail("marshall@skillhub.co." + ext);
                 user0.setAddress("80 Samora Machel Avenue");
-                user0.setGender(Gender.MALE);
                 if (country.equals("Zimbabwe")) {
                     user0.setCity("Harare");
                     user0.setCountry("Zimbabwe");
@@ -259,16 +241,12 @@ public class OrgDataSet {
             authUser.setPassword(newPassword);
             repository.save(authUser);
             user1 = new User();
-            user1.setUserType(UserType.HUMAN);
-            user1.setOrg(org);
             user1.setVerified(Verified.YES);
             user1.setNationalId("222224222");
             user1.setFirstName("John");
             user1.setLastName("Doe");
             user1.setEmail("john1@skillhub.co." + ext);
             user1.setAddress("80 Samora Machel Avenue");
-            user1.setGender(Gender.MALE);
-
             if (country.equals("Zimbabwe")) {
                 user1.setCity("Harare");
                 user1.setCountry("Zimbabwe");

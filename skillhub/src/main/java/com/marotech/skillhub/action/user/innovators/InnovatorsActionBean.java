@@ -2,10 +2,10 @@ package com.marotech.skillhub.action.user.innovators;
 
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
-import com.marotech.skillhub.action.user.converters.WorkerConverter;
-import com.marotech.skillhub.model.Worker;
+import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.model.Showcase;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.User;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;
@@ -22,11 +22,12 @@ public class InnovatorsActionBean extends UserBaseActionBean {
     @Setter
     private int currPage = 0;
     @Getter
-    private Iterable<Worker> workers = new ArrayList<>();
+    private Iterable<User
+            > workers = new ArrayList<>();
     @Getter
     @Setter
-    @Validate(required = true, on = {DISABLE, ADD}, converter = WorkerConverter.class)
-    private Worker user;
+    @Validate(required = true, on = {DISABLE, ADD}, converter = UserConverter.class)
+    private User user;
 
     @DefaultHandler
     public Resolution list() {
@@ -57,7 +58,7 @@ public class InnovatorsActionBean extends UserBaseActionBean {
         workers = repositoryService.findInnovators(start, perPage);
     }
 
-    public long getWorkersSize() {
+    public long getUsersSize() {
         return workers.spliterator().getExactSizeIfKnown();
     }
 

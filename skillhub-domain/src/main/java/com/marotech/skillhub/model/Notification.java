@@ -20,7 +20,4 @@ public class Notification extends BaseEntity {
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     private User recipient;
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Org org;
 }

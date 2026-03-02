@@ -52,9 +52,8 @@ public class CommentActionBean extends UserBaseActionBean {
         comment.setTitle(title);
         comment.setBody(body);
         comment.setParentNote(parent);
+        comment.setPublication(publication);
         repositoryService.save(comment);
-        publication.getComments().add(comment);
-        repositoryService.save(publication);
         return new RedirectResolution("/web/comments/" + publication.getId());
     }
 

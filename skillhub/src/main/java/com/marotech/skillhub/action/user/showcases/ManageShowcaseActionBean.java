@@ -91,7 +91,7 @@ public class ManageShowcaseActionBean extends UserBaseActionBean {
     }
 
     public List<Category> getCategories() {
-        return Category.getSortedValues();
+        return repositoryService.fetchAllCategories();
     }
 
     @SpringBean
