@@ -49,8 +49,10 @@ public class RoleNameParser extends DefaultHandler {
             log
                     .error("ParserConfigurationException - Error parsing document : " + fileName
                             , e);
+            System.exit(0);
         } catch (Exception e) {
             log.error("IOException - Error parsing document : " + fileName, e);
+            System.exit(0);
         }
         validateRoles();
     }

@@ -2,10 +2,10 @@ package com.marotech.skillhub.action.user.tools;
 
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.llm.ChatService;
 import com.marotech.skillhub.llm.MockChatService;
 import com.marotech.skillhub.llm.OllamaChatService;
-import com.marotech.skillhub.components.service.RepositoryService;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;

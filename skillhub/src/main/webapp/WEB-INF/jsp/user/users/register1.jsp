@@ -14,104 +14,41 @@
 
                                    <s:errors/>
 
-                    <s:form action="/web/register2" name="createForm" id="createForm"
+                    <s:form action="/web/register1" name="createForm" id="createForm"
                             method="post">
                         <input type="hidden" name="_eventName" id="_eventName" value="save"/>
                         <table class="alternating">
                             <thead>
                             <tr>
                                 <th colspan="2">
-                                    <u><fmt:message key="registerheaderlabel"/></u>
+                                    <u><fmt:message key="registerasheaderlabel"/></u>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                                  <tr>
                                      <td>
-                                         <fmt:message key="provincelabel"/>
+                                         <fmt:message key="regtypelabel"/>
                                      </td>
                                      <td>
-
                                              <c:set var="selectedValue" value=""/>
-                                             <s:select name="province" id="province" style="background-color:#F0E68C"
-                                             onchange="resetDistrict()">
+                                             <s:select name="regType" id="regType" style="background-color:#F0E68C">
                                                    <s:option value="">
-                                                   <fmt:message key="selectprovincelabel"/></s:option>
-                                                   <c:forEach items="${actionBean.provinces}" var="province"
+                                                   <fmt:message key="selectregTypelabel"/></s:option>
+                                                   <c:forEach items="${actionBean.regTypes}" var="regType"
                                                               varStatus="loopStatus">
 
-                                                       <c:if test="${actionBean.province !=null &&
-                                                             actionBean.province.id == province.id}">
+                                                       <c:if test="${actionBean.regType !=null &&
+                                                             actionBean.regType == regType}">
                                                          <c:set var="selectedValue" value="selected"/>
                                                       </c:if>
-                                                       <option value="${province.id}" ${selectedValue}/>
-                                                      ${province.name}
+                                                       <option value="${regType}" ${selectedValue}/>
+                                                      ${regType.name}
                                                       <c:set var="selectedValue" value=""/>
                                                    </c:forEach>
                                              </s:select>
                                      </td>
                                  </tr>
-                                 <tr>
-                                     <td>
-                                         <fmt:message key="districtlabel"/>
-                                     </td>
-                                     <td>
-                                             <c:set var="selectedValue" value=""/>
-                                             <s:select name="district" id="district" style="background-color:#F0E68C"
-                                              onchange="resetWard()">
-                                                   <s:option value="">
-                                                   <fmt:message key="selectdistrictlabel"/></s:option>
-                                                   <c:forEach items="${actionBean.districts}" var="district"
-                                                              varStatus="loopStatus">
-
-                                                       <c:if test="${actionBean.district !=null &&
-                                                             actionBean.district.id == district.id}">
-                                                         <c:set var="selectedValue" value="selected"/>
-                                                      </c:if>
-                                                       <option value="${district.id}" ${selectedValue}/>
-                                                      ${district.name}
-                                                      <c:set var="selectedValue" value=""/>
-                                                   </c:forEach>
-                                             </s:select>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                      <td>
-                                          <fmt:message key="wardlabel"/>
-                                      </td>
-                                      <td>
-                                             <c:set var="selectedValue" value=""/>
-                                             <s:select name="ward" id="ward" style="background-color:#F0E68C"
-                                              onchange="createForm.submit()">
-                                                   <s:option value="">
-                                                   <fmt:message key="selectwardlabel"/></s:option>
-                                                   <c:forEach items="${actionBean.wards}" var="ward"
-                                                              varStatus="loopStatus">
-
-                                                       <c:if test="${actionBean.ward !=null &&
-                                                             actionBean.ward.id == ward.id}">
-                                                         <c:set var="selectedValue" value="selected"/>
-                                                      </c:if>
-                                                       <option value="${ward.id}" ${selectedValue}/>
-                                                      ${ward.wardNumber}
-                                                      <c:set var="selectedValue" value=""/>
-                                                   </c:forEach>
-                                             </s:select>
-                                      </td>
-                                 </tr>
-                            </tbody>
-                        </table>
-                        <script language="javascript">
-                            function resetDistrict(){
-                                document.getElementById('district').selectedIndex = 0;
-                                document.getElementById('ward').selectedIndex = 0;
-                                document.createForm.submit();
-                            }
-                            function resetWard(){
-                                document.getElementById('ward').selectedIndex = 0;
-                                document.createForm.submit();
-                            }
-                        </script>
                     </s:form>
                 </div>
             </div>

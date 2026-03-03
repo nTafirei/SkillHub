@@ -4,7 +4,7 @@
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="manage-workers">
+    <protected-element name="manage-talent">
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
@@ -12,26 +12,7 @@
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="manage-publications">
-        <role name="Administrator"/>
-        <role name="System Administrator"/>
-    </protected-element>
-    <protected-element name="edit-workers">
-        <role name="Administrator"/>
-        <role name="System Administrator"/>
-    </protected-element>
-    <protected-element name="view-publications">
-        <role name="User"/>
-        <role name="Administrator"/>
-        <role name="System Administrator"/>
-    </protected-element>
-    <protected-element name="show-tools">
-        <role name="User"/>
-        <role name="Administrator"/>
-        <role name="System Administrator"/>
-    </protected-element>
-    <protected-element name="view-workers">
-        <role name="User"/>
+    <protected-element name="edit-talent">
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>

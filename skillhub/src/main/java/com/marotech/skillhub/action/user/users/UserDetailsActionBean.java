@@ -1,8 +1,8 @@
 package com.marotech.skillhub.action.user.users;
 
-import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
+import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.model.User;
 import lombok.Getter;
 import lombok.Setter;

@@ -54,10 +54,13 @@ public class FeatureValidator extends DefaultHandler {
             log
                     .error("ParserConfigurationException - Error parsing document : " + fileName
                             , e);
+            System.exit(0);
         } catch (SAXException e) {
             log.error("SAXException - Error parsing document : " + fileName, e);
+            System.exit(0);
         } catch (IOException e) {
             log.error("IOException - Error parsing document : " + fileName, e);
+            System.exit(0);
         }
         validateFeatures();
     }

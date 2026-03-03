@@ -17,5 +17,4 @@ public class BaseDataSet {
 
     @Autowired
     private ProtectedElementParser protectedElementParser;
-
 }

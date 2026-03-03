@@ -79,4 +79,6 @@ public class ProtectedElement {
         return roles.size() > 0;
     }
 
+
+
 }

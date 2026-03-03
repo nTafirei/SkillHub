@@ -1,9 +1,9 @@
 package com.marotech.skillhub.action.user;
 
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.AuthUser;
 import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.util.Constants;
-import com.marotech.skillhub.components.service.RepositoryService;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;

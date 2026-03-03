@@ -7,6 +7,7 @@ import com.marotech.skillhub.model.*;
 import com.marotech.skillhub.model.Parameter;
 import com.marotech.skillhub.repository.GenericRepository;
 import com.marotech.skillhub.repository.ResultsType;
+import com.marotech.skillhub.util.Constants;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
@@ -46,12 +47,6 @@ public class RepositoryService {
                 .setParameter("roleNames", roleNames)
                 .getResultList();
     }
-    public List<User> findAllUsers() {
-        return entityManager.createQuery(
-                        "SELECT r FROM User r ", User.class)
-                .getResultList();
-    }
-
 
     public List<User> fetchUsersWithRoleIds(List<String> roleIds) {
         return entityManager.createQuery(
@@ -168,6 +163,28 @@ public class RepositoryService {
         }
     }
 
+    public User findUserByNationalIdAndRole(String nationalId, String roleName) {
+        try {
+            User user =  entityManager.createQuery("SELECT u from User u WHERE u.nationalId =?1", User.class).
+                    setParameter(1, nationalId).getSingleResult();
+            if(user != null && user.hasRole(roleName)){
+                return user;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    public User findUserByMobilePhoneAndRole(String mobilePhone, String roleName) {
+        try {
+            User user = entityManager.createQuery("SELECT u from User u WHERE u.mobilePhone =?1", User.class).
+                    setParameter(1, mobilePhone).getSingleResult();
+            if(user != null && user.hasRole(roleName)){
+                return user;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
     public User findUserByMobilePhone(String mobilePhone) {
         try {
             return entityManager.createQuery("SELECT u from User u WHERE u.mobilePhone =?1", User.class).

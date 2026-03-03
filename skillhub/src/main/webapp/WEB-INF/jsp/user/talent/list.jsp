@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/tags/taglibs.jsp" %>
 <%@taglib prefix="security" uri="http://www.providencebehavior.com/security.tld" %>
 
-<s:layout-render name="/WEB-INF/jsp/user/layout.jsp" title="Users">
+<s:layout-render name="/WEB-INF/jsp/user/layout.jsp" title="Talent">
 
     <s:layout-component name="head">
     </s:layout-component>
@@ -11,19 +11,18 @@
             <div class="container">
                 <div id="content">
 
-                    <security:protected-element name="list-users">
                         <c:if test="${empty actionBean.users}">
-                            <fmt:message key="nousersfound"/>
+                            <fmt:message key="notakentedsersfound"/>
                         </c:if>
                         <table width="100%">
                             <tr>
                                 <td align="center" colspan = "3">
                                     <c:if test="${!empty actionBean.users}">
                                         <strong>${actionBean.usersSize}
-                                        <fmt:message key="usersfound"/></strong>
+                                        <fmt:message key="takentedsersfound"/></strong>
                                     </c:if>
                                 </td>
-                                <td align="center" colspan="3"><d:link href="/web/search-users"><fmt:message key="searchusersmenulabel"/></d:link></td>
+                                <td align="center" colspan="3"><d:link href="/web/search-talent"><fmt:message key="searchusersmenulabel"/></d:link></td>
                             </tr>
                         </table>
                         <table class="alternating">
@@ -86,12 +85,6 @@
                                 </tbody>
                             </c:if>
                         </table>
-                    </security:protected-element>
-                    <security:when-no-content-displayed>
-                        <d:link href="/web/admin/site/help"><fmt:message
-                                key="securityexceptionlink"/></d:link>
-                    </security:when-no-content-displayed>
-
                 </div>
             </div>
         </div>

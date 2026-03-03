@@ -88,7 +88,7 @@ public class ProtectedElementTag extends TagSupport {
      * Determine if the body should be evaluated or not.
      *
      * @return EVAL_BODY_INCLUDE if the body should be included, or SKIP_BODY
-     * @throws jakarta.servlet.jsp.JspException when the tag cannot (decide if to) write the body content
+     * @throws JspException when the tag cannot (decide if to) write the body content
      */
     @Override
     public int doStartTag() throws JspException {

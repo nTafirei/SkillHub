@@ -1,12 +1,12 @@
 package com.marotech.skillhub.action.user.showcases;
 
-import com.marotech.skillhub.action.user.converters.PublicationConverter;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.EnumConverter;
+import com.marotech.skillhub.action.user.converters.PublicationConverter;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.Category;
 import com.marotech.skillhub.model.Publication;
 import com.marotech.skillhub.repository.ShowcaseRepository;
-import com.marotech.skillhub.components.service.RepositoryService;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.DefaultHandler;

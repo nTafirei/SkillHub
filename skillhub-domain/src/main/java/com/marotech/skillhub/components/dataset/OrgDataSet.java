@@ -52,6 +52,7 @@ public class OrgDataSet {
             User superAdmin = null;
 
             if (superAdmin == null) {
+                String country = config.getProperty("country");
                 AuthUser authUser = new AuthUser();
                 authUser.setUserName("system_admin@skillhub.co." + ext);
                 String newPassword = AuthUser.encodedPassword("test");
@@ -71,6 +72,7 @@ public class OrgDataSet {
                 superAdmin.setCountry("Zimbabwe");
                 superAdmin.setMobilePhone("0712374658");
                 repository.save(superAdmin);
+                superAdmin.setCountry(country);
 
                 Iterable<UserRole> roles = repositoryService.findAllRoles();
 
@@ -84,7 +86,7 @@ public class OrgDataSet {
                 authUser.setSystemUser(superAdmin);
                 repository.save(authUser);
 
-                createUsers(superAdmin);
+               // createUsers(superAdmin);
             }
 
             createUsers();
@@ -108,6 +110,8 @@ public class OrgDataSet {
         List<PubJson> pubs = gson.fromJson(jsonData, publicationListType);
         int index = 0;
         Iterator<PubJson> it0 = pubs.iterator();
+        String country = config.getProperty("country");
+
         while (it0.hasNext()) {
             PubJson p = it0.next();
             Publication pub = new Publication();
@@ -134,6 +138,7 @@ public class OrgDataSet {
                 String[] names = name.split(" ");
                 worker.setFirstName(names[0]);
                 worker.setLastName(names[1]);
+                worker.setCountry(country);
                 worker.setEmail((worker.getLastName() + "@gmail.com").toLowerCase());
                 worker.setProfile(PROFILE.replaceAll("MUNHU", worker.getFullName()));
                 List<User> tmp = repositoryService.findUsersByNames(worker.getFirstName(), worker.getLastName());
@@ -207,6 +212,7 @@ public class OrgDataSet {
                 user0.setNationalId("" + random.nextInt(1012450000));
 
                 user0.setFirstName("Marshall");
+                user0.setCountry(country);
                 user0.setLastName("Munhumumwe");
                 user0.setNationalId("11123561");
                 user0.setEmail("marshall@skillhub.co." + ext);
@@ -245,6 +251,7 @@ public class OrgDataSet {
             user1.setNationalId("222224222");
             user1.setFirstName("John");
             user1.setLastName("Doe");
+            user1.setCountry(country);
             user1.setEmail("john1@skillhub.co." + ext);
             user1.setAddress("80 Samora Machel Avenue");
             if (country.equals("Zimbabwe")) {

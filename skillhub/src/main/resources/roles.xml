@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <roles>
     <role name="User"/>
+    <role name="Talent"/>
     <role name="Administrator"/>
     <role name="System Administrator"/>
 </roles>

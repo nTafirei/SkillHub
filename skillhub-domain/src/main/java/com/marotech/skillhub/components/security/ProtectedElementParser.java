@@ -53,8 +53,10 @@ public class ProtectedElementParser extends DefaultHandler {
             log
                     .error("ParserConfigurationException - Error parsing document : " + fileName
                             , e);
+            System.exit(0);
         } catch (Exception e) {
             log.error("Exception - Error parsing document : " + fileName, e);
+            System.exit(0);
         }
     }
 
@@ -65,13 +67,14 @@ public class ProtectedElementParser extends DefaultHandler {
             element = new ProtectedElement();
             String name = attributes.getValue(0);
             if (!featureValidator.isValidFeature(name)) {
-                throw new SAXException(
+                log.error(
                         "Security/Feature error : "
                                 + name
                                 + " is defined as a tag protected-element but is not listed as a valid feature. Please make sure "
                                 + fileName + " and "
                                 + featureValidator.getFileName()
                                 + " match for " + name);
+                System.exit(0);
             }
             element.setName(attributes.getValue(0));
             elements.add(element);
@@ -81,13 +84,14 @@ public class ProtectedElementParser extends DefaultHandler {
             String role = attributes.getValue(0);
 
             if (!isValidRole(role)) {
-                throw new SAXException(
+                log.error(
                         "Security/Feature error : "
                                 + role
                                 + " is defined as a role in a protected-element but is not listed as a valid role. Please make sure "
                                 + fileName + " and "
                                 + roleNameParser.getFileName() + " match for "
                                 + role);
+                System.exit(0);
             }
             element.addRole(role);
         }

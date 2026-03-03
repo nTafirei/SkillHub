@@ -2,8 +2,8 @@ package com.marotech.skillhub.action.user.datasources;
 
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
-import com.marotech.skillhub.model.JDBCDataSource;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.JDBCDataSource;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;

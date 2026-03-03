@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/tags/taglibs.jsp" %>
-<s:layout-render name="/WEB-INF/jsp/user/layout.jsp" title="Search Workers">
+<s:layout-render name="/WEB-INF/jsp/user/layout.jsp" title="Search Users">
 
     <s:layout-component name="head">
     </s:layout-component>
@@ -23,7 +23,7 @@
                             </div>
                             <!-- Content -->
                             <article>
-                                <s:form action="/web/search-workers" method="post" name="searchForm" id="searchForm">
+                                <s:form action="/web/search-talent" method="post" name="searchForm" id="searchForm">
                                 <input type="hidden" name="target" value="${actionBean.target}"/>
                                 <input type="hidden" name="_eventName" value="search"/>
 
@@ -31,24 +31,24 @@
                                     <thead>
                                     <tr>
                                         <th colspan="2">
-                                            <h4><fmt:message key="searchworkersmenulabel"/></h4>
+                                            <h4><fmt:message key="searchusersmenulabel"/></h4>
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr valign="top">
-                                        <td nowrap="nowrap"><fmt:message key="firstnamelabel"/></td>
+                                        <td nowrap="nowrap"><fmt:message key="mobilephonelabel"/></td>
                                         <td nowrap="nowrap">
-                                            <d:text style="background-color:#F0E68C" name="firstName"
-                                            id="firstName"/>
+                                            <d:text style="background-color:#F0E68C" name="mobilePhone"
+                                            id="mobilePhone"/>
                                         </td>
                                     </tr>
                                      <tr valign="top">
-                                         <td nowrap="nowrap"><fmt:message key="lastnamelabel"/>
+                                         <td nowrap="nowrap"><fmt:message key="nationaidlabel"/>
                                           </td>
                                          <td nowrap="nowrap">
-                                             <d:text style="background-color:#F0E68C" name="lastName"
-                                             id="lastName"/>
+                                             <d:text style="background-color:#F0E68C" name="nationalId"
+                                             id="nationalId"/>
                                          </td>
                                      </tr>
                                     <tr>

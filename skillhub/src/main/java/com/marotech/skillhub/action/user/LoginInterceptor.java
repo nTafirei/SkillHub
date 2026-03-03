@@ -1,8 +1,8 @@
 package com.marotech.skillhub.action.user;
 
+import com.marotech.skillhub.action.HubActionBeanContext;
 import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.util.Constants;
-import com.marotech.skillhub.util.HubActionBeanContext;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.config.ConfigurableComponent;

@@ -12,9 +12,6 @@
                 <div id="content">
 
                     <s:errors/>
-
-                    <security:protected-element name="show-tools">
-
                         <table class="alternating">
                                 <thead>
                                 <tr>
@@ -46,12 +43,6 @@
                                     </tr>
                                 </tbody>
                         </table>
-                    </security:protected-element>
-                    <security:when-no-content-displayed>
-                        <d:link href="/web/user/site/help"><fmt:message
-                                key="securityexceptionlink"/></d:link>
-                    </security:when-no-content-displayed>
-
                 </div>
             </div>
         </div>

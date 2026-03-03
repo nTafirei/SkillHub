@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <features>
-    <feature name="view-publications"/>
-    <feature name="view-workers"/>
-    <feature name="edit-workers"/>
+    <feature name="edit-talent"/>
     <feature name="verify-users"/>
     <feature name="add-users"/>
-    <feature name="manage-workers"/>
-    <feature name="manage-publications"/>
+    <feature name="manage-talent"/>
     <feature name="assign-roles"/>
     <feature name="manage-roles"/>
     <feature name="list-users"/>
@@ -16,8 +13,6 @@
     <feature name="search-users"/>
     <feature name="generate-reports"/>
     <feature name="list-reports"/>
-    <feature name="create-sql-queries"/>
-    <feature name="show-tools"/>
     <feature name="change-user-password"/>
     <feature name="manage-showcases"/>
 </features>

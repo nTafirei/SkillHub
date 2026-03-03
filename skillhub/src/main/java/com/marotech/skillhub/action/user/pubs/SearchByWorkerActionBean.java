@@ -2,8 +2,8 @@ package com.marotech.skillhub.action.user.pubs;
 
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
-import com.marotech.skillhub.model.Publication;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.Publication;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;

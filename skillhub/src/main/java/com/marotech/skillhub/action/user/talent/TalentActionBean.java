@@ -1,4 +1,4 @@
-package com.marotech.skillhub.action.user.users;
+package com.marotech.skillhub.action.user.talent;
 
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@UrlBinding("/web/users/{_eventName}")
+@UrlBinding("/web/talent/{_eventName}")
 @RequiresOneRoleOf({"Administrator", "System Administrator"})
-public class UsersActionBean extends UserBaseActionBean {
+public class TalentActionBean extends UserBaseActionBean {
 
     @Getter
     private List<User> users = new ArrayList<>();
@@ -64,8 +64,8 @@ public class UsersActionBean extends UserBaseActionBean {
 
     @SpringBean
     private RepositoryService repositoryService;
-    public static final String USERS_LIST = "/web/users";
-    private static final String [] ROLES = {Constants.ADMINISTRATOR,
-            Constants.CUSTOMER_SERVICE, Constants.SYSTEM_ADMINISTRATOR};
-    private static final String USERS_LIST_JSP = "/WEB-INF/jsp/user/users/list.jsp";
+    public static final String USERS_LIST = "/web/talent";
+
+    private static final String [] ROLES = {Constants.TALENT};
+    private static final String USERS_LIST_JSP = "/WEB-INF/jsp/user/talent/list.jsp";
 }

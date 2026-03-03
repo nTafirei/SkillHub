@@ -1,7 +1,7 @@
 package com.marotech.skillhub.action.user.pubs;
 
-import com.marotech.skillhub.action.user.converters.AttachmentConverter;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
+import com.marotech.skillhub.action.user.converters.AttachmentConverter;
 import com.marotech.skillhub.model.Attachment;
 import lombok.Getter;
 import lombok.Setter;

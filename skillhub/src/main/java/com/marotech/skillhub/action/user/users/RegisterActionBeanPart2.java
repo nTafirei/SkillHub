@@ -2,9 +2,13 @@ package com.marotech.skillhub.action.user.users;
 
 import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
-import com.marotech.skillhub.model.*;
-import com.marotech.skillhub.util.Constants;
+import com.marotech.skillhub.action.user.converters.EnumConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.AuthUser;
+import com.marotech.skillhub.model.Gender;
+import com.marotech.skillhub.model.User;
+import com.marotech.skillhub.model.UserRole;
+import com.marotech.skillhub.util.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;
@@ -17,8 +21,12 @@ import org.slf4j.LoggerFactory;
 
 @SkipAuthentication
 @UrlBinding("/web/register2")
-public class RegisterActionBeanPart extends UserBaseActionBean {
+public class RegisterActionBeanPart2 extends UserBaseActionBean {
 
+    @Getter
+    @Setter
+    @Validate(required = true, converter = EnumConverter.class)
+    private RegType regType;
     @Getter
     @Setter
     @Validate(on = {SAVE}, required = true)
@@ -109,8 +117,14 @@ public class RegisterActionBeanPart extends UserBaseActionBean {
             return new ForwardResolution(REGISTER2_JSP);
         }
 
-        UserRole role = repositoryService.findUserRoleByRoleName("User");
-        user.getUserRoles().add(role);
+        if(regType == RegType.TALENT) {
+            UserRole role = repositoryService.findUserRoleByRoleName(Constants.TALENT);
+            user.getUserRoles().add(role);
+        }else{
+            UserRole role = repositoryService.findUserRoleByRoleName(Constants.USER);
+            user.getUserRoles().add(role);
+        }
+
         repositoryService.save(user);
 
         return new RedirectResolution(INBOX_LIST);
@@ -146,5 +160,5 @@ public class RegisterActionBeanPart extends UserBaseActionBean {
 
     private static final String INBOX_LIST = "/web/inbox/list";
     private static final String REGISTER2_JSP = "/WEB-INF/jsp/user/users/register2.jsp";
-    private static final Logger LOG = LoggerFactory.getLogger(RegisterActionBeanPart.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RegisterActionBeanPart2.class);
 }

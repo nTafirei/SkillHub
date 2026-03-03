@@ -1,16 +1,19 @@
 package com.marotech.skillhub.components.security;
 
+import com.marotech.skillhub.action.user.BaseActionBean;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.model.UserRole;
-import com.marotech.skillhub.util.Constants;
-import com.marotech.skillhub.components.service.RepositoryService;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.jsp.JspException;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.config.DontAutoLoad;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,6 @@ import java.util.Map;
 @DontAutoLoad
 @Component("securityManager")
 public class J2EESecurityManager {
-
     @Autowired
     private ProtectedElementParser elementParser;
 
@@ -47,10 +49,12 @@ public class J2EESecurityManager {
             throws JspException {
 
         if (!isUserAuthenticated(bean)) {
+            LOG.debug("RETURNING 1");
             return false;
         }
 
         if (tag.getName() == null) {
+            LOG.debug("RETURNING 2");
             return false;
         }
 
@@ -63,6 +67,7 @@ public class J2EESecurityManager {
         String tagName = tag.getName();
 
         if (!featureValidator.isValidFeature(tagName)) {
+            LOG.debug("RETURNING 3");
             throw new JspException(
                     "Security/Feature error : Tag names and feature names must match. Tag name "
                             + tagName
@@ -85,11 +90,26 @@ public class J2EESecurityManager {
 
         ProtectedElement element = elementSet.get(tagName);
         if (element == null) {
+            LOG.debug("RETURNING 4 : " + tagName);
+            for(ProtectedElement e : elements){
+                LOG.debug(e.toString());
+            }
             return false;
         }
 
         if (!element.hasRoles() || user == null) {
+            LOG.debug("RETURNING 5");
             return false;
+        }
+
+        boolean show = ((BaseActionBean)bean).showRoles();
+
+        if(show){
+            LOG.debug("J2EESecurityManager: Roles found: " +
+                    user.getRoleNames());
+            LOG.debug("J2EESecurityManager: Tag : " + element.getName()
+                    + " requires these roles: " +
+                    Arrays.asList(element.getRoles()));
         }
 
         for (String role : element.getRoles()) {
@@ -101,23 +121,14 @@ public class J2EESecurityManager {
         return userHasRole;
     }
 
-    protected Boolean isUserAuthenticated(ActionBean bean, Method handler) {
-        return bean.getContext().getRequest().getUserPrincipal() != null;
-    }
-
     protected Boolean isUserAuthenticated(ActionBean bean) {
-        return bean.getContext().getRequest().getUserPrincipal() != null
-                || bean.getContext().getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER) != null;
+        BaseActionBean baseActionBean = (BaseActionBean)bean;
+        return baseActionBean.getIsLoggedIn();
     }
 
     protected User getUserAuthenticated(ActionBean bean) {
-        return (User) bean.getContext().getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER);
-    }
-
-    protected Boolean hasRole(ActionBean bean, Method handler, String role) {
-        return bean.getContext().getRequest().isUserInRole(role);
+        BaseActionBean baseActionBean = (BaseActionBean)bean;
+        return baseActionBean.getCurrentUser();
     }
 
     protected Boolean hasRole(User user, String role) {
@@ -128,4 +139,5 @@ public class J2EESecurityManager {
         }
         return false;
     }
+    private static final Logger LOG = LoggerFactory.getLogger(J2EESecurityManager.class);
 }

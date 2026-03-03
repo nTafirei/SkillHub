@@ -44,7 +44,7 @@
         <init-param>
             <param-name>ActionBeanContext.Class</param-name>
             <param-value>
-                com.marotech.skillhub.util.HubActionBeanContext
+                com.marotech.skillhub.action.HubActionBeanContext
             </param-value>
         </init-param>
 

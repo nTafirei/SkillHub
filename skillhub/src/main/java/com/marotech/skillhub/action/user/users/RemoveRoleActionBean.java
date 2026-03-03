@@ -1,12 +1,12 @@
 package com.marotech.skillhub.action.user.users;
 
+import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.action.user.converters.UserRoleConverter;
-import com.marotech.skillhub.action.user.UserBaseActionBean;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.model.UserRole;
 import com.marotech.skillhub.util.Constants;
-import com.marotech.skillhub.components.service.RepositoryService;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;

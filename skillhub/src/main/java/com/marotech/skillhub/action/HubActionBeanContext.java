@@ -1,4 +1,4 @@
-package com.marotech.skillhub.util;
+package com.marotech.skillhub.action;
 
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.ForwardResolution;

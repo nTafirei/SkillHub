@@ -11,7 +11,6 @@
             <div class="container">
                 <div id="content">
 
-                    <security:protected-element name="view-publications">
                         <c:if test="${empty actionBean.publications}">
                             <fmt:message key="noshowcasepublicationsfound"/>
                         </c:if>
@@ -100,12 +99,6 @@
                             </c:if>
                         </table>
                       </s:form>
-                    </security:protected-element>
-                    <security:when-no-content-displayed>
-                        <d:link href="/web/admin/site/help"><fmt:message
-                                key="securityexceptionlink"/></d:link>
-                    </security:when-no-content-displayed>
-
                 </div>
             </div>
         </div>

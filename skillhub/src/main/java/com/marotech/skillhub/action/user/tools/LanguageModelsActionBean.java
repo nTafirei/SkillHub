@@ -2,8 +2,8 @@ package com.marotech.skillhub.action.user.tools;
 
 import com.marotech.skillhub.action.user.RequiresOneRoleOf;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
-import com.marotech.skillhub.model.LanguageModel;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.LanguageModel;
 import lombok.Getter;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;

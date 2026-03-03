@@ -57,11 +57,19 @@ public class RoleInterceptor implements Interceptor, ConfigurableComponent {
             String[] roleNames = executionContext.getActionBean().
                     getClass().getAnnotation(RequiresOneRoleOf.class).value();
 
+            boolean show = ((BaseActionBean)executionContext.getActionBean()).showRoles();
+
+            if(show){
+                LOG.debug("RoleInterceptorRoles found: " +
+                        user.getRoleNames());
+                LOG.debug("RoleInterceptor: Class : " + executionContext.getActionBean().
+                        getClass().getName() + " requires these roles: " +
+                        Arrays.asList(roleNames));
+            }
+
             if(roleNames != null && roleNames.length > 0) {
                 if (!user.hasOneRoleOf(roleNames)) {
-                    LOG.debug("Class : " + executionContext.getActionBean().
-                            getClass().getName() + " requires these roles: " +
-                            Arrays.asList(roleNames));
+
                     LOG.debug("User has these roles : " + user.getRoleNames());
 
                     executionContext.getActionBean().getContext()
