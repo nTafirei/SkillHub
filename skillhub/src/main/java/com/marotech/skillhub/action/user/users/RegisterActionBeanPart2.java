@@ -100,7 +100,7 @@ public class RegisterActionBeanPart2 extends UserBaseActionBean {
                 town, mobilephone, nationalId, country);
         String orgName = config.getProperty("orgId");
         repositoryService.save(user);
-        authUser.setSystemUser(user);
+        authUser.setUser(user);
         repositoryService.save(authUser);
 
         getContext().getRequest().getSession()

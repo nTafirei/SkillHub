@@ -67,7 +67,7 @@ public class LoginActionBean extends UserBaseActionBean {
             return new ForwardResolution(WEB_INF_JSP_LOGIN_JSP);
         }
 
-        user = authUser.getSystemUser();
+        user = authUser.getUser();
         getContext().getRequest().getSession()
                 .setAttribute(Constants.LOGGED_IN_USER, user);
 

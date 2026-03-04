@@ -20,7 +20,7 @@ public class AuthUser extends BaseEntity {
     private String password;
     @ToString.Exclude
     @OneToOne(fetch = FetchType.EAGER, cascade = {jakarta.persistence.CascadeType.REMOVE})
-    private User systemUser;
+    private User user;
 
     public static final String encodedPassword(String original) throws Exception {
         return DigestUtils.sha256Hex(original);

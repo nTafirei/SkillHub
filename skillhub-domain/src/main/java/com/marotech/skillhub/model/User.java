@@ -34,12 +34,14 @@ public class User extends BaseEntity {
     private String email;
     @Column(length = 72)
     private String city;
+    @Column(length = 72)
+    private String suburb;
     @Column(nullable = false, length = 32)
     private String country;
     @Column(length = 16)
     private String mobilePhone;
     @Column(length = 512)
-    private String profile;
+    private String description;
     @Column(length = 32)
     private String nationalId = "";
     @Enumerated(EnumType.STRING)

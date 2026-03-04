@@ -1,0 +1,795 @@
+[
+  {
+    "category": "Construction and building",
+    "skill": "Carpenter",
+    "profile": {
+      "firstName": "Tinashe",
+      "lastName": "Moyo",
+      "address": {
+        "streetNumber": "15A",
+        "streetName": "Parklands Road",
+        "suburb": "Parklands",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8333,
+        "longitude": 31.0333
+      },
+      "email": "tinashe.moyo.carpenter@example.com",
+      "phone": "+263 774 123 456",
+      "description": "Skilled carpenter specializing in furniture, roofing timber, and formwork for residential construction.",
+      "nationalId": "1101234Z"
+    }
+  },
+  {
+    "category": "Construction and building",
+    "skill": "Concrete finisher",
+    "profile": {
+      "firstName": "Dalton",
+      "lastName": "Moyo",
+      "address": {
+        "streetNumber": "21",
+        "streetName": "Highfield Road",
+        "suburb": "Highfield",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8667,
+        "longitude": 31.0167
+      },
+      "email": "dalton.moyo.concrete@example.com",
+      "phone": "+263 772 234 567",
+      "description": "Expert in concrete pouring, leveling, polishing, and decorative finishes for floors and structural elements.",
+      "nationalId": "1102345M"
+    }
+  },
+  {
+    "category": "Construction and building",
+    "skill": "Roofer",
+    "profile": {
+      "firstName": "Patience",
+      "lastName": "Ncube",
+      "address": {
+        "streetNumber": "8",
+        "streetName": "Renwick Road",
+        "suburb": "Ascot",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1500,
+        "longitude": 28.6000
+      },
+      "email": "patience.ncube.roofer@example.com",
+      "phone": "+263 773 111 222",
+      "description": "Certified roofer specializing in tile, metal, and corrugated-iron roof installations and repairs.",
+      "nationalId": "1103456P"
+    }
+  },
+  {
+    "category": "Construction and building",
+    "skill": "Boilermaker",
+    "profile": {
+      "firstName": "Evidence",
+      "lastName": "Sibanda",
+      "address": {
+        "streetNumber": "44",
+        "streetName": "Industrial Area",
+        "suburb": "Workington",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8500,
+        "longitude": 31.0167
+      },
+      "email": "evidence.sibanda.boiler@example.com",
+      "phone": "+263 774 999 000",
+      "description": "Boilermaker specializing in fabrication, assembly, and repair of pressure vessels and industrial tanks.",
+      "nationalId": "1104567E"
+    }
+  },
+  {
+    "category": "Plumbing and pipefitting",
+    "skill": "Plumber",
+    "profile": {
+      "firstName": "Farai",
+      "lastName": "Chitando",
+      "address": {
+        "streetNumber": "32",
+        "streetName": "Mufakose Road",
+        "suburb": "Mufakose",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8833,
+        "longitude": 31.0333
+      },
+      "email": "farai.chitando.plumber@example.com",
+      "phone": "+263 775 445 667",
+      "description": "Domestic and commercial plumbing, pipe installation, and water systems maintenance.",
+      "nationalId": "1105678F"
+    }
+  },
+  {
+    "category": "Electrical trades",
+    "skill": "Electrician",
+    "profile": {
+      "firstName": "Ropafadzo",
+      "lastName": "Matemane",
+      "address": {
+        "streetNumber": "19",
+        "streetName": "Nkulumane Road",
+        "suburb": "Nkulumane",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1700,
+        "longitude": 28.5833
+      },
+      "email": "ropafadzo.matemane.electrician@example.com",
+      "phone": "+263 777 556 778",
+      "description": "Wiring, solar installations, and electrical maintenance for residential and industrial.",
+      "nationalId": "1106789R"
+    }
+  },
+  {
+    "category": "Masonry",
+    "skill": "Bricklayer",
+    "profile": {
+      "firstName": "Simba",
+      "lastName": "Gumbo",
+      "address": {
+        "streetNumber": "27",
+        "streetName": "Mkoba Heights",
+        "suburb": "Mkoba",
+        "city": "Gweru"
+      },
+      "coordinates": {
+        "latitude": -19.4200,
+        "longitude": 29.8200
+      },
+      "email": "simba.gumbo.bricklayer@example.com",
+      "phone": "+263 779 667 889",
+      "description": "Brickwork, blocklaying, and plastering for structural walls and facades.",
+      "nationalId": "1107890S"
+    }
+  },
+  {
+    "category": "Painting and decorating",
+    "skill": "Painter",
+    "profile": {
+      "firstName": "Anita",
+      "lastName": "Dube",
+      "address": {
+        "streetNumber": "63",
+        "streetName": "Dangamvura Drive",
+        "suburb": "Dangamvura",
+        "city": "Mutare"
+      },
+      "coordinates": {
+        "latitude": -18.9667,
+        "longitude": 32.6500
+      },
+      "email": "anita.dube.painter@example.com",
+      "phone": "+263 782 778 990",
+      "description": "Interior/exterior painting, decorative finishes, and wall treatments.",
+      "nationalId": "1108901A"
+    }
+  },
+  {
+    "category": "Welding",
+    "skill": "Welder",
+    "profile": {
+      "firstName": "Taurai",
+      "lastName": "Hove",
+      "address": {
+        "streetNumber": "12",
+        "streetName": "Pelandaba Road",
+        "suburb": "Pelandaba",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1833,
+        "longitude": 28.5500
+      },
+      "email": "taurai.hove.welder@example.com",
+      "phone": "+263 784 889 001",
+      "description": "MIG/TIG/Arc welding for structural steel, gates, and repairs.",
+      "nationalId": "1109012T"
+    }
+  },
+  {
+    "category": "Tiling",
+    "skill": "Tile setter",
+    "profile": {
+      "firstName": "Precious",
+      "lastName": "Zvobgo",
+      "address": {
+        "streetNumber": "41",
+        "streetName": "Waterfalls Valley",
+        "suburb": "Waterfalls",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8833,
+        "longitude": 31.0333
+      },
+      "email": "precious.zvobgo.tiler@example.com",
+      "phone": "+263 776 001 223",
+      "description": "Ceramic, porcelain, and natural stone tiling for floors and walls.",
+      "nationalId": "1110123P"
+    }
+  },
+  {
+    "category": "Family Heritage Studies",
+    "skill": "Primary Heritage Teacher",
+    "profile": {
+      "firstName": "Nyasha",
+      "lastName": "Kabweza",
+      "address": {
+        "streetNumber": "23",
+        "streetName": "Glenara Avenue",
+        "suburb": "Glen Norah",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8833,
+        "longitude": 30.9833
+      },
+      "email": "nyasha.kabweza.heritage@example.com",
+      "phone": "+263 774 112 334",
+      "description": "Teaches Grade 1-4 heritage, culture, and family values through stories and local traditions in the new curriculum.",
+      "nationalId": "94/334455G"
+    }
+  },
+  {
+    "category": "Mathematics and Science",
+    "skill": "Infant Science Teacher",
+    "profile": {
+      "firstName": "Takudzwa",
+      "lastName": "Sibanda",
+      "address": {
+        "streetNumber": "9",
+        "streetName": "Cowdray Park",
+        "suburb": "Cowdray Park",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1333,
+        "longitude": 28.5667
+      },
+      "email": "takudzwa.sibanda.mathsci@example.com",
+      "phone": "+263 776 556 778",
+      "description": "Integrated math and basic science for Early Childhood Development, using hands-on activities like counting and simple experiments.",
+      "nationalId": "91/778899S"
+    }
+  },
+  {
+    "category": "Indigenous Languages (Shona)",
+    "skill": "Primary Shona Teacher",
+    "profile": {
+      "firstName": "Rumbidzai",
+      "lastName": "Mugabe",
+      "address": {
+        "streetNumber": "17",
+        "streetName": "Nkulumane Road",
+        "suburb": "Nkulumane",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1700,
+        "longitude": 28.5833
+      },
+      "email": "rumbidzai.mugabe.shona@example.com",
+      "phone": "+263 784 321 654",
+      "description": "Primary Shona language teacher emphasizing reading, writing, and oral skills for cultural preservation.",
+      "nationalId": "85/123456T"
+    }
+  },
+  {
+    "category": "English Language",
+    "skill": "Junior English Teacher",
+    "profile": {
+      "firstName": "Tafadzwa",
+      "lastName": "Chatora",
+      "address": {
+        "streetNumber": "34",
+        "streetName": "Siboza Street",
+        "suburb": "Iminyela",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1500,
+        "longitude": 28.5833
+      },
+      "email": "tafadzwa.chatora.english@example.com",
+      "phone": "+263 779 445 667",
+      "description": "Builds literacy and comprehension for Grades 5-7 in the streamlined primary curriculum.",
+      "nationalId": "89/667788C"
+    }
+  },
+  {
+    "category": "Physical Education and Arts",
+    "skill": "Primary PE Teacher",
+    "profile": {
+      "firstName": "Munashe",
+      "lastName": "Gumbo",
+      "address": {
+        "streetNumber": "56",
+        "streetName": "Mt Pleasant Drive",
+        "suburb": "Mt Pleasant",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8000,
+        "longitude": 31.0833
+      },
+      "email": "munashe.gumbo.pe@example.com",
+      "phone": "+263 782 889 001",
+      "description": "Focuses on sports, mass displays, and expressive arts for physical development and creativity.",
+      "nationalId": "93/001122M"
+    }
+  },
+  {
+    "category": "Mathematics",
+    "skill": "O-Level Math Teacher",
+    "profile": {
+      "firstName": "Tinashe",
+      "lastName": "Chigumbu",
+      "address": {
+        "streetNumber": "45",
+        "streetName": "Mbare Road",
+        "suburb": "Mbare",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8166,
+        "longitude": 31.0413
+      },
+      "email": "tinashe.chigumbu.math@example.com",
+      "phone": "+263 772 456 789",
+      "description": "O-Level algebra, geometry, and stats for ZIMSEC exams.",
+      "nationalId": "92/456789K"
+    }
+  },
+  {
+    "category": "Automotive repair",
+    "skill": "Motor Mechanic",
+    "profile": {
+      "firstName": "Kudzanai",
+      "lastName": "Chigumbu",
+      "address": {
+        "streetNumber": "7",
+        "streetName": "Southerton Road",
+        "suburb": "Southerton",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8833,
+        "longitude": 31.0167
+      },
+      "email": "kudzanai.chigumbu.mechanic@example.com",
+      "phone": "+263 772 334 556",
+      "description": "Petrol/diesel engine repair, diagnostics, and gearbox overhaul for light vehicles and trucks.",
+      "nationalId": "1111234K"
+    }
+  },
+  {
+    "category": "Automotive repair",
+    "skill": "Panel Beater/Spray Painter",
+    "profile": {
+      "firstName": "Tafara",
+      "lastName": "Mafara",
+      "address": {
+        "streetNumber": "22",
+        "streetName": "Workington Road",
+        "suburb": "Workington",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8500,
+        "longitude": 31.0167
+      },
+      "email": "tafara.mafara.panelbeater@example.com",
+      "phone": "+263 774 445 667",
+      "description": "Vehicle body repair, dent removal, spray painting, and accident damage restoration.",
+      "nationalId": "1112345T"
+    }
+  },
+  {
+    "category": "Metalwork",
+    "skill": "Blacksmith",
+    "profile": {
+      "firstName": "Reason",
+      "lastName": "Ndlovu",
+      "address": {
+        "streetNumber": "15",
+        "streetName": "Industrial Strip",
+        "suburb": "Thorngrove",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1333,
+        "longitude": 28.5833
+      },
+      "email": "reason.ndlovu.blacksmith@example.com",
+      "phone": "+263 775 556 778",
+      "description": "Forging gates, security doors, agricultural tools, and ornamental ironwork.",
+      "nationalId": "1113456R"
+    }
+  },
+  {
+    "category": "Manufacturing",
+    "skill": "Machine Operator",
+    "profile": {
+      "firstName": "Vongai",
+      "lastName": "Sibanda",
+      "address": {
+        "streetNumber": "31",
+        "streetName": "Mkoba Industrial",
+        "suburb": "Mkoba",
+        "city": "Gweru"
+      },
+      "coordinates": {
+        "latitude": -19.4200,
+        "longitude": 29.8200
+      },
+      "email": "vongai.sibanda.machineop@example.com",
+      "phone": "+263 776 667 889",
+      "description": "Lathe, milling machine, and CNC operation for precision metal components.",
+      "nationalId": "1114567V"
+    }
+  },
+  {
+    "category": "Agriculture",
+    "skill": "Diesel Mechanic",
+    "profile": {
+      "firstName": "Paidamoyo",
+      "lastName": "Hove",
+      "address": {
+        "streetNumber": "18",
+        "streetName": "Mutare Road",
+        "suburb": "Dangamvura",
+        "city": "Mutare"
+      },
+      "coordinates": {
+        "latitude": -18.9667,
+        "longitude": 32.6500
+      },
+      "email": "paidamoyo.hove.diesel@example.com",
+      "phone": "+263 777 778 990",
+      "description": "Tractor, combine harvester, and irrigation pump engine maintenance.",
+      "nationalId": "1115678P"
+    }
+  },
+  {
+    "category": "Agriculture",
+    "skill": "Seed Technician",
+    "profile": {
+      "firstName": "Tinashe",
+      "lastName": "Makoni",
+      "address": {
+        "streetNumber": "44",
+        "streetName": "Ascot Farms Road",
+        "suburb": "Ascot",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1500,
+        "longitude": 28.6000
+      },
+      "email": "tinashe.makoni.seedtech@example.com",
+      "phone": "+263 778 889 001",
+      "description": "Maize, tobacco, and soybean seed treatment, planting, and crop management.",
+      "nationalId": "1116789T"
+    }
+  },
+  {
+    "category": "Agriculture",
+    "skill": "Poultry Processor",
+    "profile": {
+      "firstName": "Ropafadzo",
+      "lastName": "Chatora",
+      "address": {
+        "streetNumber": "29",
+        "streetName": "Highfields Road",
+        "suburb": "Highfields",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8500,
+        "longitude": 31.0333
+      },
+      "email": "ropafadzo.chatora.poultry@example.com",
+      "phone": "+263 779 001 223",
+      "description": "Broiler production, slaughter, processing, and packaging for retail.",
+      "nationalId": "1117890R"
+    }
+  },
+  {
+    "category": "Food Production",
+    "skill": "Butcher",
+    "profile": {
+      "firstName": "Fortune",
+      "lastName": "Gumbo",
+      "address": {
+        "streetNumber": "12",
+        "streetName": "Mbare Musika Road",
+        "suburb": "Mbare",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8166,
+        "longitude": 31.0413
+      },
+      "email": "fortune.gumbo.butcher@example.com",
+      "phone": "+263 771 112 334",
+      "description": "Beef, goat, and pork cutting, preparation, and retail sales.",
+      "nationalId": "1118901F"
+    }
+  },
+  {
+    "category": "Food Production",
+    "skill": "Baker/Pastry Chef",
+    "profile": {
+      "firstName": "Tendai",
+      "lastName": "Zimunya",
+      "address": {
+        "streetNumber": "32",
+        "streetName": "Bread Street",
+        "suburb": "Town Centre",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1700,
+        "longitude": 28.5833
+      },
+      "email": "tendai.zimunya.baker@example.com",
+      "phone": "+263 773 789 012",
+      "description": "Bread, wedding cakes, and traditional Zimbabwean pastries.",
+      "nationalId": "1119012T"
+    }
+  },
+  {
+    "category": "Food Production",
+    "skill": "Caterer",
+    "profile": {
+      "firstName": "Priscilla",
+      "lastName": "Mutasa",
+      "address": {
+        "streetNumber": "56",
+        "streetName": "Mt Pleasant Drive",
+        "suburb": "Mt Pleasant",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8000,
+        "longitude": 31.0833
+      },
+      "email": "priscilla.mutasa.caterer@example.com",
+      "phone": "+263 772 223 445",
+      "description": "Wedding, corporate, and funeral catering services.",
+      "nationalId": "1120123P"
+    }
+  },
+  {
+    "category": "Beauty & Personal Care",
+    "skill": "Hairdresser/Barber",
+    "profile": {
+      "firstName": "Anesu",
+      "lastName": "Dube",
+      "address": {
+        "streetNumber": "63",
+        "streetName": "Nkulumane Salon Street",
+        "suburb": "Nkulumane",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1700,
+        "longitude": 28.5833
+      },
+      "email": "anesu.dube.hair@example.com",
+      "phone": "+263 774 334 556",
+      "description": "Weaves, dreadlocks, fades, and traditional braiding.",
+      "nationalId": "1121234A"
+    }
+  },
+  {
+    "category": "Beauty & Personal Care",
+    "skill": "Tailor/Dressmaker",
+    "profile": {
+      "firstName": "Memory",
+      "lastName": "Khumalo",
+      "address": {
+        "streetNumber": "41",
+        "streetName": "Iminyela Tailor Street",
+        "suburb": "Iminyela",
+        "city": "Bulawayo"
+      },
+      "coordinates": {
+        "latitude": -20.1500,
+        "longitude": 28.5833
+      },
+      "email": "memory.khumalo.tailor@example.com",
+      "phone": "+263 775 445 667",
+      "description": "School uniforms, wedding dresses, and corporate attire.",
+      "nationalId": "1122345M"
+    }
+  },
+  {
+    "category": "Hospitality",
+    "skill": "Chef",
+    "profile": {
+      "firstName": "Brian",
+      "lastName": "Chirinda",
+      "address": {
+        "streetNumber": "27",
+        "streetName": "Borrowdale Hotel Road",
+        "suburb": "Borrowdale",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.7667,
+        "longitude": 31.1000
+      },
+      "email": "brian.chirinda.chef@example.com",
+      "phone": "+263 776 556 778",
+      "description": "Fine dining, buffet, and traditional Zimbabwean cuisine.",
+      "nationalId": "1123456B"
+    }
+  },
+  {
+    "category": "Healthcare",
+    "skill": "Nursing Assistant",
+    "profile": {
+      "firstName": "Chenai",
+      "lastName": "Pasipanodya",
+      "address": {
+        "streetNumber": "19",
+        "streetName": "Parirenyatwa Clinic Road",
+        "suburb": "Avondale",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8000,
+        "longitude": 31.0500
+      },
+      "email": "chenai.pasipanodya.nurse@example.com",
+      "phone": "+263 777 667 889",
+      "description": "Patient care, vital signs monitoring, and clinic support.",
+      "nationalId": "1124567C"
+    }
+  },
+  {
+    "category": "Early Childhood",
+    "skill": "Creche Teacher",
+    "profile": {
+      "firstName": "Takudzwa",
+      "lastName": "Zvobgo",
+      "address": {
+        "streetNumber": "34",
+        "streetName": "Kuwadzana Creche Road",
+        "suburb": "Kuwadzana",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8500,
+        "longitude": 30.9333
+      },
+      "email": "takudzwa.zvobgo.creche@example.com",
+      "phone": "+263 778 778 990",
+      "description": "Early childhood development for ages 3-5 years.",
+      "nationalId": "1125678T"
+    }
+  },
+  {
+    "category": "Transportation",
+    "skill": "Heavy Truck Driver",
+    "profile": {
+      "firstName": "Simbarashe",
+      "lastName": "Tembo",
+      "address": {
+        "streetNumber": "8",
+        "streetName": "Showground Road",
+        "suburb": "Showgrounds",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8166,
+        "longitude": 31.0333
+      },
+      "email": "simbarashe.tembo.trucker@example.com",
+      "phone": "+263 779 889 001",
+      "description": "Cross-border haulage and mining equipment transport.",
+      "nationalId": "1126789S"
+    }
+  },
+  {
+    "category": "Transportation",
+    "skill": "Forklift Operator",
+    "profile": {
+      "firstName": "Admire",
+      "lastName": "Moyo",
+      "address": {
+        "streetNumber": "52",
+        "streetName": "Southerton Warehouse Road",
+        "suburb": "Southerton",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8833,
+        "longitude": 31.0167
+      },
+      "email": "admire.moyo.forklift@example.com",
+      "phone": "+263 771 001 223",
+      "description": "Warehouse loading, stacking, and inventory movement.",
+      "nationalId": "1127890A"
+    }
+  },
+  {
+    "category": "ICT Services",
+    "skill": "Computer Technician",
+    "profile": {
+      "firstName": "Passion",
+      "lastName": "Makoni",
+      "address": {
+        "streetNumber": "45",
+        "streetName": "Samora Machel Avenue",
+        "suburb": "Central Business District",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8166,
+        "longitude": 31.0500
+      },
+      "email": "passion.makoni.tech@example.com",
+      "phone": "+263 772 112 334",
+      "description": "PC/laptop repair, software installation, and networking.",
+      "nationalId": "1128901P"
+    }
+  },
+  {
+    "category": "ICT Services",
+    "skill": "Mobile Phone Repair",
+    "profile": {
+      "firstName": "Sibusiso",
+      "lastName": "Khumalo",
+      "address": {
+        "streetNumber": "4th Floor",
+        "streetName": "Jason Moyo Avenue",
+        "suburb": "Central Business District",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.8166,
+        "longitude": 31.0413
+      },
+      "email": "sibusiso.khumalo.phonerepair@example.com",
+      "phone": "+263 773 223 445",
+      "description": "Smartphone screen replacement, battery service, and software flashing.",
+      "nationalId": "1129012S"
+    }
+  },
+  {
+    "category": "Renewable Energy",
+    "skill": "Solar PV Installer",
+    "profile": {
+      "firstName": "Nyasha",
+      "lastName": "Rusere",
+      "address": {
+        "streetNumber": "36",
+        "streetName": "Borrowdale Solar Road",
+        "suburb": "Borrowdale",
+        "city": "Harare"
+      },
+      "coordinates": {
+        "latitude": -17.7667,
+        "longitude": 31.1000
+      },
+      "email": "nyasha.rusere.solar@example.com",
+      "phone": "+263 774 334 556",
+      "description": "Off-grid solar systems, inverters, and panel installations.",
+      "nationalId": "1130123N"
+    }
+  }
+]
+

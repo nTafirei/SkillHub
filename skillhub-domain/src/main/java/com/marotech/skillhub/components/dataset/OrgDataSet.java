@@ -3,12 +3,12 @@ package com.marotech.skillhub.components.dataset;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marotech.skillhub.components.config.Config;
-import com.marotech.skillhub.model.*;
-import com.marotech.skillhub.repository.GenericRepository;
-import com.marotech.skillhub.gson.CustomExclusionStrategy;
-import com.marotech.skillhub.gson.LocalDateTimeAdapter;
-import com.marotech.skillhub.components.processor.LocalDateAdapter;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.AuthUser;
+import com.marotech.skillhub.model.User;
+import com.marotech.skillhub.model.UserRole;
+import com.marotech.skillhub.model.Verified;
+import com.marotech.skillhub.repository.GenericRepository;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Transactional
 @Component
@@ -50,6 +48,7 @@ public class OrgDataSet {
             }
 
             User superAdmin = null;
+            Iterable<UserRole> roles = repositoryService.findAllRoles();
 
             if (superAdmin == null) {
                 String country = config.getProperty("country");
@@ -74,8 +73,6 @@ public class OrgDataSet {
                 repository.save(superAdmin);
                 superAdmin.setCountry(country);
 
-                Iterable<UserRole> roles = repositoryService.findAllRoles();
-
                 for (UserRole role : roles) {
                     if (role.getRoleName().equals("System Administrator")) {
                         superAdmin.addUserRole(role);
@@ -83,100 +80,75 @@ public class OrgDataSet {
                     }
                 }
                 repository.save(superAdmin);
-                authUser.setSystemUser(superAdmin);
+                authUser.setUser(superAdmin);
                 repository.save(authUser);
-
-               // createUsers(superAdmin);
             }
-
-            createUsers();
+            createProfilesFromFile(roles);
+            //createDefaultUsers();
         } catch (Exception e) {
             LOG.error("Error building basic data :", e);
             System.exit(0);
         }
     }
 
-    private void createUsers(User user) throws IOException {
-        byte[] bytes = readFileFromClasspath("pubs.json");
+    private void createProfilesFromFile(Iterable<UserRole> roles) throws IOException {
+        List<SkillProvider> providers = parseArrayFromFile();
+        String country = config.getProperty("country");
+        Iterator<SkillProvider> it = providers.iterator();
+        while (it.hasNext()) {
+            SkillProvider provider = it.next();
+            User user = transformToUser(provider, country);
+            AuthUser existing = repositoryService.findAuthUserByUserName
+                    (provider.getProfile().getNationalId());
+            if(existing != null){
+                continue;
+            }
+            for (UserRole role : roles) {
+                if (role.getRoleName().equals("Talent")) {
+                    user.addUserRole(role);
+                    break;
+                }
+            }
+            repositoryService.save(user);
+            AuthUser authUser = new AuthUser();
+            authUser.setUserName(provider.getProfile().getNationalId());
+            authUser.setPassword(UUID.randomUUID().toString());
+            authUser.setUser(user);
+            repositoryService.save(authUser);
+        }
+    }
+
+    public User transformToUser(SkillProvider skillProvider, String country) {
+        if (skillProvider == null || skillProvider.getProfile() == null) {
+            return null;
+        }
+
+        TalentProfile profile = skillProvider.getProfile();
+        TalentAddress address = profile.getAddress();
+
+        User user = new User();
+        user.setFirstName(profile.getFirstName());
+        user.setLastName(profile.getLastName());
+        user.setAddress(String.format("%s %s",
+                address.getStreetNumber(), address.getStreetName()));
+        user.setEmail(profile.getEmail());
+        user.setCity(address.getCity());
+        user.setSuburb(address.getSuburb());
+        user.setCountry(country);
+        user.setMobilePhone(profile.getPhone());
+        user.setDescription(profile.getDescription());
+        user.setNationalId(skillProvider.getProfile().getNationalId());
+        return user;
+    }
+
+    public List<SkillProvider> parseArrayFromFile() throws IOException {
+        byte[] bytes = readFileFromClasspath("talent.json");
         Gson gson = new GsonBuilder()
-                .setExclusionStrategies(new CustomExclusionStrategy())
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .create();
         String jsonData = new String(bytes, StandardCharsets.UTF_8);
-        Type publicationListType = new com.google.gson.reflect.TypeToken<List<PubJson>>() {
+        Type listType = new com.google.gson.reflect.TypeToken<List<SkillProvider>>() {
         }.getType();
-
-        List<PubJson> pubs = gson.fromJson(jsonData, publicationListType);
-        int index = 0;
-        Iterator<PubJson> it0 = pubs.iterator();
-        String country = config.getProperty("country");
-
-        while (it0.hasNext()) {
-            PubJson p = it0.next();
-            Publication pub = new Publication();
-            if (index % 2 == 0) {
-                pub.setShowcase(Showcase.YES);
-            }
-            if (index % 3 == 0) {
-                pub.setActiveStatus(ActiveStatus.NOT_ACTIVE);
-            }
-            index = index + 1;
-            pub.setTitle(p.getTitle());
-            pub.setSource(p.getSource());
-            pub.setSummary(p.getSummary());
-
-            PubJson.Worker[] workerList = p.getWorkers();
-            for (PubJson.Worker a : workerList) {
-                User worker =
-                        new User();
-                String aStr = a.getWorker();
-                if (index % 2 == 0) {
-                    worker.setShowcase(Showcase.YES);
-                }
-                String name = aStr.replaceAll("Dr. ", "");
-                String[] names = name.split(" ");
-                worker.setFirstName(names[0]);
-                worker.setLastName(names[1]);
-                worker.setCountry(country);
-                worker.setEmail((worker.getLastName() + "@gmail.com").toLowerCase());
-                worker.setProfile(PROFILE.replaceAll("MUNHU", worker.getFullName()));
-                List<User> tmp = repositoryService.findUsersByNames(worker.getFirstName(), worker.getLastName());
-                if (tmp.isEmpty()) {
-                    repositoryService.save(worker);
-                } else {
-                    worker = tmp.get(0);
-                }
-                pub.setWorker(worker);
-            }
-
-            Category cat = null;
-            pub.setCategory(cat);
-            PubType pubType = PubType.fromString(p.getPublicationType());
-            pub.setPubType(pubType);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PubJson.PATTERN);
-            LocalDate localDate = LocalDate.parse(p.getPublicationDate(), formatter);
-            pub.setPubDate(localDate);
-            for (PubJson.Citation c : p.getCitations()) {
-                pub.getCitations().add(c.getCitation());
-            }
-
-            Attachment attachment = new Attachment();
-            bytes = readFileFromClasspath("sample-pub.pdf");
-            attachment.setName(pub.getTitle());
-            attachment.setData(bytes);
-            pub.setFileName("sample-pub.pdf");
-            attachment.setSize(bytes.length);
-            attachment.setContentType("application/pdf");
-            repositoryService.save(attachment);
-            pub.setAttachment(attachment);
-            Comment comment = new Comment();
-            comment.setCreatedBy(user);
-            comment.setTitle("Commenting on : " + pub.getTitle());
-            comment.setBody("this is a test comment");
-            repositoryService.save(comment);
-            repositoryService.save(pub);
-        }
+        return gson.fromJson(jsonData, listType);
     }
 
     private static final String PROFILE = "MUNHU is an eminent professor and a prolific publisher";
@@ -195,6 +167,7 @@ public class OrgDataSet {
         if (!isDev) {
             return;
         }
+
         Iterable<UserRole> roles = repositoryService.findAllRoles();
         String country = config.getProperty("country");
         String ext = config.getProperty(country + ".extension");
@@ -234,7 +207,7 @@ public class OrgDataSet {
                 }
                 repository.save(user0);
 
-                authUser.setSystemUser(user0);
+                authUser.setUser(user0);
                 repository.save(authUser);
             }
         }
@@ -272,7 +245,7 @@ public class OrgDataSet {
             }
 
             repository.save(user1);
-            authUser.setSystemUser(user1);
+            authUser.setUser(user1);
             repository.save(authUser);
         }
     }
