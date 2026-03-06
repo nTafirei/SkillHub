@@ -1,6 +1,6 @@
 package com.marotech.skillhub.action.user.converters;
 
-import com.marotech.skillhub.model.Publication;
+import com.marotech.skillhub.model.Article;
 import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.TypeConverter;
 import net.sourceforge.stripes.validation.ValidationError;
@@ -9,18 +9,18 @@ import org.apache.commons.lang.StringUtils;
 import java.util.Collection;
 import java.util.Locale;
 
-public class PublicationConverter extends ConverterBase implements TypeConverter<Publication> {
+public class PublicationConverter extends ConverterBase implements TypeConverter<Article> {
 
     @Override
-    public Publication convert(String input, Class<? extends Publication> targetType,
-                               Collection<ValidationError> errors) {
+    public Article convert(String input, Class<? extends Article> targetType,
+                           Collection<ValidationError> errors) {
 
         if (StringUtils.isBlank(input)) {
             errors.add(new LocalizableError("publicationnotfound"));
             return null;
         }
 
-        Publication publication;
+        Article publication;
         try {
             publication = repositoryService.findPublicationById(input);
         } catch (Exception e) {

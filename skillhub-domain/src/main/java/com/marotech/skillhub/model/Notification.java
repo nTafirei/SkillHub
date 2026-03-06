@@ -12,7 +12,12 @@ import lombok.*;
 @Entity
 @Table(name = "notification")
 public class Notification extends BaseEntity {
-
+    @Column(nullable = false)
+    private String from;
+    @Column
+    private String email;
+    @Column(nullable = false)
+    private String mobile;
     @Column(nullable = false)
     private String subject;
     @Column(nullable = false)

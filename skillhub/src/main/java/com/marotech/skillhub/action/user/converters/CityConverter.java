@@ -1,6 +1,5 @@
 package com.marotech.skillhub.action.user.converters;
 
-import com.marotech.skillhub.action.user.converters.ConverterBase;
 import com.marotech.skillhub.model.City;
 import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.TypeConverter;

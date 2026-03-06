@@ -35,6 +35,8 @@ public class User extends BaseEntity {
     private String description;
     @Column(length = 32)
     private String nationalId = "";
+    @Column
+    private int rating;
     @Enumerated(EnumType.STRING)
     private Verified verified = Verified.NO;
     @Enumerated(EnumType.STRING)

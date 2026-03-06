@@ -29,5 +29,5 @@ public class Comment extends BaseEntity {
 	private LocalDateTime archivedDate;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@NotNull
-	private Publication publication;
+	private User talent;
 }

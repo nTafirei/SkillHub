@@ -3,7 +3,7 @@ package com.marotech.skillhub.model;
 
 public enum PubType {
 
-    BOOK("Book"), WORK_RELATED_ARTICLE("Work Related Article"),
+    WORK_RELATED_ARTICLE("Work Related Article"),
     SELF_REVIEW_ARTICLE("Self Review Article"),
     THIRD_PARTY_REVIEW_ARTICLE("Third Party Review Article");
 

@@ -218,14 +218,14 @@ public class RepositoryService {
                 setParameter(1, id).getSingleResult();
     }
 
-    public Publication findPublicationById(String id) {
-        return entityManager.createQuery("SELECT u from Publication u where u.id = ?1", Publication.class).
+    public Article findPublicationById(String id) {
+        return entityManager.createQuery("SELECT u from Publication u where u.id = ?1", Article.class).
                 setParameter(1, id).getSingleResult();
     }
 
-    public List<Publication> findPublicationsForUser(User worker) {
+    public List<Article> findPublicationsForUser(User worker) {
         return entityManager.createQuery(
-                        "SELECT p FROM Publication p JOIN p.workers a WHERE a = :worker", Publication.class)
+                        "SELECT p FROM Publication p JOIN p.workers a WHERE a = :worker", Article.class)
                 .setParameter("worker", worker)
                 .getResultList();
     }
@@ -265,8 +265,8 @@ public class RepositoryService {
                 setParameter(1, id).getSingleResult();
     }
 
-    public Iterable<Publication> findAllPublications() {
-        return entityManager.createQuery("SELECT u from Publication u", Publication.class).getResultList();
+    public Iterable<Article> findAllPublications() {
+        return entityManager.createQuery("SELECT u from Publication u", Article.class).getResultList();
     }
 
     public List<UserRole> findAllRoles() {
@@ -808,11 +808,11 @@ public class RepositoryService {
         }
     */
 
-    public List<Publication> findShowcasedPublications(int start, int limit) {
+    public List<Article> findShowcasedPublications(int start, int limit) {
         try {
             return entityManager.createQuery("SELECT u from Publication u WHERE " +
                                     " u.activeStatus =?1 AND u.showcase =?2",
-                            Publication.class).
+                            Article.class).
                     setParameter(1, ActiveStatus.ACTIVE).
                     setParameter(2, Showcase.YES).
                     getResultList();
@@ -834,11 +834,11 @@ public class RepositoryService {
         }
     }
 
-    public List<Publication> findShowcasedByCategory(Category category, int start, int limit) {
+    public List<Article> findShowcasedByCategory(Category category, int start, int limit) {
         try {
             return entityManager.createQuery("SELECT u from Publication u WHERE u.category =?1 AND " +
                                     " u.activeStatus =?2 AND u.showcase =?3",
-                            Publication.class).
+                            Article.class).
                     setParameter(1, category).
                     setParameter(2, ActiveStatus.ACTIVE).
                     setParameter(3, Showcase.YES).
@@ -849,11 +849,11 @@ public class RepositoryService {
         }
     }
 
-    public List<Publication> findPublicationsByCategory(Category category, int start, int limit, ActiveStatus activeStatus) {
+    public List<Article> findPublicationsByCategory(Category category, int start, int limit, ActiveStatus activeStatus) {
         try {
             return entityManager.createQuery("SELECT u from Publication u WHERE u.category =?1 AND " +
                                     " u.activeStatus =?2",
-                            Publication.class).
+                            Article.class).
                     setParameter(1, category).
                     setParameter(2, activeStatus).
                     getResultList();
@@ -863,11 +863,11 @@ public class RepositoryService {
         }
     }
 
-    public List<Publication> findPublications(int start, int limit, ActiveStatus activeStatus) {
+    public List<Article> findPublications(int start, int limit, ActiveStatus activeStatus) {
         try {
             return entityManager.createQuery("SELECT u from Publication u WHERE " +
                                     " u.activeStatus =?1",
-                            Publication.class).
+                            Article.class).
                     setParameter(1, activeStatus).
                     getResultList();
         } catch (Exception e) {
@@ -931,12 +931,12 @@ public class RepositoryService {
         }
     }
 
-    public List<Publication> findPublicationBySource(String source) {
+    public List<Article> findPublicationBySource(String source) {
         if (StringUtils.isBlank(source)) {
             return new ArrayList<>();
         }
         try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE u.source LIKE?1", Publication.class).
+            return entityManager.createQuery("SELECT u from Publication u WHERE u.source LIKE?1", Article.class).
                     setParameter(1, "%" + source + "%").
                     getResultList();
         } catch (Exception e) {
@@ -966,12 +966,12 @@ public class RepositoryService {
         }
     }
 
-    public List<Publication> findPublicationByTitle(String title) {
+    public List<Article> findPublicationByTitle(String title) {
         if (StringUtils.isBlank(title)) {
             return new ArrayList<>();
         }
         try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE u.title LIKE?1", Publication.class).
+            return entityManager.createQuery("SELECT u from Publication u WHERE u.title LIKE?1", Article.class).
                     setParameter(1, "%" + title + "%").
                     getResultList();
         } catch (Exception e) {
@@ -979,7 +979,7 @@ public class RepositoryService {
         }
     }
 
-    public List<Publication> findPublicationByName(String firstName, String lastName) {
+    public List<Article> findPublicationByName(String firstName, String lastName) {
         //TODO: implement method
         return null;
     }

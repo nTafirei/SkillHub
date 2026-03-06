@@ -72,6 +72,7 @@
                                   </tr>
                             </security:protected-element>
 
+                        <c:if test="${actionBean.user.isTalent}">
                               <tr>
                                   <td class="strong">
                                      <fmt:message key="skillslabel"/>
@@ -80,6 +81,7 @@
                                       ${actionBean.user.skillsAsString}
                                   </td>
                               </tr>
+
                               <tr>
                                   <td class="strong">
                                      <fmt:message key="desclabel"/>
@@ -103,8 +105,14 @@
                                                           href="/web/review/${actionBean.user.id}">
                                                           <fmt:message key="reviewlabel"/>
                                                       </d:link>
+                                                      |
+                                                      <d:link
+                                                          href="/web/reviews/${actionBean.user.id}">
+                                                          <fmt:message key="reviewslabel"/>
+                                                      </d:link>
                                 </td>
                             </tr>
+                        </c:if>
 
                         <security:protected-element name="view-deeper-user-details">
                             <tr>

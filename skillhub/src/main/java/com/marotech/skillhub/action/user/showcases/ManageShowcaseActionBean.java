@@ -6,7 +6,7 @@ import com.marotech.skillhub.action.user.converters.EnumConverter;
 import com.marotech.skillhub.action.user.converters.PublicationConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.Category;
-import com.marotech.skillhub.model.Publication;
+import com.marotech.skillhub.model.Article;
 import com.marotech.skillhub.model.Showcase;
 import com.marotech.skillhub.repository.ShowcaseRepository;
 import lombok.Getter;
@@ -27,14 +27,14 @@ public class ManageShowcaseActionBean extends UserBaseActionBean {
     @Validate(converter = EnumConverter.class)
     private Category category;
     @Getter
-    private List<Publication> publications;
+    private List<Article> publications;
     @Getter
     @Setter
     private int currPage = 0;
     @Getter
     @Setter
     @Validate(required = true, on = {REMOVE, ADD}, converter = PublicationConverter.class)
-    private Publication publication;
+    private Article publication;
 
     @HandlesEvent(REMOVE)
     public Resolution remove() {
