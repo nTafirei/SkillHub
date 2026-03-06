@@ -3,5 +3,6 @@
     <role name="User"/>
     <role name="Talent"/>
     <role name="Administrator"/>
+    <role name="Customer Service"/>
     <role name="System Administrator"/>
 </roles>

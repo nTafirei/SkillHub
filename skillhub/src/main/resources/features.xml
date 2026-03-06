@@ -15,4 +15,6 @@
     <feature name="list-reports"/>
     <feature name="change-user-password"/>
     <feature name="manage-showcases"/>
+    <feature name="view-talent-details"/>
+    <feature name="view-deeper-user-details"/>
 </features>

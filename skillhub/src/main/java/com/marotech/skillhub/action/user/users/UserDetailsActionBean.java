@@ -1,6 +1,6 @@
 package com.marotech.skillhub.action.user.users;
 
-import com.marotech.skillhub.action.user.RequiresOneRoleOf;
+import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.model.User;
@@ -13,8 +13,8 @@ import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrors;
 
+@SkipAuthentication
 @UrlBinding("/web/user-details/{user}/{_eventName}")
-@RequiresOneRoleOf({"Administrator", "System Administrator"})
 public class UserDetailsActionBean extends UserBaseActionBean {
     @Getter
     @Setter
@@ -40,6 +40,9 @@ public class UserDetailsActionBean extends UserBaseActionBean {
 
     @Override
     public String getNavSection() {
+        if(user.getIsTalent()){
+            return "talent";
+        }
         return "users";
     }
 

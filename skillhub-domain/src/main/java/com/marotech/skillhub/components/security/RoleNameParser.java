@@ -1,7 +1,7 @@
 package com.marotech.skillhub.components.security;
 
-import com.marotech.skillhub.model.UserRole;
 import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.UserRole;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +63,7 @@ public class RoleNameParser extends DefaultHandler {
         if (tagName.equalsIgnoreCase("role")) {
             String role = attributes.getValue("name");
             UserRole userRole = new UserRole();
-            userRole.setRoleName(role);
+            userRole.setRoleName(role.trim());
             roles.put(role, userRole);
         }
     }

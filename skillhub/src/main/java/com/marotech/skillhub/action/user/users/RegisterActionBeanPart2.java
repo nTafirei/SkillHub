@@ -98,10 +98,8 @@ public class RegisterActionBeanPart2 extends UserBaseActionBean {
         User user = new User(firstName,
                 middleName, lastName, address,
                 town, mobilephone, nationalId, country);
-        String orgName = config.getProperty("orgId");
         repositoryService.save(user);
         authUser.setUser(user);
-        repositoryService.save(authUser);
 
         getContext().getRequest().getSession()
                 .setAttribute(Constants.LOGGED_IN_USER, user);

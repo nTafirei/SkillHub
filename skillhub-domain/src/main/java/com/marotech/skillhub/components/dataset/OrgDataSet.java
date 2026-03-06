@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marotech.skillhub.components.config.Config;
 import com.marotech.skillhub.components.service.RepositoryService;
-import com.marotech.skillhub.model.AuthUser;
-import com.marotech.skillhub.model.User;
-import com.marotech.skillhub.model.UserRole;
-import com.marotech.skillhub.model.Verified;
+import com.marotech.skillhub.model.*;
 import com.marotech.skillhub.repository.GenericRepository;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -68,6 +65,7 @@ public class OrgDataSet {
                 superAdmin.setEmail(adminEmail);
                 superAdmin.setAddress("80 Samora Machel Avenue");
                 superAdmin.setCity("Harare");
+                superAdmin.setSuburb("City Center");
                 superAdmin.setCountry("Zimbabwe");
                 superAdmin.setMobilePhone("0712374658");
                 repository.save(superAdmin);
@@ -97,10 +95,27 @@ public class OrgDataSet {
         Iterator<SkillProvider> it = providers.iterator();
         while (it.hasNext()) {
             SkillProvider provider = it.next();
+
+            String cat = provider.getCategory();
+            Category category = repositoryService.findCategoryByName(cat);
+            if (category == null) {
+                category = new Category();
+                category.setName(cat);
+                repositoryService.save(category);
+            }
+            String skillName = provider.getSkill();
+            Skill skill = repositoryService.findSkillByName(skillName);
+            if (skill == null) {
+                skill = new Skill();
+                skill.setName(skillName);
+                skill.setCategory(category);
+                repositoryService.save(skill);
+            }
             User user = transformToUser(provider, country);
+            user.getSkills().add(skill);
             AuthUser existing = repositoryService.findAuthUserByUserName
                     (provider.getProfile().getNationalId());
-            if(existing != null){
+            if (existing != null) {
                 continue;
             }
             for (UserRole role : roles) {

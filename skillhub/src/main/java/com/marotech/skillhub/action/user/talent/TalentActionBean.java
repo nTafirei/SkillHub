@@ -1,6 +1,6 @@
 package com.marotech.skillhub.action.user.talent;
 
-import com.marotech.skillhub.action.user.RequiresOneRoleOf;
+import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
@@ -14,11 +14,11 @@ import net.sourceforge.stripes.validation.Validate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
-
+@SkipAuthentication
 @UrlBinding("/web/talent/{_eventName}")
-@RequiresOneRoleOf({"Administrator", "System Administrator"})
 public class TalentActionBean extends UserBaseActionBean {
 
     @Getter
@@ -39,7 +39,7 @@ public class TalentActionBean extends UserBaseActionBean {
                 users.add(user1);
             }
         }
-
+        users.sort(Comparator.comparing(User::getLastName));
         return new ForwardResolution(USERS_LIST_JSP);
     }
 
@@ -59,7 +59,7 @@ public class TalentActionBean extends UserBaseActionBean {
 
     @Override
     public String getNavSection() {
-        return "users";
+        return "talent";
     }
 
     @SpringBean

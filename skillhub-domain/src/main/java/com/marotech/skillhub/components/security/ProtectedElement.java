@@ -11,6 +11,7 @@ import java.util.Set;
 public class ProtectedElement {
 
     private String name;
+    private boolean allowGuest;
     private List<String> roles;
     private Set<String> roleSet = new HashSet<String>();
 
@@ -49,6 +50,14 @@ public class ProtectedElement {
 
     public Set<String> getRoleSet() {
         return roleSet;
+    }
+
+    public boolean isAllowGuest() {
+        return allowGuest;
+    }
+
+    public void setAllowGuest(boolean allowGuest) {
+        this.allowGuest = allowGuest;
     }
 
     @Override

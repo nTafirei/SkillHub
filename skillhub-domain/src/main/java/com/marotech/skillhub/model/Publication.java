@@ -1,6 +1,5 @@
 package com.marotech.skillhub.model;
 
-import com.marotech.skillhub.util.CommentComparator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -8,7 +7,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 

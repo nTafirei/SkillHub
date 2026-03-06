@@ -3,14 +3,10 @@ package com.marotech.skillhub.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -55,6 +51,9 @@ public class User extends BaseEntity {
     @NotNull
     private Showcase showcase = Showcase.NO;
     @ToString.Exclude
+    @ManyToMany(targetEntity = Skill.class, fetch = FetchType.EAGER)
+    private Set<Skill> skills = new HashSet<>();
+    @ToString.Exclude
     @ManyToMany(targetEntity = UserRole.class, fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -77,8 +76,21 @@ public class User extends BaseEntity {
         return userRoles != null && userRoles.size() > 0;
     }
 
-    public boolean getIsAgent() {
-        return hasRole("AGENT");
+    public boolean getIsTalent() {
+        return hasRole(TALENT);
+    }
+
+    public String getSkillsAsString(){
+        StringBuilder builder = new StringBuilder();
+        Iterator<Skill> it = skills.iterator();
+        while(it.hasNext()){
+            Skill skill = it.next();
+            builder.append(skill.getName());
+            if(it.hasNext()){
+                builder.append(",");
+            }
+        }
+        return  builder.toString();
     }
 
     public void addUserRole(UserRole userRole) {
@@ -141,6 +153,7 @@ public class User extends BaseEntity {
         return roles;
     }
 
+    public static final String TALENT = "Talent";
     public static final String ADMINISTRATOR = "Administrator";
     public static final String SYSTEM_ADMINISTRATOR = "System Administrator";
 }

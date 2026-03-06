@@ -32,14 +32,6 @@
                              <li><d:link href="/web/tools"><fmt:message key="toolslabel"/></d:link></li>
                          </c:if>
 
-                <c:if test="${actionBean.isLoggedIn == true}">
-                         <c:if test="${actionBean.navSection == 'showcases'}">
-                             <li class="current"><d:link href="/web/showcases"><fmt:message key="showcaseslabel"/></d:link></li>
-                         </c:if>
-                         <c:if test="${actionBean.navSection != 'showcases'}">
-                             <li><d:link href="/web/showcases"><fmt:message key="showcaseslabel"/></d:link></li>
-                         </c:if>
-
                          <c:if test="${actionBean.navSection == 'search-talent'}">
                              <li class="current"><d:link href="/web/talent"><fmt:message key="searchmenulabel"/></d:link></li>
                          </c:if>
@@ -52,6 +44,13 @@
                          </c:if>
                          <c:if test="${actionBean.navSection != 'talent'}">
                              <li><d:link href="/web/talent"><fmt:message key="talentlabel"/></d:link></li>
+                         </c:if>
+                <c:if test="${actionBean.isLoggedIn == true}">
+                         <c:if test="${actionBean.navSection == 'showcases'}">
+                             <li class="current"><d:link href="/web/showcases"><fmt:message key="showcaseslabel"/></d:link></li>
+                         </c:if>
+                         <c:if test="${actionBean.navSection != 'showcases'}">
+                             <li><d:link href="/web/showcases"><fmt:message key="showcaseslabel"/></d:link></li>
                          </c:if>
 
                     <security:protected-element name="generate-reports">

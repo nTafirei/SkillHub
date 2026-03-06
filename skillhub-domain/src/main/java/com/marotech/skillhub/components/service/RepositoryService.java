@@ -3,11 +3,10 @@ package com.marotech.skillhub.components.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.marotech.skillhub.model.*;
 import com.marotech.skillhub.model.Parameter;
+import com.marotech.skillhub.model.*;
 import com.marotech.skillhub.repository.GenericRepository;
 import com.marotech.skillhub.repository.ResultsType;
-import com.marotech.skillhub.util.Constants;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
@@ -79,12 +78,24 @@ public class RepositoryService {
         }
     }
 
-    public LanguageModel findLanguageModelByName(String name) {
+    public Skill findSkillByName(String name) {
         if (StringUtils.isBlank(name)) {
             return null;
         }
         try {
-            return entityManager.createQuery("SELECT u from LanguageModel u WHERE u.name =?1", LanguageModel.class).
+            return entityManager.createQuery("SELECT u from Skill u WHERE u.name =?1", Skill.class).
+                    setParameter(1, name).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Category findCategoryByName(String name) {
+        if (StringUtils.isBlank(name)) {
+            return null;
+        }
+        try {
+            return entityManager.createQuery("SELECT u from Category u WHERE u.name =?1", Category.class).
                     setParameter(1, name).getSingleResult();
         } catch (Exception e) {
             return null;
@@ -95,7 +106,10 @@ public class RepositoryService {
         return entityManager.createQuery("SELECT u from LanguageModel u", LanguageModel.class).
                 getResultList();
     }
-
+    public Skill findSkillById(String id) {
+        return entityManager.createQuery("SELECT u from Skill u where u.id = ?1", Skill.class).
+                setParameter(1, id).getSingleResult();
+    }
     public Comment findCommentById(String id) {
         return entityManager.createQuery("SELECT u from Comment u where u.id = ?1", Comment.class).
                 setParameter(1, id).getSingleResult();
@@ -132,12 +146,17 @@ public class RepositoryService {
         return entityManager.createQuery("SELECT u from JDBCDataSource u where u.id = ?1", JDBCDataSource.class).
                 setParameter(1, id).getSingleResult();
     }
+
     public List<JDBCDataSource> findAllJDBCDataSources() {
         return entityManager.createQuery("SELECT u from JDBCDataSource u ", JDBCDataSource.class).getResultList();
     }
 
     public UserRole findUserRoleById(String id) {
         return entityManager.createQuery("SELECT u from UserRole u where u.id = ?1", UserRole.class).
+                setParameter(1, id).getSingleResult();
+    }
+    public Category findCategoryById(String id) {
+        return entityManager.createQuery("SELECT u from Category u where u.id = ?1", Category.class).
                 setParameter(1, id).getSingleResult();
     }
 
@@ -165,26 +184,28 @@ public class RepositoryService {
 
     public User findUserByNationalIdAndRole(String nationalId, String roleName) {
         try {
-            User user =  entityManager.createQuery("SELECT u from User u WHERE u.nationalId =?1", User.class).
+            User user = entityManager.createQuery("SELECT u from User u WHERE u.nationalId =?1", User.class).
                     setParameter(1, nationalId).getSingleResult();
-            if(user != null && user.hasRole(roleName)){
+            if (user != null && user.hasRole(roleName)) {
                 return user;
             }
         } catch (Exception e) {
         }
         return null;
     }
+
     public User findUserByMobilePhoneAndRole(String mobilePhone, String roleName) {
         try {
             User user = entityManager.createQuery("SELECT u from User u WHERE u.mobilePhone =?1", User.class).
                     setParameter(1, mobilePhone).getSingleResult();
-            if(user != null && user.hasRole(roleName)){
+            if (user != null && user.hasRole(roleName)) {
                 return user;
             }
         } catch (Exception e) {
         }
         return null;
     }
+
     public User findUserByMobilePhone(String mobilePhone) {
         try {
             return entityManager.createQuery("SELECT u from User u WHERE u.mobilePhone =?1", User.class).
@@ -754,10 +775,22 @@ public class RepositoryService {
             return null;
         }
     }
+
     public List<Category> fetchAllCategories() {
         return entityManager.createQuery("SELECT u from Category u ", Category.class).
-        getResultList();
+                getResultList();
     }
+
+    public List<User> fetchUsersWithSkill(Skill skill) {
+        if (skill == null) {
+            return new ArrayList<>();
+        }
+        String jpql = "SELECT DISTINCT u FROM User u JOIN u.skills s WHERE s = :skill";
+        TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
+        query.setParameter("skill", skill);
+        return query.getResultList();
+    }
+
     public Feature findFeatureByName(String name) {
         if (StringUtils.isBlank(name)) {
             return null;
@@ -805,6 +838,19 @@ public class RepositoryService {
         try {
             return entityManager.createQuery("SELECT u from Publication u WHERE u.source LIKE?1", Publication.class).
                     setParameter(1, "%" + source + "%").
+                    getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Skill> fetchSkillsForCategory(Category category) {
+        if (category == null) {
+            return new ArrayList<>();
+        }
+        try {
+            return entityManager.createQuery("SELECT u from Skill u WHERE u.category =?1", Skill.class).
+                    setParameter(1, category).
                     getResultList();
         } catch (Exception e) {
             return null;

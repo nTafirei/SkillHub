@@ -65,7 +65,7 @@ public class ProtectedElementParser extends DefaultHandler {
 
         if (tagName.equalsIgnoreCase("protected-element")) {
             element = new ProtectedElement();
-            String name = attributes.getValue(0);
+            String name = attributes.getValue(0).trim();
             if (!featureValidator.isValidFeature(name)) {
                 log.error(
                         "Security/Feature error : "
@@ -81,7 +81,7 @@ public class ProtectedElementParser extends DefaultHandler {
         }
 
         if (tagName.equalsIgnoreCase("role")) {
-            String role = attributes.getValue(0);
+            String role = attributes.getValue(0).trim();
 
             if (!isValidRole(role)) {
                 log.error(
@@ -94,6 +94,10 @@ public class ProtectedElementParser extends DefaultHandler {
                 System.exit(0);
             }
             element.addRole(role);
+        }
+        if (tagName.equalsIgnoreCase("allowGuest")) {
+            String allowGuest = attributes.getValue(0).trim();
+            element.setAllowGuest(Boolean.valueOf(allowGuest));
         }
     }
 

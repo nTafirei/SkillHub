@@ -16,6 +16,25 @@
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
+    <protected-element name="disable-users">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="view-talent-details">
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+        <allowGuest value="true"/>
+    </protected-element>
+    <protected-element name="generate-reports">
+        <role name="Customer Service"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
+    <protected-element name="view-deeper-user-details">
+        <role name="Customer Service"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
     <protected-element name="verify-users">
         <role name="Administrator"/>
         <role name="System Administrator"/>

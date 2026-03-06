@@ -63,6 +63,9 @@ public class AssignRoleActionBean extends UserBaseActionBean {
 
     @Override
     public String getNavSection() {
+        if(user.getIsTalent()){
+            return "talent";
+        }
         return "users";
     }
 

@@ -21,34 +21,19 @@
                             </thead>
                             <tr>
                                 <td class="strong">
-                                    <fmt:message key="firstnamelabel"/>
+                                    <fmt:message key="namelabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.firstName}
+                                    ${actionBean.user.fullName}
                                 </td>
                             </tr>
+
                             <tr>
                                 <td class="strong">
-                                    <fmt:message key="lastnamelabel"/>
+                                    <fmt:message key="surbablabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.lastName}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="strong">
-                                    <fmt:message key="nationalidlabel"/>
-                                </td>
-                                <td>
-                                    ${actionBean.user.nationalId}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="strong">
-                                    <fmt:message key="addresslabel"/>
-                                </td>
-                                <td>
-                                    ${actionBean.user.address}
+                                    ${actionBean.user.suburb}
                                 </td>
                             </tr>
                             <tr>
@@ -67,12 +52,59 @@
                                         ${actionBean.user.country}
                                 </td>
                             </tr>
+
+                            <security:protected-element name="view-talent-details">
+                                    <tr>
+                                        <td class="strong">
+                                           <fmt:message key="mobilephonelabel"/>
+                                        </td>
+                                        <td>
+                                             <a href="tel:${actionBean.user.email}">${actionBean.user.mobilePhone}</a>
+                                        </td>
+                                    </tr>
+                                  <tr>
+                                      <td class="strong">
+                                         <fmt:message key="emaillabel"/>
+                                      </td>
+                                      <td>
+                                          <a href="mailto:${actionBean.user.email}">${actionBean.user.email}</a>
+                                      </td>
+                                  </tr>
+                            </security:protected-element>
+
+                              <tr>
+                                  <td class="strong">
+                                     <fmt:message key="skillslabel"/>
+                                  </td>
+                                  <td>
+                                      ${actionBean.user.skillsAsString}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td class="strong">
+                                     <fmt:message key="desclabel"/>
+                                  </td>
+                                  <td>
+                                      ${actionBean.user.description}
+                                  </td>
+                              </tr>
+
                             <tr>
                                 <td class="strong">
-                                   <fmt:message key="mobilephonelabel"/>
+                                    <fmt:message key="addresslabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.mobilePhone}
+                                    ${actionBean.user.address}
+                                </td>
+                            </tr>
+
+                        <security:protected-element name="view-deeper-user-details">
+                            <tr>
+                                <td class="strong">
+                                    <fmt:message key="nationalidlabel"/>
+                                </td>
+                                <td>
+                                    ${actionBean.user.nationalId}
                                 </td>
                             </tr>
                             <tr>
@@ -91,14 +123,6 @@
                              </tr>
                               <tr>
                                   <td class="strong">
-                                     <fmt:message key="emaillabel"/>
-                                  </td>
-                                  <td>
-                                      <a href="mailto:${actionBean.user.email}">${actionBean.user.email}</a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td class="strong">
                                      <fmt:message key="verified"/>
                                   </td>
                                   <td>
@@ -106,10 +130,7 @@
                                   </td>
                               </tr>
                             <tr>
-    <td align="right">
-
-
-
+                               <td align="right">
                                  <security:protected-element name="disable-users">
                                                       <d:link
                                                           href="/web/disable/${actionBean.user.id}">
@@ -138,6 +159,7 @@
                                                 </c:if>
                                           </td>
                                       </tr>
+                              </security:protected-element>
                             </tbody>
                         </table>
                 </div>

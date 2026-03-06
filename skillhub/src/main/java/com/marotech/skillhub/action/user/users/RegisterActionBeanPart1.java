@@ -9,8 +9,6 @@ import lombok.Setter;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SkipAuthentication
 @UrlBinding("/web/register1")

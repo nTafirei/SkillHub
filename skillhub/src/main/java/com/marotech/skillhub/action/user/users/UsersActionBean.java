@@ -14,6 +14,7 @@ import net.sourceforge.stripes.validation.Validate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public class UsersActionBean extends UserBaseActionBean {
                 users.add(user1);
             }
         }
-
+        users.sort(Comparator.comparing(User::getLastName));
         return new ForwardResolution(USERS_LIST_JSP);
     }
 
@@ -65,6 +66,7 @@ public class UsersActionBean extends UserBaseActionBean {
     @SpringBean
     private RepositoryService repositoryService;
     public static final String USERS_LIST = "/web/users";
+    public static final String TALENT_LIST = "/web/talent";
     private static final String [] ROLES = {Constants.ADMINISTRATOR,
             Constants.CUSTOMER_SERVICE, Constants.SYSTEM_ADMINISTRATOR};
     private static final String USERS_LIST_JSP = "/WEB-INF/jsp/user/users/list.jsp";

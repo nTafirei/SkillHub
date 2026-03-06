@@ -22,7 +22,7 @@
                                         <fmt:message key="takentedsersfound"/></strong>
                                     </c:if>
                                 </td>
-                                <td align="center" colspan="3"><d:link href="/web/search-talent"><fmt:message key="searchusersmenulabel"/></d:link></td>
+                                <td align="center" colspan="3"><d:link href="/web/search-for-talent"><fmt:message key="searchusersmenulabel"/></d:link></td>
                             </tr>
                         </table>
                         <table class="alternating">
@@ -33,13 +33,13 @@
                                         <fmt:message key="namelabel"/>
                                     </td>
                                     <td>
-                                        <fmt:message key="emaillabel"/>
+                                        <fmt:message key="surbablabel"/>
                                     </td>
                                     <td>
-                                        <fmt:message key="mobilephonelabel"/>
+                                        <fmt:message key="citylabel"/>
                                     </td>
                                      <td>
-                                         <fmt:message key="id"/>
+                                         <fmt:message key="skillslabel"/>
                                      </td>
                                     <td align="right">
                                         <fmt:message key="actionlabel"/>
@@ -54,17 +54,15 @@
                                                 ${user.firstName} ${user.lastName}
                                         </td>
                                         <td>
-                                                <a href="mailto:${user.email}">${user.email}</a>
+                                                ${user.suburb}
                                         </td>
                                         <td nowrap="nowrap">
-                                                ${user.mobilePhone}
+                                                ${user.city}
                                         </td>
                                         <td nowrap="nowrap">
-                                             ${user.nationalId}
+                                             ${user.skillsAsString}
                                         </td>
                                          <td align="right">
-
-
                                                  <d:link
                                                              href="/web/user-details/${user.id}">
                                                              <fmt:message key="detaillabel"/>

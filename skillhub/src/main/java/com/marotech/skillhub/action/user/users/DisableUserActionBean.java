@@ -26,6 +26,9 @@ public class DisableUserActionBean extends UserBaseActionBean {
     public Resolution view() {
         user.setActiveStatus(ActiveStatus.NOT_ACTIVE);
         repositoryService.save(user);
+        if(user.getIsTalent()){
+            return new RedirectResolution(UsersActionBean.TALENT_LIST);
+        }
         return new RedirectResolution(UsersActionBean.USERS_LIST);
     }
 

@@ -3,8 +3,8 @@ package com.marotech.skillhub.action.user;
 
 import com.marotech.skillhub.action.HubActionBeanContext;
 import com.marotech.skillhub.components.config.Config;
-import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.components.security.SecurityAwareActionBean;
+import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.util.Constants;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.ForwardResolution;
