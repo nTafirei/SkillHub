@@ -33,7 +33,7 @@
                                     <fmt:message key="surbablabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.suburb}
+                                    ${actionBean.user.address.suburb.name}
                                 </td>
                             </tr>
                             <tr>
@@ -41,7 +41,7 @@
                                     <fmt:message key="citylabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.city}
+                                    ${actionBean.user.address.suburb.city.name}
                                 </td>
                             </tr>
                             <tr>
@@ -49,7 +49,7 @@
                                     <fmt:message key="countrylabel"/>
                                 </td>
                                 <td>
-                                        ${actionBean.user.country}
+                                        ${actionBean.user.address.suburb.city.country}
                                 </td>
                             </tr>
 
@@ -91,14 +91,30 @@
 
                             <tr>
                                 <td class="strong">
-                                    <fmt:message key="addresslabel"/>
+                                    <fmt:message key="actionlabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.address}
+                                                    <d:link
+                                                          href="/web/send-message/${actionBean.user.id}">
+                                                          <fmt:message key="sendmessagelabel"/>
+                                                      </d:link>
+                                                      |
+                                                      <d:link
+                                                          href="/web/review/${actionBean.user.id}">
+                                                          <fmt:message key="reviewlabel"/>
+                                                      </d:link>
                                 </td>
                             </tr>
 
                         <security:protected-element name="view-deeper-user-details">
+                            <tr>
+                                <td class="strong">
+                                    <fmt:message key="addresslabel"/>
+                                </td>
+                                <td>
+                                    ${actionBean.user.address.address}
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="strong">
                                     <fmt:message key="nationalidlabel"/>

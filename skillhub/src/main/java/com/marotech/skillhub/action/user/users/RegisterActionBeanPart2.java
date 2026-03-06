@@ -4,10 +4,7 @@ import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.EnumConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
-import com.marotech.skillhub.model.AuthUser;
-import com.marotech.skillhub.model.Gender;
-import com.marotech.skillhub.model.User;
-import com.marotech.skillhub.model.UserRole;
+import com.marotech.skillhub.model.*;
 import com.marotech.skillhub.util.Constants;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,6 +58,11 @@ public class RegisterActionBeanPart2 extends UserBaseActionBean {
     private String town;
     @Getter
     @Setter
+    @Validate(on = {SAVE}, required = true)
+    private String suburb;
+
+    @Getter
+    @Setter
     @Validate
     private String telephone;
     @Getter
@@ -95,9 +97,29 @@ public class RegisterActionBeanPart2 extends UserBaseActionBean {
 
         String country = config.getProperty("country");
 
+        City city = repositoryService.fetchCityByName(town, country);
+        if(city == null){
+            city = new City();
+            city.setName(town);
+            city.setCountry(country);
+            repositoryService.save(city);
+        }
+        Suburb suburb = repositoryService.fetchSuburbByName(city, this.suburb);
+        if(suburb == null) {
+            suburb = new Suburb();
+            suburb.setCity(city);
+            suburb.setName(this.suburb);
+            repositoryService.save(suburb);
+        }
+
+        Address theAddress = new Address();
+        theAddress.setSuburb(suburb);
+        theAddress.setAddress(address);
+        repositoryService.save(theAddress);
+
         User user = new User(firstName,
-                middleName, lastName, address,
-                town, mobilephone, nationalId, country);
+                middleName, lastName, theAddress,
+                 mobilephone, nationalId);
         repositoryService.save(user);
         authUser.setUser(user);
 

@@ -31,6 +31,7 @@ public abstract class BaseActionBean extends SecurityAwareActionBean implements
     protected static final String SAVE = "save";
     protected static final String EDIT = "edit";
     protected static final String SEARCH = "search";
+    protected static final String POPULATE = "populate";
     protected static final String DEPLOYMENT_ENV = "env.deployment";
     private Map<String, String> navSectionClasses = new HashMap<String, String>();
     protected HubActionBeanContext context;

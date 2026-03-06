@@ -63,13 +63,30 @@ public class OrgDataSet {
                 superAdmin.setLastName("System Admin");
                 superAdmin.setMiddleName("System Admin");
                 superAdmin.setEmail(adminEmail);
-                superAdmin.setAddress("80 Samora Machel Avenue");
-                superAdmin.setCity("Harare");
-                superAdmin.setSuburb("City Center");
-                superAdmin.setCountry("Zimbabwe");
+
+                City city = repositoryService.fetchCityByName("Harare", "Zimbabwe");
+                if(city == null){
+                    city = new City();
+                    city.setName("Harare");
+                    city.setCountry("Zimbabwe");
+                    repositoryService.save(city);
+                }
+                Suburb suburb = repositoryService.fetchSuburbByName(city, "City Center");
+                if(suburb == null) {
+                    suburb = new Suburb();
+                    suburb.setCity(city);
+                    suburb.setName("City Center");
+                    repositoryService.save(suburb);
+                }
+
+                Address address = new Address();
+                address.setSuburb(suburb);
+                address.setAddress("80 Samora Machel Avenue");
+                repositoryService.save(address);
+                superAdmin.setAddress(address);
                 superAdmin.setMobilePhone("0712374658");
                 repository.save(superAdmin);
-                superAdmin.setCountry(country);
+
 
                 for (UserRole role : roles) {
                     if (role.getRoleName().equals("System Administrator")) {
@@ -139,17 +156,35 @@ public class OrgDataSet {
         }
 
         TalentProfile profile = skillProvider.getProfile();
-        TalentAddress address = profile.getAddress();
+        TalentAddress talentAddress = profile.getAddress();
 
         User user = new User();
         user.setFirstName(profile.getFirstName());
         user.setLastName(profile.getLastName());
-        user.setAddress(String.format("%s %s",
-                address.getStreetNumber(), address.getStreetName()));
         user.setEmail(profile.getEmail());
-        user.setCity(address.getCity());
-        user.setSuburb(address.getSuburb());
-        user.setCountry(country);
+
+        City city = repositoryService.fetchCityByName(talentAddress.getCity(), country);
+        if(city == null){
+            city = new City();
+            city.setName(talentAddress.getCity());
+            city.setCountry(country);
+            repositoryService.save(city);
+        }
+        Suburb suburb = repositoryService.fetchSuburbByName(city, talentAddress.getSuburb());
+        if(suburb == null) {
+            suburb = new Suburb();
+            suburb.setCity(city);
+            suburb.setName(talentAddress.getSuburb());
+            repositoryService.save(suburb);
+        }
+
+        Address address = new Address();
+        address.setSuburb(suburb);
+        address.setAddress(String.format("%s %s",
+                talentAddress.getStreetNumber(), talentAddress.getStreetName()));
+        repositoryService.save(address);
+        user.setAddress(address);
+
         user.setMobilePhone(profile.getPhone());
         user.setDescription(profile.getDescription());
         user.setNationalId(skillProvider.getProfile().getNationalId());
@@ -177,93 +212,6 @@ public class OrgDataSet {
         }
     }
 
-    private void createUsers() throws Exception {
-
-        if (!isDev) {
-            return;
-        }
-
-        Iterable<UserRole> roles = repositoryService.findAllRoles();
-        String country = config.getProperty("country");
-        String ext = config.getProperty(country + ".extension");
-        {
-            User user0;
-            user0 = repositoryService.findUserByEmail("marshall@skillhub.co." + ext);
-            if (user0 == null) {
-                AuthUser authUser = new AuthUser();
-                authUser.setUserName("" + random.nextInt(10020000));
-                String newPassword = AuthUser.encodedPassword("test");
-                authUser.setPassword(newPassword);
-                repository.save(authUser);
-                user0 = new User();
-                user0.setVerified(Verified.YES);
-                user0.setNationalId("" + random.nextInt(1012450000));
-
-                user0.setFirstName("Marshall");
-                user0.setCountry(country);
-                user0.setLastName("Munhumumwe");
-                user0.setNationalId("11123561");
-                user0.setEmail("marshall@skillhub.co." + ext);
-                user0.setAddress("80 Samora Machel Avenue");
-                if (country.equals("Zimbabwe")) {
-                    user0.setCity("Harare");
-                    user0.setCountry("Zimbabwe");
-                } else if (country.equals("Zambia")) {
-                    user0.setCity("Chingola");
-                    user0.setCountry("Zambia");
-                }
-                user0.setMobilePhone("" + random.nextInt(30023400));
-                repository.save(user0);
-
-                for (UserRole role : roles) {
-                    if (role.getRoleName().equals("Human Agent")) {
-                        user0.addUserRole(role);
-                    }
-                }
-                repository.save(user0);
-
-                authUser.setUser(user0);
-                repository.save(authUser);
-            }
-        }
-
-        User user1 = repositoryService.findUserByEmail("john@skillhub.co." + ext);
-        if (user1 == null) {
-            AuthUser authUser = new AuthUser();
-            authUser.setUserName("" + random.nextInt(101000));
-            String newPassword = AuthUser.encodedPassword("test");
-            authUser.setPassword(newPassword);
-            repository.save(authUser);
-            user1 = new User();
-            user1.setVerified(Verified.YES);
-            user1.setNationalId("222224222");
-            user1.setFirstName("John");
-            user1.setLastName("Doe");
-            user1.setCountry(country);
-            user1.setEmail("john1@skillhub.co." + ext);
-            user1.setAddress("80 Samora Machel Avenue");
-            if (country.equals("Zimbabwe")) {
-                user1.setCity("Harare");
-                user1.setCountry("Zimbabwe");
-            } else if (country.equals("Zambia")) {
-                user1.setCity("Chingola");
-                user1.setCountry("Zambia");
-            }
-            user1.setMobilePhone("" + random.nextInt(10023400));
-            repository.save(user1);
-
-            for (UserRole role : roles) {
-                if (role.getRoleName().equals("User")) {
-                    user1.addUserRole(role);
-                    break;
-                }
-            }
-
-            repository.save(user1);
-            authUser.setUser(user1);
-            repository.save(authUser);
-        }
-    }
 
     private Random random = new Random();
 

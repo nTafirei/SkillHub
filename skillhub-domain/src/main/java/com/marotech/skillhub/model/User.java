@@ -24,16 +24,11 @@ public class User extends BaseEntity {
     private String middleName;
     @Column(length = 80)
     private String lastName;
-    @Column
-    private String address;
+    @OneToOne(fetch = FetchType.EAGER)
+    @NotNull
+    private Address address;
     @Column(length = 128)
     private String email;
-    @Column(length = 72)
-    private String city;
-    @Column(length = 72)
-    private String suburb;
-    @Column(nullable = false, length = 32)
-    private String country;
     @Column(length = 16)
     private String mobilePhone;
     @Column(length = 512)
@@ -62,13 +57,10 @@ public class User extends BaseEntity {
     private LocalDate dateOfBirth;
 
     public User(String firstName, String middleName, String lastName,
-                String address, String city, String mobile, String nationalId, String country) {
+                Address address, String mobile, String nationalId) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.country = country;
         this.nationalId = nationalId;
         this.mobilePhone = mobile;
     }

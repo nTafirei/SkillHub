@@ -22,6 +22,9 @@
         <class>com.marotech.skillhub.model.Comment</class>
         <class>com.marotech.skillhub.model.Embedding</class>
         <class>com.marotech.skillhub.model.LanguageModel</class>
+        <class>com.marotech.skillhub.model.Address</class>
+        <class>com.marotech.skillhub.model.City</class>
+        <class>com.marotech.skillhub.model.Suburb</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>

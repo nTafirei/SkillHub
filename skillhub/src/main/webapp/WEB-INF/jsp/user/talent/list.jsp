@@ -22,7 +22,7 @@
                                         <fmt:message key="takentedsersfound"/></strong>
                                     </c:if>
                                 </td>
-                                <td align="center" colspan="3"><d:link href="/web/search-for-talent"><fmt:message key="searchusersmenulabel"/></d:link></td>
+                                <td align="center" colspan="3"><d:link href="/web/search-for-talent"><fmt:message key="searchlabel"/></d:link></td>
                             </tr>
                         </table>
                         <table class="alternating">
@@ -54,10 +54,10 @@
                                                 ${user.firstName} ${user.lastName}
                                         </td>
                                         <td>
-                                                ${user.suburb}
+                                                ${user.address.suburb.name}
                                         </td>
                                         <td nowrap="nowrap">
-                                                ${user.city}
+                                                ${user.address.suburb.city.name}
                                         </td>
                                         <td nowrap="nowrap">
                                              ${user.skillsAsString}

@@ -20,7 +20,9 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -55,6 +57,55 @@ public class RepositoryService {
                 .getResultList();
     }
 
+    public List<User> fetchUsersByFilters(Category category, Skill skill, City city, Suburb suburb) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT DISTINCT u FROM User u ");
+
+        Map<String, Object> parameters = new HashMap<>();
+
+        // Build dynamic WHERE conditions
+        List<String> conditions = new ArrayList<>();
+
+        // Category filter (skill.category = :category)
+        if (category != null) {
+            jpql.append("JOIN u.skills s ");
+            conditions.add("s.category = :category");
+            parameters.put("category", category);
+        }
+
+        // Skill filter (direct skill match)
+        if (skill != null) {
+            jpql.append("JOIN u.skills s2 ");
+            conditions.add("s2 = :skill");
+            parameters.put("skill", skill);
+        }
+
+        // City filter
+        if (city != null) {
+            conditions.add("u.address.suburb.city = :city");
+            parameters.put("city", city);
+        }
+
+        // Suburb filter
+        if (suburb != null) {
+            conditions.add("u.address.suburb = :suburb");
+            parameters.put("suburb", suburb);
+        }
+
+        if (!conditions.isEmpty()) {
+            jpql.append("WHERE ");
+            jpql.append(String.join(" AND ", conditions));
+        }
+
+        Query query = entityManager.createQuery(jpql.toString(), User.class);
+
+        // Set parameters
+        parameters.forEach(query::setParameter);
+
+        return query.getResultList();
+    }
+
+
     public List<Notification> findNotificationsByRecipient(User recipient) {
         if (recipient == null) {
             return new ArrayList<>();
@@ -73,6 +124,36 @@ public class RepositoryService {
         try {
             return entityManager.createQuery("SELECT u from User u WHERE u.email =?1", User.class).
                     setParameter(1, email).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Suburb fetchSuburbByName(City city, String name) {
+        if (StringUtils.isBlank(name) || city == null) {
+            return null;
+        }
+        try {
+            return entityManager.createQuery("SELECT u from Suburb u WHERE u.name =?1 " +
+                            "and u.city=?2", Suburb.class).
+                    setParameter(1, name).
+                    setParameter(2, city).
+                    getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public City fetchCityByName(String name, String country) {
+        if (StringUtils.isBlank(name)) {
+            return null;
+        }
+        try {
+            return entityManager.createQuery("SELECT u from City u WHERE u.name =?1 " +
+                            "and u.country=?2", City.class).
+                    setParameter(1, name).
+                    setParameter(2, country).
+                    getSingleResult();
         } catch (Exception e) {
             return null;
         }
@@ -106,10 +187,22 @@ public class RepositoryService {
         return entityManager.createQuery("SELECT u from LanguageModel u", LanguageModel.class).
                 getResultList();
     }
+
+    public Suburb findSuburbById(String id) {
+        return entityManager.createQuery("SELECT u from Suburb u where u.id = ?1", Suburb.class).
+                setParameter(1, id).getSingleResult();
+    }
+
+    public City findCityById(String id) {
+        return entityManager.createQuery("SELECT u from City u where u.id = ?1", City.class).
+                setParameter(1, id).getSingleResult();
+    }
+
     public Skill findSkillById(String id) {
         return entityManager.createQuery("SELECT u from Skill u where u.id = ?1", Skill.class).
                 setParameter(1, id).getSingleResult();
     }
+
     public Comment findCommentById(String id) {
         return entityManager.createQuery("SELECT u from Comment u where u.id = ?1", Comment.class).
                 setParameter(1, id).getSingleResult();
@@ -148,13 +241,20 @@ public class RepositoryService {
     }
 
     public List<JDBCDataSource> findAllJDBCDataSources() {
-        return entityManager.createQuery("SELECT u from JDBCDataSource u ", JDBCDataSource.class).getResultList();
+        return entityManager.createQuery("SELECT u from JDBCDataSource u ",
+                JDBCDataSource.class).getResultList();
+    }
+
+    public List<City> fetchAllCities() {
+        return entityManager.createQuery("SELECT u from City u ",
+                City.class).getResultList();
     }
 
     public UserRole findUserRoleById(String id) {
         return entityManager.createQuery("SELECT u from UserRole u where u.id = ?1", UserRole.class).
                 setParameter(1, id).getSingleResult();
     }
+
     public Category findCategoryById(String id) {
         return entityManager.createQuery("SELECT u from Category u where u.id = ?1", Category.class).
                 setParameter(1, id).getSingleResult();
@@ -844,6 +944,15 @@ public class RepositoryService {
         }
     }
 
+    public List<Suburb> fetchSuburbsForCity(City city) {
+        if (city == null) {
+            return new ArrayList<>();
+        }
+        return entityManager.createQuery("SELECT u from Suburb u WHERE u.city =?1", Suburb.class).
+                setParameter(1, city).
+                getResultList();
+    }
+
     public List<Skill> fetchSkillsForCategory(Category category) {
         if (category == null) {
             return new ArrayList<>();
@@ -899,7 +1008,6 @@ public class RepositoryService {
     public static final String ORG = "org";
     public static final String NAME = "name";
     private static final Logger LOG = LoggerFactory.getLogger(RepositoryService.class);
-
 
 
 }
