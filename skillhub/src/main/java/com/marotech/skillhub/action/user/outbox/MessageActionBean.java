@@ -11,9 +11,6 @@ import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 
-import java.util.Arrays;
-import java.util.List;
-
 @SkipAuthentication
 @UrlBinding("/web/message{_eventName}")
 public class MessageActionBean extends UserBaseActionBean {

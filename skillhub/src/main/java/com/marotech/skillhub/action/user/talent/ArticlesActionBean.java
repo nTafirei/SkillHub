@@ -3,7 +3,6 @@ package com.marotech.skillhub.action.user.talent;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.CategoryConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
-import com.marotech.skillhub.model.ActiveStatus;
 import com.marotech.skillhub.model.Category;
 import com.marotech.skillhub.model.User;
 import lombok.Getter;

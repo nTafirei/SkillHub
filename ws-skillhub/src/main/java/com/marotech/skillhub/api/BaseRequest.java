@@ -1,4 +1,4 @@
-package com.marotech.recording.api;
+package com.marotech.skillhub.api;
 
 import lombok.Getter;
 import lombok.Setter;

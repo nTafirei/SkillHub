@@ -1,12 +1,10 @@
-package com.marotech.recording.ws;
+package com.marotech.skillhub.ws;
 
 
-import com.marotech.recording.api.*;
-import com.marotech.recording.model.AppSession;
-import com.marotech.recording.model.AuthUser;
-import com.marotech.recording.model.Recording;
-import com.marotech.recording.model.User;
-import com.marotech.recording.service.RepositoryService;
+import com.marotech.skillhub.api.*;
+import com.marotech.skillhub.components.service.RepositoryService;
+import com.marotech.skillhub.model.AuthUser;
+import com.marotech.skillhub.model.User;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -27,16 +25,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/my-recordings")
-public class MyRecordingsController extends BaseController {
+@RequestMapping("/my-articles")
+public class MyArticlesController extends BaseController {
 
     @Autowired
     private RepositoryService repositoryService;
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetches recordings from system",
-            notes = "Fetches recordings from system")
+    @ApiOperation(value = "Fetches articles from system",
+            notes = "Fetches articles from system")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Token is valid. Recordings list is included"),
             @ApiResponse(code = 400, message = "Bad request. Adjust values before retrying again", response =
@@ -81,24 +79,24 @@ public class MyRecordingsController extends BaseController {
             List<RecordingDTO> dtos = null;
 
             if (request.getStartDate() == null) {
-                List<Recording> recordings = repositoryService.fetchRecordingsForUser(user, request.getPage());
-                if (recordings.isEmpty()) {
+                List<Recording> articles = repositoryService.fetchRecordingsForUser(user, request.getPage());
+                if (articles.isEmpty()) {
                     response.setMessage(NO_VOUCHERS_FOUND);
                     return ResponseEntity.status(HttpStatus.OK).body(response);
                 }
 
-                for (Recording recording : recordings) {
-                    dtos = populateRecordingTOs(recording);
+                for (Recording article : articles) {
+                    dtos = populateRecordingTOs(article);
                 }
             } else {
-                List<Recording> recordings = repositoryService.fetchRecordingsForUser(user, request.getStartDate(),
+                List<Recording> articles = repositoryService.fetchRecordingsForUser(user, request.getStartDate(),
                         request.getEndDate(), request.getPage());
-                if (recordings.isEmpty()) {
+                if (articles.isEmpty()) {
                     response.setMessage(NO_VOUCHERS_FOUND);
                     return ResponseEntity.status(HttpStatus.OK).body(response);
                 }
-                for (Recording recording : recordings) {
-                    dtos = populateRecordingTOs(recording);
+                for (Recording article : articles) {
+                    dtos = populateRecordingTOs(article);
                 }
             }
 
@@ -116,13 +114,13 @@ public class MyRecordingsController extends BaseController {
         }
     }
 
-    private List<RecordingDTO> populateRecordingTOs(Recording recording) {
+    private List<RecordingDTO> populateRecordingTOs(Recording article) {
         List<RecordingDTO> dtos = new ArrayList<>();
         RecordingDTO dto = new RecordingDTO();
-        dto.setId(recording.getId());
-        dto.setName(recording.getName());
-        dto.setMimeType(recording.getMediaType());
-        dto.setDeviceLocation(recording.getDeviceLocation());
+        dto.setId(article.getId());
+        dto.setName(article.getName());
+        dto.setMimeType(article.getMediaType());
+        dto.setDeviceLocation(article.getDeviceLocation());
         dtos.add(dto);
         return dtos;
     }

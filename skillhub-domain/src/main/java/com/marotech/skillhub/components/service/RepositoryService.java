@@ -182,12 +182,19 @@ public class RepositoryService {
             return null;
         }
     }
+    public List<Job> fetchAllJobs() {
+        return entityManager.createQuery("SELECT u from Job u", Job.class).
+                getResultList();
+    }
 
     public List<LanguageModel> findAllLanguageModels() {
         return entityManager.createQuery("SELECT u from LanguageModel u", LanguageModel.class).
                 getResultList();
     }
-
+    public Job findJobById(String id) {
+        return entityManager.createQuery("SELECT u from Job u where u.id = ?1", Job.class).
+                setParameter(1, id).getSingleResult();
+    }
     public Suburb findSuburbById(String id) {
         return entityManager.createQuery("SELECT u from Suburb u where u.id = ?1", Suburb.class).
                 setParameter(1, id).getSingleResult();
@@ -1008,6 +1015,7 @@ public class RepositoryService {
     public static final String ORG = "org";
     public static final String NAME = "name";
     private static final Logger LOG = LoggerFactory.getLogger(RepositoryService.class);
+
 
 
 }

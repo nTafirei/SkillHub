@@ -31,7 +31,7 @@
                                     </td>
                                         <td align="right">
                                             <fmt:message key="submitlabel" var="submitlabel"/>
-                                            <d:submit name="submit" class="small" value="${submitlabel}" id="login"/>
+                                            <d:submit name="submitbtn" class="small" value="${submitlabel}" id="login"/>
                                         </td>
                                     </tr>
                         </table>

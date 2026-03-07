@@ -9,11 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.marotech.vend</groupId>
-    <artifactId>r-ws</artifactId>
+    <groupId>com.marotech.skillhub</groupId>
+    <artifactId>ws-skillhub</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Recorder Web Services</name>
-    <description>Recorder Web Services</description>
+    <name>Skillhub Web Services</name>
+    <description>Skillhub Web Services</description>
     <properties>
         <java.version>17</java.version>
         <springdoc.version>2.8.13</springdoc.version>
@@ -30,8 +30,8 @@
             <version>${springdoc.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.marotech.recorder</groupId>
-            <artifactId>recorder-domain</artifactId>
+            <groupId>com.marotech.skillhub</groupId>
+            <artifactId>skillhub-domain</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
             <exclusions>

@@ -1,6 +1,6 @@
-package com.marotech.recording.ws;
+package com.marotech.skillhub.ws;
 
-import com.marotech.recording.api.ServiceResponse;
+import com.marotech.skillhub.api.ServiceResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -25,8 +25,8 @@ public class PlayController {
     private AudioStreamHandler audioHandler;
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Plays a recording from the system",
-            notes = "Plays a recording from the system")
+    @ApiOperation(value = "Plays a article from the system",
+            notes = "Plays a article from the system")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Recording is played"),
             @ApiResponse(code = 400, message = "Bad request. Adjust values before retrying again", response =

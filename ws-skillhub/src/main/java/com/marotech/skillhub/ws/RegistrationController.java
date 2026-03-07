@@ -1,13 +1,13 @@
-package com.marotech.recording.ws;
+package com.marotech.skillhub.ws;
 
-import com.marotech.recording.api.RegisterRequest;
-import com.marotech.recording.api.HttpCode;
-import com.marotech.recording.api.ResponseType;
-import com.marotech.recording.api.ServiceResponse;
-import com.marotech.recording.model.*;
-import com.marotech.recording.service.RepositoryService;
-import com.marotech.recording.util.Constants;
-import com.marotech.recording.util.EmailValidator;
+import com.marotech.skillhub.api.RegisterRequest;
+import com.marotech.skillhub.api.HttpCode;
+import com.marotech.skillhub.api.ResponseType;
+import com.marotech.skillhub.api.ServiceResponse;
+import com.marotech.skillhub.model.*;
+import com.marotech.skillhub.service.RepositoryService;
+import com.marotech.skillhub.util.Constants;
+import com.marotech.skillhub.util.EmailValidator;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

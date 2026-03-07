@@ -2,7 +2,6 @@ package com.marotech.skillhub.action.user.talent;
 
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.UserConverter;
-import com.marotech.skillhub.model.ActiveStatus;
 import com.marotech.skillhub.model.User;
 import lombok.Getter;
 import lombok.Setter;

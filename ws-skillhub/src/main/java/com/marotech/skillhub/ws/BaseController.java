@@ -1,10 +1,10 @@
-package com.marotech.recording.ws;
+package com.marotech.skillhub.ws;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.marotech.recording.config.Config;
-import com.marotech.recording.gson.CustomExclusionStrategy;
-import com.marotech.recording.gson.LocalDateTimeAdapter;
+import com.marotech.skillhub.config.Config;
+import com.marotech.skillhub.gson.CustomExclusionStrategy;
+import com.marotech.skillhub.gson.LocalDateTimeAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -25,7 +25,7 @@ public abstract class BaseController {
     public static final String TOKEN_NOT_FOUND = "Specified token was not found in our system. Please try again or contact our customer service team";
     public static final String TTL = "ttl";
     public static final String NULL_REQUEST_FOUND = "Null request found";
-    public static final String RECORDINGS = "recordings";
+    public static final String RECORDINGS = "articles";
     public static final String SEC_QUESTION_1 = "securityQuestion1";
     public static final String SEC_QUESTION_2 = "securityQuestion2";
     public static final String SEC_QUESTION_3 = "securityQuestion3";

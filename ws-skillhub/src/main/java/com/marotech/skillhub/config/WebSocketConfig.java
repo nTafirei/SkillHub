@@ -1,6 +1,6 @@
-package com.marotech.recording.config;
+package com.marotech.skillhub.config;
 
-import com.marotech.recording.ws.AudioStreamHandler;
+import com.marotech.skillhub.ws.AudioStreamHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

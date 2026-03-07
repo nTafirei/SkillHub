@@ -1,15 +1,15 @@
-package com.marotech.recording.ws;
+package com.marotech.skillhub.ws;
 
-import com.marotech.recording.api.OTPVerificationRequest;
-import com.marotech.recording.api.PasswordVerificationRequest;
-import com.marotech.recording.api.HttpCode;
-import com.marotech.recording.api.ResponseType;
-import com.marotech.recording.api.ServiceResponse;
-import com.marotech.recording.model.Activity;
-import com.marotech.recording.model.ActivityType;
-import com.marotech.recording.model.AppSession;
-import com.marotech.recording.model.AuthUser;
-import com.marotech.recording.service.RepositoryService;
+import com.marotech.skillhub.api.OTPVerificationRequest;
+import com.marotech.skillhub.api.PasswordVerificationRequest;
+import com.marotech.skillhub.api.HttpCode;
+import com.marotech.skillhub.api.ResponseType;
+import com.marotech.skillhub.api.ServiceResponse;
+import com.marotech.skillhub.model.Activity;
+import com.marotech.skillhub.model.ActivityType;
+import com.marotech.skillhub.model.AppSession;
+import com.marotech.skillhub.model.AuthUser;
+import com.marotech.skillhub.service.RepositoryService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

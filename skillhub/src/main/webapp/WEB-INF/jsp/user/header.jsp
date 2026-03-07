@@ -32,6 +32,20 @@
                              <li><d:link href="/web/tools"><fmt:message key="toolslabel"/></d:link></li>
                          </c:if>
 
+                         <c:if test="${actionBean.navSection == 'jobs'}">
+                             <li class="current"><d:link href="/web/jobs"><fmt:message key="jobslabel"/></d:link></li>
+                         </c:if>
+                         <c:if test="${actionBean.navSection != 'jobs'}">
+                             <li><d:link href="/web/jobs"><fmt:message key="jobslabel"/></d:link></li>
+                         </c:if>
+
+                         <c:if test="${actionBean.navSection == 'post'}">
+                             <li class="current"><d:link href="/web/post"><fmt:message key="postlabel"/></d:link></li>
+                         </c:if>
+                         <c:if test="${actionBean.navSection != 'post'}">
+                             <li><d:link href="/web/post"><fmt:message key="postlabel"/></d:link></li>
+                         </c:if>
+
                          <c:if test="${actionBean.navSection == 'search-talent'}">
                              <li class="current"><d:link href="/web/talent"><fmt:message key="searchmenulabel"/></d:link></li>
                          </c:if>

@@ -1,8 +1,8 @@
-package com.marotech.recording.api;
+package com.marotech.skillhub.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.marotech.recording.gson.GsonExcludeField;
-import com.marotech.recording.util.Page;
+import com.marotech.skillhub.gson.GsonExcludeField;
+import com.marotech.skillhub.util.Page;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

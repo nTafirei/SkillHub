@@ -35,6 +35,9 @@ public class InboxActionBean extends UserBaseActionBean {
     }
 
     public long getNotificationsSize() {
+        if(notifications == null){
+            return 0;
+        }
         return notifications.size();
     }
 
