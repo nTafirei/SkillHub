@@ -71,11 +71,13 @@
                                                              href="/web/job-details?job=${job.id}">
                                                              <fmt:message key="detailslabel"/>
                                                  </d:link>
+                                             <security:protected-element name="delete-jobs">
                                                  |
                                                  <d:link
-                                                             href="/web/manage-job?job=${job.id}">
+                                                             href="/web/delete-job?job=${job.id}">
                                                              <fmt:message key="deletelabel"/>
                                                  </d:link>
+                                             </security:protected-element>
                                     </td>
                                 </tr>
                             </c:forEach>

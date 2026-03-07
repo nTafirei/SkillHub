@@ -32,7 +32,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="namelabel"/>(will be hidden to the public)
+                                        <fmt:message key="namelabel"/><br/>(will be hidden to the public)
                                     </td>
                                     <td>
                                         <d:text name="name" id="name" style="background-color:#F0E68C"/>

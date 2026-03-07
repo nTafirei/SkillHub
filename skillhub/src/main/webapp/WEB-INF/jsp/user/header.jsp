@@ -47,10 +47,10 @@
                          </c:if>
 
                          <c:if test="${actionBean.navSection == 'search-talent'}">
-                             <li class="current"><d:link href="/web/talent"><fmt:message key="searchmenulabel"/></d:link></li>
+                             <li class="current"><d:link href="/web/search-for-talent"><fmt:message key="searchtalentmenulabel"/></d:link></li>
                          </c:if>
                          <c:if test="${actionBean.navSection != 'search-talent'}">
-                             <li><d:link href="/web/talent"><fmt:message key="searchmenulabel"/></d:link></li>
+                             <li><d:link href="/web/search-for-talent"><fmt:message key="searchtalentmenulabel"/></d:link></li>
                          </c:if>
 
                          <c:if test="${actionBean.navSection == 'talent'}">

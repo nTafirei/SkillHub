@@ -17,4 +17,5 @@
     <feature name="manage-showcases"/>
     <feature name="view-talent-details"/>
     <feature name="view-deeper-user-details"/>
+    <feature name="delete-jobs"/>
 </features>

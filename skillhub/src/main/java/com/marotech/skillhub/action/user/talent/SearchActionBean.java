@@ -12,9 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
-import net.sourceforge.stripes.validation.SimpleError;
-import net.sourceforge.stripes.validation.Validate;
-import net.sourceforge.stripes.validation.ValidationErrors;
+import net.sourceforge.stripes.validation.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -62,6 +60,9 @@ public class SearchActionBean extends UserBaseActionBean {
     @HandlesEvent(POPULATE)
     public Resolution populate() throws Exception {
         categories = repositoryService.fetchAllCategories();
+        if (context.getValidationErrors().size() > 0) {
+            return new ForwardResolution(SEARCH_JSP);
+        }
         categories.sort(Comparator.comparing(Category::getName));
 
         // Fetch skills if category is selected (optional)
@@ -77,6 +78,9 @@ public class SearchActionBean extends UserBaseActionBean {
     @HandlesEvent(SEARCH)
     public Resolution search() throws Exception {
 
+        if (context.getValidationErrors().size() > 0) {
+            return new ForwardResolution(SEARCH_JSP);
+        }
         // Single database query with all filters applied at DB level
         users = repositoryService.fetchUsersByFilters(category, skill, city, suburb);
 
@@ -87,6 +91,7 @@ public class SearchActionBean extends UserBaseActionBean {
         }
 
         users.sort(Comparator.comparing(User::getLastName));
+
         return new ForwardResolution(USERS_LIST_JSP);
     }
 
@@ -103,6 +108,14 @@ public class SearchActionBean extends UserBaseActionBean {
             cities.sort(Comparator.comparing(City::getName));
         }
         return new ForwardResolution(getErrorPage());
+    }
+
+    @ValidationMethod(on = {POPULATE, SEARCH})
+    public void validate() {
+        if (category == null && skill == null && city == null && suburb == null) {
+            getContext().getValidationErrors().add("enterdata",
+                    new LocalizableError("entersesarchoptions"));
+        }
     }
 
     public int getUsersSize() {
@@ -161,14 +174,13 @@ public class SearchActionBean extends UserBaseActionBean {
 
     @Override
     public String getNavSection() {
-        return "talent";
+        return "search-talent";
     }
 
     @SpringBean
     private RepositoryService repositoryService;
 
     public static final String SEARCH_JSP = "/WEB-INF/jsp/user/talent/search.jsp";
-    private static final String USER_DETAILS = "/web/user-details";
     private static final String USERS_LIST_JSP = "/WEB-INF/jsp/user/talent/list.jsp";
 }
 

@@ -14,8 +14,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * secures any event on any action bean, while leaving the security decisions to
  * the security manager.
  *
- * @worker <a href="mailto:kindop@xs4all.nl">Oscar Westra van Holthe - Kind</a>
  * @version $Id:$
+ * @worker <a href="mailto:kindop@xs4all.nl">Oscar Westra van Holthe - Kind</a>
  */
 public class ProtectedElementTag extends TagSupport {
     /**
@@ -34,6 +34,8 @@ public class ProtectedElementTag extends TagSupport {
     private String contentType;
 
     private String contentId;
+    private Class<? extends J2EESecurityManager> clazz;
+    private J2EESecurityManager securityManager;
 
     /**
      * Create the secure tag.
@@ -106,12 +108,15 @@ public class ProtectedElementTag extends TagSupport {
                 .getWebApplicationContext(actionBean.getContext()
                         .getServletContext());
 
-
-        J2EESecurityManager securityManager = (J2EESecurityManager) context
-                .getBean("securityManager");
+        if (securityManager == null) {
+            securityManager = (J2EESecurityManager) context
+                    .getBean("securityManager");
+        }
 
         if (securityManager == null) {
-            Class<? extends J2EESecurityManager> clazz = J2EESecurityManager.class;
+            if (clazz == null) {
+                clazz = J2EESecurityManager.class;
+            }
             try {
                 securityManager = clazz.newInstance();
             } catch (InstantiationException e) {

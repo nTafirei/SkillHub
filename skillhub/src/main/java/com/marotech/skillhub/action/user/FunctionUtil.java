@@ -1,5 +1,6 @@
 package com.marotech.skillhub.action.user;
 
+import com.marotech.skillhub.model.Job;
 import com.marotech.skillhub.model.User;
 
 import java.util.Collection;
@@ -8,6 +9,17 @@ import java.util.Set;
 
 public class FunctionUtil {
 
+    public static boolean isJobDetailsAccessAllowed(Job job, User user) {
+        if (job == null || user == null) {
+            return false;
+        }
+        if (job.getMobile().equals(user.getMobilePhone())) {
+            return true;
+        }
+        return user.hasOneRoleOf(ROLES);
+    }
+
+    private static String ROLES[] = {"Customer Service","Administrator","System Administrator"};
     public static boolean isAnalysisOptionSelected(String option, List<String> options) {
         if (option == null || options.size() == 0) {
             return false;

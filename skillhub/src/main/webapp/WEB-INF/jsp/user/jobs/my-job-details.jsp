@@ -82,6 +82,17 @@
                                         ${actionBean.job.desc}
                                     </td>
                                 </tr>
+                                    <tr>
+                                        <td>
+                                            <fmt:message key="actionlabel"/>
+                                        </td>
+                                        <td>
+                                                     <d:link
+                                                                 href="/web/delete-job?job=${job.id}">
+                                                                 <fmt:message key="deletelabel"/>
+                                                     </d:link>
+                                        </td>
+                                    </tr>
                         </table>
             </div>
         </div>

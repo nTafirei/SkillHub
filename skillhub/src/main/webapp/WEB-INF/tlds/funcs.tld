@@ -37,4 +37,13 @@
             java.util.Set)
         </function-signature>
     </function>
+    <function>
+        <name>isJobDetailsAccessAllowed</name>
+        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-signature>java.lang.Boolean
+            isJobDetailsAccessAllowed(com.marotech.skillhub.model.Job,
+            com.marotech.skillhub.model.User)
+        </function-signature>
+    </function>
+
 </taglib>

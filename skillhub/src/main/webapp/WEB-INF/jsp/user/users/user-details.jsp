@@ -24,7 +24,10 @@
                                     <fmt:message key="namelabel"/>
                                 </td>
                                 <td>
-                                    ${actionBean.user.fullName}
+                                    ${actionBean.user.firstName}
+                                    <security:protected-element name="view-deeper-user-details">
+                                        ${actionBean.user.lastName}
+                                    </security:protected-element>
                                 </td>
                             </tr>
 
@@ -53,7 +56,7 @@
                                 </td>
                             </tr>
 
-                            <security:protected-element name="view-talent-details">
+                            <security:protected-element name="view-deeper-user-details">
                                     <tr>
                                         <td class="strong">
                                            <fmt:message key="mobilephonelabel"/>
@@ -90,28 +93,6 @@
                                       ${actionBean.user.description}
                                   </td>
                               </tr>
-
-                            <tr>
-                                <td class="strong">
-                                    <fmt:message key="actionlabel"/>
-                                </td>
-                                <td>
-                                                    <d:link
-                                                          href="/web/send-message/${actionBean.user.id}">
-                                                          <fmt:message key="sendmessagelabel"/>
-                                                      </d:link>
-                                                      |
-                                                      <d:link
-                                                          href="/web/review/${actionBean.user.id}">
-                                                          <fmt:message key="reviewlabel"/>
-                                                      </d:link>
-                                                      |
-                                                      <d:link
-                                                          href="/web/reviews/${actionBean.user.id}">
-                                                          <fmt:message key="reviewslabel"/>
-                                                      </d:link>
-                                </td>
-                            </tr>
                         </c:if>
 
                         <security:protected-element name="view-deeper-user-details">
@@ -152,38 +133,56 @@
                                   <td>
                                       ${actionBean.user.verified}
                                   </td>
-                              </tr>
+                            </tr>
+                            </security:protected-element>
                             <tr>
-                               <td align="right">
-                                 <security:protected-element name="disable-users">
-                                                      <d:link
-                                                          href="/web/disable/${actionBean.user.id}">
-                                                          <fmt:message key="disablelabel"/>
-                                                      </d:link>
-                                 </security:protected-element>
-                                 <security:protected-element name="manage-roles">
-                                                      <d:link
-                                                          href="/web/assign-role/${actionBean.user.id}">
-                                                          <fmt:message key="assignroleslabel"/>
-                                                      </d:link>
-                                                     | <d:link
-                                                          href="/web/remove-role/${actionBean.user.id}">
-                                                          <fmt:message key="removeroleslabel"/>
-                                                      </d:link>
-                                 </security:protected-element>
+                               <td><fmt:message key="actionlabel"/></td>
+                               <td align="left">
+                                     <security:protected-element name="view-deeper-user-details">
+                                         <security:protected-element name="disable-users">
+                                                              <d:link
+                                                                  href="/web/disable/${actionBean.user.id}">
+                                                                  <fmt:message key="disablelabel"/> |
+                                                              </d:link>
+                                         </security:protected-element>
+                                         <security:protected-element name="manage-roles">
+                                                              <d:link
+                                                              href="/web/assign-role/${actionBean.user.id}">
+                                                              <fmt:message key="assignroleslabel"/>
+                                                          </d:link>
+                                                         | <d:link
+                                                              href="/web/remove-role/${actionBean.user.id}">
+                                                              <fmt:message key="removeroleslabel"/> |
+                                                          </d:link>
+                                        </security:protected-element>
 
                                                 <c:if test="${actionBean.user.verified == 'NO'}">
                                                      <security:protected-element name="verify-users">
-                                                           |
                                                            <d:link
                                                            href="/web/verify-user/${actionBean.user.id}/verify">
                                                            <fmt:message key="verifyuserlabel"/>
-                                                           </d:link>
+                                                           </d:link> |
                                                      </security:protected-element>
                                                 </c:if>
+                                     </security:protected-element>
+                                            <c:if test="${actionBean.user.isTalent}">
+                                                    <d:link
+                                                          href="/web/send-message/${actionBean.user.id}">
+                                                          <fmt:message key="sendmessagelabel"/>
+                                                      </d:link>
+                                                      |
+                                                      <d:link
+                                                          href="/web/review/${actionBean.user.id}">
+                                                          <fmt:message key="reviewlabel"/>
+                                                      </d:link>
+                                                      |
+                                                      <d:link
+                                                          href="/web/reviews/${actionBean.user.id}">
+                                                          <fmt:message key="reviewslabel"/>
+                                                      </d:link>
+                                            </c:if>
                                           </td>
                                       </tr>
-                              </security:protected-element>
                             </tbody>
                         </table>
                 </div>

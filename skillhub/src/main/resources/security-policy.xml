@@ -16,6 +16,11 @@
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
+    <protected-element name="delete-jobs">
+        <role name="Customer Service"/>
+        <role name="Administrator"/>
+        <role name="System Administrator"/>
+    </protected-element>
     <protected-element name="disable-users">
         <role name="Administrator"/>
         <role name="System Administrator"/>

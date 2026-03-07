@@ -12,17 +12,17 @@
                 <div id="content">
 
                         <c:if test="${empty actionBean.users}">
-                            <fmt:message key="notakentedsersfound"/>
+                            <fmt:message key="nouserssersfound"/>
                         </c:if>
                         <table width="100%">
                             <tr>
                                 <td align="center" colspan = "3">
                                     <c:if test="${!empty actionBean.users}">
                                         <strong>${actionBean.usersSize}
-                                        <fmt:message key="takentedsersfound"/></strong>
+                                        <fmt:message key="usersfound"/></strong>
                                     </c:if>
                                 </td>
-                                <td align="center" colspan="3"><d:link href="/web/search-for-talent"><fmt:message key="searchlabel"/></d:link></td>
+                                <td align="center" colspan="3"><d:link href="/web/search-for-talent"><fmt:message key="searchtalentlabel"/></d:link></td>
                             </tr>
                         </table>
                         <table class="alternating">
@@ -51,7 +51,10 @@
                                            varStatus="loopStatus">
                                     <tr class="${loopStatus.index % 2 == 0 ? 'even' : 'odd'}">
                                         <td>
-                                                ${user.firstName} ${user.lastName}
+                                        ${user.firstName}
+                                        <security:protected-element name="view-deeper-user-details">
+                                            ${user.lastName}
+                                        </security:protected-element>
                                         </td>
                                         <td>
                                                 ${user.address.suburb.name}
