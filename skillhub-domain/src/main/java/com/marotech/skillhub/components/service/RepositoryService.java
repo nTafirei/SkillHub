@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -242,6 +243,48 @@ public class RepositoryService {
                 .setParameter("pubType", PubType.THIRD_PARTY_REVIEW)
                 .getResultList();
     }
+    public List<Comment> getCompleteReviewsTree(User talent) {
+        List<Comment> allComments = entityManager.createQuery(
+                        "SELECT DISTINCT c FROM Comment c " +
+                                "JOIN FETCH c.createdBy " +
+                                "JOIN FETCH c.talent " +
+                                "LEFT JOIN FETCH c.parentNode " +
+                                "WHERE c.talent = :talent", Comment.class)
+                .setParameter("talent", talent)
+                .getResultList();
+
+        // Create lookup map by ID
+        Map<String, Comment> commentMap = new HashMap<>();
+        for (Comment comment : allComments) {
+            commentMap.put(comment.getId(), comment);
+        }
+
+        // Find root comments and build tree
+        List<Comment> rootComments = new ArrayList<>();
+        for (Comment comment : allComments) {
+            if (comment.getParentNode() == null) {
+                buildTree(comment, commentMap);
+                rootComments.add(comment);
+            }
+        }
+
+        return rootComments;
+    }
+
+    private void buildTree(Comment parent, Map<String, Comment> allComments) {
+        List<Comment> children = new ArrayList<>();
+
+        // Find all direct children
+        for (Comment candidate : allComments.values()) {
+            if (parent.equals(candidate.getParentNode())) {
+                buildTree(candidate, allComments);  // Recursively build child trees
+                children.add(candidate);
+            }
+        }
+        // Set the children list
+        parent.setChildren(children);
+    }
+
 
     public List<Comment> fetchAssociatedReviews(Comment parent) {
         return entityManager.createQuery(

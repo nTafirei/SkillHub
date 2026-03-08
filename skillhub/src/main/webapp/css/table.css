@@ -66,3 +66,8 @@ a:link {
     overflow: hidden;
 "
 }
+.comment-tree { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; }
+.comment-level-1 { margin-left: 20px; }
+.comment-level-2 { margin-left: 40px; }
+.indent { font-family: monospace; color: #666; }
+.children { margin-top: 10px; }

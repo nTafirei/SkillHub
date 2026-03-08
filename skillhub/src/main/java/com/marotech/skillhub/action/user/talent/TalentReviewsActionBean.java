@@ -31,7 +31,7 @@ public class TalentReviewsActionBean extends UserBaseActionBean {
 
     @DefaultHandler
     public Resolution view() {
-        comments = repositoryService.fetchReviewsForTalent(talent);
+        comments = repositoryService.getCompleteReviewsTree(talent);
         return new ForwardResolution(COMMENTS_JSP);
     }
 

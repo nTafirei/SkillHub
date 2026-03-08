@@ -16,6 +16,10 @@
                         <input type="hidden" name="_eventName" value="save"/>
                         <input type="hidden" name="recipient" value="${actionBean.recipient.id}"/>
 
+                        <c:if test="${!empty actionBean.parentNode}">
+                            <input type="hidden" name="parentNode" value="${actionBean.parentNode.id}"/>
+                        </c:if>
+
                         <c:if test="${actionBean.isLoggedIn == true}">
                             <input type="hidden" name="fromFirstName" value="${actionBean.currentUser.firstName}"/>
                             <input type="hidden" name="fromLastName" value="${actionBean.currentUser.lastName}"/>
@@ -25,18 +29,44 @@
 
                         <table class="alternating">
                             <thead>
-                                <tr>
-                                    <tr colspan="2" align="center">
-                                        <fmt:message key="writereviewon"/>
-                                            <c:if test="${!funcs:hasOneRoleOf(actionBean.currentUser, 'Customer Service,Administrator,System Administrator')}">
-                                                ${actionBean.recipient.abbrvName}
-                                            </c:if>
+                                <c:if test="${empty actionBean.parentNode}">
+                                    <tr>
+                                        <tr colspan="2" align="center">
+                                            <fmt:message key="writereviewon"/>
+                                                <c:if test="${!funcs:hasOneRoleOf(actionBean.currentUser, 'Customer Service,Administrator,System Administrator')}">
+                                                    ${actionBean.recipient.abbrvName}
+                                                </c:if>
 
-                                            <security:protected-element name="view-deeper-user-details">
-                                               ${actionBean.recipient.firstName} ${actionBean.recipient.lastName}
-                                            </security:protected-element>
-                                    </th>
-                                <tr>
+                                                <security:protected-element name="view-deeper-user-details">
+                                                   ${actionBean.recipient.firstName} ${actionBean.recipient.lastName}
+                                                </security:protected-element>
+                                        </th>
+                                    <tr>
+                                </c:if>
+                                <c:if test="${!empty actionBean.parentNode}">
+                                    <tr>
+                                        <tr colspan="2" align="center">
+                                            <fmt:message key="respondto"/> <u>'${actionBean.parentNode.title}'</u> on
+                                                <c:if test="${!funcs:hasOneRoleOf(actionBean.currentUser, 'Customer Service,Administrator,System Administrator')}">
+                                                    ${actionBean.recipient.abbrvName}
+                                                </c:if>
+
+                                                <security:protected-element name="view-deeper-user-details">
+                                                   ${actionBean.recipient.firstName} ${actionBean.recipient.lastName}
+                                                </security:protected-element>
+                                                by
+                                                <c:if test="${!funcs:hasOneRoleOf(actionBean.currentUser, 'Customer Service,Administrator,System Administrator')}">
+                                                    ${actionBean.parentNode.createdBy.abbrvName}
+                                                </c:if>
+
+                                                <security:protected-element name="view-deeper-user-details">
+                                                   ${actionBean.parentNode.createdBy.firstName} ${actionBean.parentNode.createdBy.lastName}
+                                                </security:protected-element>
+                                                <br/><fmt:message key="commentbody"/>: ${actionBean.parentNode.body}
+
+                                        </th>
+                                    <tr>
+                                </c:if>
                             </thead>
                             <tbody>
                             <c:if test="${actionBean.isLoggedIn == false}">

@@ -2,6 +2,7 @@ package com.marotech.skillhub.action.user.talent;
 
 import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
+import com.marotech.skillhub.action.user.converters.CommentConverter;
 import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.*;
@@ -46,8 +47,16 @@ public class CommentActionBean extends UserBaseActionBean {
     @Validate(on = SAVE, required = true, converter = UserConverter.class)
     private User recipient;
 
+    @Getter
+    @Setter
+    @Validate(converter = CommentConverter.class)
+    private Comment parentNode;
+
     @DefaultHandler
     public Resolution view() throws Exception {
+        if (parentNode != null) {
+            subject = "RE: " + parentNode.getTitle();
+        }
         return new ForwardResolution(COMPOSE_JSP);
     }
 
@@ -104,7 +113,12 @@ public class CommentActionBean extends UserBaseActionBean {
 
         Notification notification = new Notification();
         notification.setBody(body);
-        notification.setSubject("Your Review: " + subject);
+        if(parentNode == null){
+            notification.setSubject("A comment response: " + subject);
+        }
+        else {
+            notification.setSubject("Your new review: " + subject);
+        }
         notification.setSender(currentUser);
         notification.setRecipient(recipient);
         repositoryService.save(notification);
@@ -114,6 +128,7 @@ public class CommentActionBean extends UserBaseActionBean {
         comment.setCreatedBy(currentUser);
         comment.setTitle(subject);
         comment.setBody(body);
+        comment.setParentNode(parentNode);
         repositoryService.save(comment);
 
         template = context.createProducerTemplate();

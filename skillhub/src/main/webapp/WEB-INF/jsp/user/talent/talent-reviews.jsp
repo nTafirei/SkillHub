@@ -70,10 +70,10 @@
                                                 ${comment.body}
                                         </td>
                                         <td align="right">
-                                                 <d:link
-                                                             href="/web/respond?parentNode=${comment.id}">
-                                                             <fmt:message key="respondlabel"/>
-                                                   </d:link>
+                                                     <d:link
+                                                          href="/web/comment?recipient=${comment.talent.id}&parentNode=${comment.id}">
+                                                          <fmt:message key="respondlabel"/>
+                                                      </d:link>
                                         </td>
                                     </tr>
                                 </c:forEach>

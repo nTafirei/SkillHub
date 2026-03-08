@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -20,16 +22,18 @@ public class Comment extends BaseEntity {
 	@Column(length = 512, nullable = false)
 	@NotNull
 	private String body;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@NotNull
 	private User createdBy;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Comment parentNode;
 	@Column
 	private LocalDateTime archivedDate;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@NotNull
 	private User talent;
 	@Enumerated(EnumType.STRING)
 	private PubType pubType = PubType.THIRD_PARTY_REVIEW;
+	@Transient
+	private List<Comment> children = new ArrayList<>();
 }

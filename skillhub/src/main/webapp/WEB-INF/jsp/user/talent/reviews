@@ -1,0 +1,41 @@
+<c:if test="${!empty actionBean.rootComments}">
+    <c:forEach items="${actionBean.rootComments}" var="rootComment" varStatus="loopStatus">
+        <div class="comment-tree ${loopStatus.index % 2 == 0 ? 'even' : 'odd'}">
+            <!-- Root comment (level 0) -->
+            <div class="comment-level-0">
+                <strong>${rootComment.title}</strong>
+                by ${rootComment.createdBy.abbrvName}
+                <span>${rootComment.formattedDateCreated}</span>
+                <p>${rootComment.body}</p>
+
+                <!-- Children (level 1+) -->
+                <c:if test="${!empty rootComment.children}">
+                    <div class="children">
+                        <c:set var="level" value="1"/>
+                        <c:forEach items="${rootComment.children}" var="child">
+                            <div class="comment-level-${level}">
+                                <span class="indent" style="margin-left: ${level * 20}px;">└─ </span>
+                                <strong>${child.title}</strong>
+                                by ${child.createdBy.abbrvName}
+                                <span>${child.formattedDateCreated}</span>
+                                <p>${child.body}</p>
+
+                                <!-- Recursive children -->
+                                <c:if test="${!empty child.children}">
+                                    <%@ include file="_recursive_comments.jsp" %>
+                                    <c:set var="comments" value="${child.children}"/>
+                                    <c:set var="level" value="${level + 1}"/>
+                                </c:if>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:if>
+            </div>
+
+            <!-- Respond link for root -->
+            <d:link href="/web/comment?recipient=${rootComment.talent.id}&parentNode=${rootComment.id}">
+                <fmt:message key="respondlabel"/>
+            </d:link>
+        </div>
+    </c:forEach>
+</c:if>
