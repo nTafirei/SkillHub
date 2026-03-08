@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
@@ -20,14 +20,16 @@ public class Comment extends BaseEntity {
 	@Column(length = 512, nullable = false)
 	@NotNull
 	private String body;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull
 	private User createdBy;
-	@OneToOne(fetch = FetchType.EAGER)
-	private Comment parentNote;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Comment parentNode;
 	@Column
 	private LocalDateTime archivedDate;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull
 	private User talent;
+	@Enumerated(EnumType.STRING)
+	private PubType pubType = PubType.THIRD_PARTY_REVIEW;
 }

@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 public class JobMetadata {
 
     private String jobType;

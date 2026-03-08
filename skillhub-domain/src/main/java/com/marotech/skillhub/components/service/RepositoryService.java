@@ -182,6 +182,7 @@ public class RepositoryService {
             return null;
         }
     }
+
     public List<Job> fetchAllJobs() {
         return entityManager.createQuery("SELECT u from Job u", Job.class).
                 getResultList();
@@ -191,10 +192,12 @@ public class RepositoryService {
         return entityManager.createQuery("SELECT u from LanguageModel u", LanguageModel.class).
                 getResultList();
     }
+
     public Job findJobById(String id) {
         return entityManager.createQuery("SELECT u from Job u where u.id = ?1", Job.class).
                 setParameter(1, id).getSingleResult();
     }
+
     public Suburb findSuburbById(String id) {
         return entityManager.createQuery("SELECT u from Suburb u where u.id = ?1", Suburb.class).
                 setParameter(1, id).getSingleResult();
@@ -228,6 +231,28 @@ public class RepositoryService {
     public Article findPublicationById(String id) {
         return entityManager.createQuery("SELECT u from Publication u where u.id = ?1", Article.class).
                 setParameter(1, id).getSingleResult();
+    }
+
+    public List<Comment> fetchReviewsForTalent(User talent) {
+        return entityManager.createQuery(
+                        "SELECT c FROM Comment c JOIN FETCH c.createdBy " +
+                                "JOIN FETCH c.talent WHERE c.talent =:talent AND c.parentNode IS NULL" +
+                                " AND pubType =:pubType", Comment.class)
+                .setParameter("talent", talent)
+                .setParameter("pubType", PubType.THIRD_PARTY_REVIEW)
+                .getResultList();
+    }
+
+    public List<Comment> fetchAssociatedReviews(Comment parent) {
+        return entityManager.createQuery(
+                        "SELECT c FROM Comment c " +
+                                "JOIN FETCH c.createdBy " +
+                                "JOIN FETCH c.talent " +
+                                "WHERE c.parentNode =:parent " +
+                                "AND pubType =:pubType", Comment.class)
+                .setParameter("parent", parent)
+                .setParameter("pubType", PubType.THIRD_PARTY_REVIEW)
+                .getResultList();
     }
 
     public List<Article> findPublicationsForUser(User worker) {
@@ -1015,7 +1040,6 @@ public class RepositoryService {
     public static final String ORG = "org";
     public static final String NAME = "name";
     private static final Logger LOG = LoggerFactory.getLogger(RepositoryService.class);
-
 
 
 }

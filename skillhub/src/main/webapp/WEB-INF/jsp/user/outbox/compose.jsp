@@ -17,7 +17,8 @@
                         <input type="hidden" name="recipient" value="${actionBean.recipient.id}"/>
 
                         <c:if test="${actionBean.isLoggedIn == true}">
-                            <input type="hidden" name="fromName" value="${actionBean.currentUser.fullName}"/>
+                            <input type="hidden" name="fromFirstName" value="${actionBean.currentUser.firstName}"/>
+                            <input type="hidden" name="fromLastName" value="${actionBean.currentUser.lastName}"/>
                             <input type="hidden" name="fromEmail" value="${actionBean.currentUser.email}"/>
                             <input type="hidden" name="fromMobile" value="${actionBean.currentUser.mobilePhone}"/>
                         </c:if>
@@ -26,7 +27,7 @@
                             <thead>
                                 <tr>
                                     <tr colspan="2" align="center">
-                                        <fmt:message key="sendmessagetolabel"/> ${actionBean.recipient.firstName}
+                                        <fmt:message key="sendmessagetolabel"/> ${actionBean.recipient.abbrvName}
                                     </th>
                                 <tr>
                             </thead>
@@ -34,10 +35,18 @@
                             <c:if test="${actionBean.isLoggedIn == false}">
                                 <tr>
                                     <td>
-                                        <fmt:message key="namelabel"/>
+                                        <fmt:message key="firstnamelabel"/>
                                     </td>
                                     <td>
-                                        <d:text name="fromName" id="fromName" style="background-color:#F0E68C"/>
+                                        <d:text name="fromFirstName" id="fromFirstName" style="background-color:#F0E68C"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <fmt:message key="lastnamelabel"/>
+                                    </td>
+                                    <td>
+                                        <d:text name="fromLastName" id="fromLastName" style="background-color:#F0E68C"/>
                                     </td>
                                 </tr>
                                 <tr>

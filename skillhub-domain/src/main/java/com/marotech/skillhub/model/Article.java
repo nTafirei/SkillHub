@@ -4,15 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
@@ -27,7 +25,7 @@ public class Article extends BaseEntity {
     private String fileName;
     @Enumerated(EnumType.STRING)
     @NotNull
-    private PubType pubType = PubType.SELF_REVIEW_ARTICLE;
+    private PubType pubType = PubType.SELF_REVIEW;
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     private Skill skill;

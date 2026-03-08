@@ -4,9 +4,8 @@ import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
 import com.marotech.skillhub.action.user.converters.UserConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
-import com.marotech.skillhub.model.Notification;
-import com.marotech.skillhub.model.User;
-import jakarta.persistence.Column;
+import com.marotech.skillhub.model.*;
+import com.marotech.skillhub.util.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import net.sourceforge.stripes.action.*;
@@ -21,7 +20,11 @@ public class SendMessageActionBean extends UserBaseActionBean {
     @Getter
     @Setter
     @Validate(required = true, on = SAVE)
-    private String fromName;
+    private String fromFirstName;
+    @Getter
+    @Setter
+    @Validate(required = true, on = SAVE)
+    private String fromLastName;
     @Getter
     @Setter
     @Validate(required = true, on = SAVE)
@@ -51,19 +54,59 @@ public class SendMessageActionBean extends UserBaseActionBean {
     @HandlesEvent(SAVE)
     public Resolution save() throws Exception {
 
+        User user = getCurrentUser();
+
+        if (user == null) {
+            user = repositoryService.findUserByMobilePhone(fromMobile);
+        }
+
+        if (user == null) {
+            AuthUser authUser = new AuthUser();
+            fromMobile = fromMobile.replaceAll(" ", "");
+            authUser.setUserName(fromMobile.toLowerCase());
+            String newPassword = AuthUser.encodedPassword("change-me");
+            authUser.setPassword(newPassword);
+            repositoryService.save(authUser);
+
+            String country = config.getProperty("country");
+
+            City city = repositoryService.fetchCityByName("-", country);
+            if (city == null) {
+                city = new City();
+                city.setName("-");
+                city.setCountry(country);
+                repositoryService.save(city);
+            }
+            Suburb suburb = repositoryService.fetchSuburbByName(city, "-");
+            if (suburb == null) {
+                suburb = new Suburb();
+                suburb.setCity(city);
+                suburb.setName("-");
+                repositoryService.save(suburb);
+            }
+
+            Address theAddress = new Address();
+            theAddress.setSuburb(suburb);
+            theAddress.setAddress("-");
+            repositoryService.save(theAddress);
+
+            user = new User(fromFirstName,
+                    "-", fromLastName, theAddress,
+                    fromMobile, "-");
+            authUser.setUser(user);
+            System.out.println(theAddress);
+            UserRole role = repositoryService.findUserRoleByRoleName(Constants.USER);
+            user.getUserRoles().add(role);
+
+            repositoryService.save(user);
+            repositoryService.save(authUser);
+        }
+
         Notification notification = new Notification();
         notification.setBody(body);
-        notification.setFromName(fromName);
-        notification.setFromEmail(fromEmail);
-        notification.setFromMobile(fromMobile);
         notification.setSubject(subject);
-        notification.setToEmail(recipient.getEmail());
-        notification.setToName(recipient.getFullName());
-        notification.setToMobile(recipient.getMobilePhone());
-
-        if (recipient != null && recipient.getId() != null) {
-            notification.setRecipient(recipient);
-        }
+        notification.setSender(user);
+        notification.setRecipient(recipient);
         repositoryService.save(notification);
 
         template = context.createProducerTemplate();

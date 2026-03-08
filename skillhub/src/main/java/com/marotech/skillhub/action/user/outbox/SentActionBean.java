@@ -2,8 +2,10 @@ package com.marotech.skillhub.action.user.outbox;
 
 import com.marotech.skillhub.action.user.SkipAuthentication;
 import com.marotech.skillhub.action.user.UserBaseActionBean;
-import com.marotech.skillhub.util.Constants;
-import net.sourceforge.stripes.action.*;
+import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.UrlBinding;
 
 @SkipAuthentication
 @UrlBinding("/web/sent")

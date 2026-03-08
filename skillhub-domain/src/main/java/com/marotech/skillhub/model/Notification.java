@@ -10,28 +10,19 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
 @Table(name = "notification")
 public class Notification extends BaseEntity {
     @Column(nullable = false)
-    private String fromName;
-    @Column
-    private String fromEmail;
-    @Column(nullable = false)
-    private String fromMobile;
-    @Column(nullable = false)
     private String subject;
     @Column(nullable = false)
     private String body;
-    @Column(nullable = false)
-    private String toName;
-    @Column
-    private String toEmail;
-    @Column(nullable = false)
-    private String toMobile;
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User sender;
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     private User recipient;

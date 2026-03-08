@@ -172,12 +172,12 @@
                                                       </d:link>
                                                       |
                                                       <d:link
-                                                          href="/web/review/${actionBean.user.id}">
+                                                          href="/web/comment?recipient=${actionBean.user.id}">
                                                           <fmt:message key="reviewlabel"/>
                                                       </d:link>
                                                       |
                                                       <d:link
-                                                          href="/web/reviews/${actionBean.user.id}">
+                                                          href="/web/talent-reviews?talent=${actionBean.user.id}">
                                                           <fmt:message key="reviewslabel"/>
                                                       </d:link>
                                             </c:if>

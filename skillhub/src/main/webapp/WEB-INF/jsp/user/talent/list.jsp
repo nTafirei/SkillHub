@@ -51,10 +51,14 @@
                                            varStatus="loopStatus">
                                     <tr class="${loopStatus.index % 2 == 0 ? 'even' : 'odd'}">
                                         <td>
-                                        ${user.firstName}
-                                        <security:protected-element name="view-deeper-user-details">
-                                            ${user.lastName}
-                                        </security:protected-element>
+
+                                            <c:if test="${!funcs:hasOneRoleOf(actionBean.currentUser, 'Customer Service,Administrator,System Administrator')}">
+                                                ${user.abbrvName}
+                                            </c:if>
+
+                                            <security:protected-element name="view-deeper-user-details">
+                                               ${user.firstName} ${user.lastName}
+                                            </security:protected-element>
                                         </td>
                                         <td>
                                                 ${user.address.suburb.name}

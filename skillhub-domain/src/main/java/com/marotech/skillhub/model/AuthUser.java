@@ -5,7 +5,7 @@ import lombok.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 
-@ToString
+@ToString(callSuper = true)
 @Getter
 @Setter
 @NoArgsConstructor

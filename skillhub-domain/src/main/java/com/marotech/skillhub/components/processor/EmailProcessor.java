@@ -3,7 +3,6 @@ package com.marotech.skillhub.components.processor;
 import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.Notification;
 import com.marotech.skillhub.util.EmailStatus;
-import com.marotech.skillhub.util.SMSStatus;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.beans.factory.annotation.Autowired;

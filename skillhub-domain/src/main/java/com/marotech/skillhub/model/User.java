@@ -10,7 +10,7 @@ import java.util.*;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
@@ -63,6 +63,7 @@ public class User extends BaseEntity {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+        this.address = address;
         this.nationalId = nationalId;
         this.mobilePhone = mobile;
     }
@@ -138,7 +139,9 @@ public class User extends BaseEntity {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-
+    public String getAbbrvName() {
+        return firstName + " " + lastName.substring(0,1);
+    }
     public List<String> getRoleNames() {
         List<String> roles = new ArrayList<>();
         for (UserRole role : userRoles) {

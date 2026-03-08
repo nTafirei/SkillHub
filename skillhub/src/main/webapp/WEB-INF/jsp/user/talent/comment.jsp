@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/tags/taglibs.jsp" %>
 <%@taglib prefix="security" uri="http://www.providencebehavior.com/security.tld" %>
 
-<s:layout-render name="/WEB-INF/jsp/user/layout.jsp" title="Comment on Article">
+<s:layout-render name="/WEB-INF/jsp/user/layout.jsp" title="Review Talent">
 
     <s:layout-component name="head">
     </s:layout-component>
@@ -11,64 +11,80 @@
             <div class="container">
                 <div id="content">
                     <s:errors/>
-                    <strong>${actionBean.article.title}<br/>
-                    By: ${actionBean.article.workerNames}
-                    </strong>
-                    <security:protected-element name="edit-workers">
                         <s:form action="/web/comment" method="post" name="searchForm" id="searchForm">
                         <input type="hidden" name="target" value="${actionBean.target}"/>
                         <input type="hidden" name="_eventName" value="save"/>
-                        <input type="hidden" name="article" value="${actionBean.article.id}"/>
-                        <c:if test="${!empty actionBean.parent}">
-                            <input type="hidden" name="parent" value="${actionBean.parent.id}"/>
-                         </c:if>
+                        <input type="hidden" name="recipient" value="${actionBean.recipient.id}"/>
+
+                        <c:if test="${actionBean.isLoggedIn == true}">
+                            <input type="hidden" name="fromFirstName" value="${actionBean.currentUser.firstName}"/>
+                            <input type="hidden" name="fromLastName" value="${actionBean.currentUser.lastName}"/>
+                            <input type="hidden" name="fromEmail" value="${actionBean.currentUser.email}"/>
+                            <input type="hidden" name="fromMobile" value="${actionBean.currentUser.mobilePhone}"/>
+                        </c:if>
+
                         <table class="alternating">
-                            <c:if test="${!empty actionBean.parent}">
+                            <thead>
                                 <tr>
-                                    <td colspan="3">
-                                        <fmt:message key="parentcommentlabel"/>
+                                    <tr colspan="2" align="center">
+                                        <fmt:message key="writereviewon"/>
+                                            <c:if test="${!funcs:hasOneRoleOf(actionBean.currentUser, 'Customer Service,Administrator,System Administrator')}">
+                                                ${actionBean.recipient.abbrvName}
+                                            </c:if>
+
+                                            <security:protected-element name="view-deeper-user-details">
+                                               ${actionBean.recipient.firstName} ${actionBean.recipient.lastName}
+                                            </security:protected-element>
+                                    </th>
+                                <tr>
+                            </thead>
+                            <tbody>
+                            <c:if test="${actionBean.isLoggedIn == false}">
+                                <tr>
+                                    <td>
+                                        <fmt:message key="firstnamelabel"/>
                                     </td>
-                                    <td colspan="3">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <fmt:message key="yourtitlelabel"/>
-                                                </td>
-                                                <td>
-                                                    ${actionBean.parent.title}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <fmt:message key="bylabel"/>
-                                                </td>
-                                                <td>
-                                                    ${actionBean.parent.createdBy.initials}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <fmt:message key="commentlabel"/>
-                                                </td>
-                                                <td>
-                                                    ${actionBean.parent.body}
-                                                </td>
-                                            </tr>
-                                        <table>
+                                    <td>
+                                        <d:text name="fromFirstName" id="fromFirstName" style="background-color:#F0E68C"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <fmt:message key="lastnamelabel"/>
+                                    </td>
+                                    <td>
+                                        <d:text name="fromLastName" id="fromLastName" style="background-color:#F0E68C"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <fmt:message key="emaillabel"/>
+                                    </td>
+                                    <td>
+                                        <d:text name="fromEmail" id="fromEmail" style="background-color:#F0E68C"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <fmt:message key="mobilelabel"/>
+                                    </td>
+                                    <td>
+                                        <d:text name="fromMobile" id="fromMobile" style="background-color:#F0E68C"/>
                                     </td>
                                 </tr>
                             </c:if>
+
                                 <tr>
                                     <td>
-                                        <fmt:message key="titlelabel"/>
+                                        <fmt:message key="subjectlabel"/>
                                     </td>
                                     <td>
-                                        <d:textarea name="title" id="title" style="background-color:#F0E68C"/>
+                                        <d:text name="subject" id="subject" style="background-color:#F0E68C"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="yourcommentlabel"/>
+                                        <fmt:message key="bodylabel"/>
                                     </td>
                                     <td>
                                         <d:textarea name="body" id="body" style="background-color:#F0E68C"/>
@@ -83,14 +99,9 @@
                                             <d:submit name="submitbtn" class="small" value="${submitlabel}" id="login"/>
                                         </td>
                                     </tr>
+                            </tbody>
                         </table>
                       </s:form>
-                    </security:protected-element>
-                    <security:when-no-content-displayed>
-                        <d:link href="/web/admin/site/help"><fmt:message
-                                key="securityexceptionlink"/></d:link>
-                    </security:when-no-content-displayed>
-
                 </div>
             </div>
         </div>

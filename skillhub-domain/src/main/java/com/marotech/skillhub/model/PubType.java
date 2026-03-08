@@ -3,9 +3,9 @@ package com.marotech.skillhub.model;
 
 public enum PubType {
 
-    WORK_RELATED_ARTICLE("Work Related Article"),
-    SELF_REVIEW_ARTICLE("Self Review Article"),
-    THIRD_PARTY_REVIEW_ARTICLE("Third Party Review Article");
+    WORK_RELATED("Work Related"),
+    SELF_REVIEW("Self Review"),
+    THIRD_PARTY_REVIEW("Third Party Review");
 
     private String type;
 
