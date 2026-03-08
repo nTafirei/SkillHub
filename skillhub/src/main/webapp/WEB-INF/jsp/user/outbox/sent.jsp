@@ -11,7 +11,7 @@
                 <div class="col-4 col-6-medium col-12-large">
                     <!-- Feature -->
                     <section>
-                              <strong>Your message has been sent and will be processed in due time.</strong>
+                              <strong><fmt:message key="sentkey"/></strong>
                     </section>
                 </div>
              </div>

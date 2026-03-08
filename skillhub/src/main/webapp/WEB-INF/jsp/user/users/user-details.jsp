@@ -167,7 +167,7 @@
                                      </security:protected-element>
                                             <c:if test="${actionBean.user.isTalent}">
                                                     <d:link
-                                                          href="/web/send-message/${actionBean.user.id}">
+                                                          href="/web/send-message?recipient=${actionBean.user.id}">
                                                           <fmt:message key="sendmessagelabel"/>
                                                       </d:link>
                                                       |

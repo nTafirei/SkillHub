@@ -86,7 +86,21 @@
         </property>
     </bean>
 
+    <bean id="smsProcessor" class="com.marotech.skillhub.components.processor.SMSProcessor"/>
+    <bean id="emailProcessor" class="com.marotech.skillhub.components.processor.EmailProcessor"/>
+
     <camel:camelContext id="jobsCamelContext"
                         xmlns="http://camel.apache.org/schema/spring" autoStartup="true">
+
+        <route id="Send-SMS-Route">
+            <from uri="direct://send-sms"/>
+            <process ref="smsProcessor"/>
+            <log message="${body}"/>
+        </route>
+        <route id="Send-Email-Route">
+            <from uri="direct://send-email"/>
+            <process ref="emailProcessor"/>
+            <log message="${body}"/>
+        </route>
     </camel:camelContext>
 </beans>
