@@ -28,7 +28,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="namelabel"/>(will be hidden to the public)
+                                        <fmt:message key="namelabel"/>
+                                        <br/><i>(will be hidden to the public)</i>
                                     </td>
                                     <td>
                                         ${actionBean.job.name}
@@ -36,7 +37,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="mobilelabel"/><br/> (will be hidden to the public)
+                                        <fmt:message key="mobilelabel"/>
+                                        <br/> <i>(will be hidden to the public)</i>
                                     </td>
                                     <td>
                                         ${actionBean.job.mobile}
@@ -44,7 +46,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="emaillabel"/> <br/>(will be hidden to the public)
+                                        <fmt:message key="emaillabel"/>
+                                         <br/><i>(will be hidden to the public)</i>
                                     </td>
                                     <td>
                                         ${actionBean.job.email}

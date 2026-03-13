@@ -59,8 +59,8 @@
         <init-param>
             <param-name>Interceptor.Classes</param-name>
             <param-value>
-                com.marotech.skillhub.action.user.LoginInterceptor,
-                com.marotech.skillhub.action.user.RoleInterceptor
+                com.marotech.skillhub.action.LoginInterceptor,
+                com.marotech.skillhub.action.RoleInterceptor
             </param-value>
         </init-param>
     </filter>

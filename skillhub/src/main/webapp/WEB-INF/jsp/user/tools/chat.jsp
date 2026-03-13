@@ -34,6 +34,11 @@
                             <tbody>
                             <tr>
                                 <td>
+                                    <fmt:message key="exampleprompt"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                      <d:textarea style="background-color:#F0E68C" name="request"/>
                                 </td>
                                 <td align="right">

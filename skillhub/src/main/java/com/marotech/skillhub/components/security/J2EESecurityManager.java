@@ -1,6 +1,6 @@
 package com.marotech.skillhub.components.security;
 
-import com.marotech.skillhub.action.user.BaseActionBean;
+import com.marotech.skillhub.action.BaseActionBean;
 import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.model.UserRole;

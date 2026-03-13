@@ -12,26 +12,26 @@
     <uri>http://www.marotech.com/core</uri>
     <function>
         <name>isMany</name>
-        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-class>com.marotech.skillhub.action.FunctionUtil</function-class>
         <function-signature>java.lang.Boolean isMany(java.util.Collection)
         </function-signature>
     </function>
     <function>
         <name>hasMore</name>
-        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-class>com.marotech.skillhub.action.FunctionUtil</function-class>
         <function-signature>java.lang.Boolean hasMore(java.lang.Integer, java.util.Collection)
         </function-signature>
     </function>
     <function>
         <name>isAnalysisOptionSelected</name>
-        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-class>com.marotech.skillhub.action.FunctionUtil</function-class>
         <function-signature>java.lang.Boolean isAnalysisOptionSelected(java.lang.String,
             java.util.List)
         </function-signature>
     </function>
     <function>
         <name>wasDistributedTo</name>
-        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-class>com.marotech.skillhub.action.FunctionUtil</function-class>
         <function-signature>java.lang.Boolean
             wasDistributedTo(com.marotech.skillhub.model.User,
             java.util.Set)
@@ -39,7 +39,7 @@
     </function>
     <function>
         <name>hasOneRoleOf</name>
-        <function-class>com.marotech.skillhub.action.user.FunctionUtil</function-class>
+        <function-class>com.marotech.skillhub.action.FunctionUtil</function-class>
         <function-signature>java.lang.Boolean
             hasOneRoleOf(com.marotech.skillhub.model.User,
             java.lang.String)

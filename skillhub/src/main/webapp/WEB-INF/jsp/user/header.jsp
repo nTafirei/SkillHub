@@ -10,7 +10,7 @@
         <br/><br/>
         <div id="logo">
             <h1>
-                <d:link href="/web/inbox"><fmt:message key="appnamekey"/></d:link>
+                <d:link href="/web/home"><fmt:message key="appnamekey"/></d:link>
             </h1>
         </div>
 
@@ -19,10 +19,10 @@
             <ul>
                  <c:if test="${actionBean.isLoggedIn == false}">
                     <c:if test="${actionBean.navSection == 'register'}">
-                        <li class="current"><d:link href="/web/register2"><fmt:message key="registermenu"/></d:link></li>
+                        <li class="current"><d:link href="/web/register1"><fmt:message key="registermenu"/></d:link></li>
                     </c:if>
                     <c:if test="${actionBean.navSection != 'register'}">
-                            <li ><d:link href="/web/register2"><fmt:message key="registermenu"/></d:link></li>
+                            <li ><d:link href="/web/register1"><fmt:message key="registermenu"/></d:link></li>
                     </c:if>
                 </c:if>
                          <c:if test="${actionBean.navSection == 'tools'}">

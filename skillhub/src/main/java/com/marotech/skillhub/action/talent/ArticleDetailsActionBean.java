@@ -1,0 +1,45 @@
+package com.marotech.skillhub.action.talent;
+
+import com.marotech.skillhub.action.UserBaseActionBean;
+import com.marotech.skillhub.action.converters.UserConverter;
+import com.marotech.skillhub.model.User;
+import lombok.Getter;
+import lombok.Setter;
+import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidationErrors;
+
+@UrlBinding("/web/article-details/{talent}")
+public class ArticleDetailsActionBean extends UserBaseActionBean {
+    @Getter
+    @Setter
+    @Validate(converter = UserConverter.class, required = true)
+    private User talent;
+
+    @DefaultHandler
+    public Resolution view() {
+        return new ForwardResolution(AUTHOR_DETAIL_JSP);
+    }
+
+    @Override
+    public Resolution handleValidationErrors(ValidationErrors errors)
+            throws Exception {
+        super.handleValidationErrors(errors);
+        return new ForwardResolution(getErrorPage());
+    }
+
+    @Override
+    protected String getErrorPage() {
+        return AUTHOR_DETAIL_JSP;
+    }
+
+    @Override
+    public String getNavSection() {
+        return "talent";
+    }
+
+    public static final String AUTHOR_DETAIL_JSP = "/WEB-INF/jsp/user/talent/article-details.jsp";
+}

@@ -80,7 +80,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="lastnamelabel"/>
+                                        <fmt:message key="lastnamelabel"/><br/> <i>(Will be hidden from the public)</i>
                                     </td>
                                     <td>
                                         <d:text name="fromLastName" id="fromLastName" style="background-color:#F0E68C"/>
@@ -88,7 +88,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="emaillabel"/>
+                                        <fmt:message key="emaillabel"/><br/> <i>(Will be hidden from the public)</i>
                                     </td>
                                     <td>
                                         <d:text name="fromEmail" id="fromEmail" style="background-color:#F0E68C"/>

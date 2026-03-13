@@ -32,7 +32,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="namelabel"/><br/>(will be hidden to the public)
+                                        <fmt:message key="namelabel"/>
+                                        <br/><i>(will be hidden to the public)</i>
                                     </td>
                                     <td>
                                         <d:text name="name" id="name" style="background-color:#F0E68C"/>
@@ -40,7 +41,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="mobilelabel"/><br/> (will be hidden to the public)
+                                        <fmt:message key="mobilelabel"/>
+                                        <br/> <i>(will be hidden to the public)</i>
                                     </td>
                                     <td>
                                         <d:text name="mobile" id="mobile" style="background-color:#F0E68C"/>
@@ -48,7 +50,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <fmt:message key="emaillabel"/> <br/>(will be hidden to the public)
+                                        <fmt:message key="emaillabel"/>
+                                        <br/><i>(will be hidden to the public)</i>
                                     </td>
                                     <td>
                                         <d:text name="email" id="email" style="background-color:#F0E68C"/>

@@ -66,8 +66,7 @@
                                      </td>
                                      <td>
                                              <c:set var="selectedValue" value=""/>
-                                             <s:select name="skill" id="skill" style="background-color:#F0E68C"
-                                              onchange="submitForm()">
+                                             <s:select name="skill" id="skill" style="background-color:#F0E68C">
                                                    <s:option value="">
                                                    <fmt:message key="selectskilllabel"/></s:option>
                                                    <c:forEach items="${actionBean.skills}" var="skill"
@@ -114,8 +113,7 @@
                                      </td>
                                      <td>
                                              <c:set var="selectedValue" value=""/>
-                                             <s:select name="surbab" id="suburb" style="background-color:#F0E68C"
-                                             onchange="submitForm()">
+                                             <s:select name="suburb" id="suburb" style="background-color:#F0E68C">
                                                    <s:option value="">
                                                    <fmt:message key="selectsurbablabel"/></s:option>
                                                    <c:forEach items="${actionBean.suburbs}" var="suburb"
