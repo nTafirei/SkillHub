@@ -1,0 +1,7 @@
+package com.marotech.skillhub.api;
+
+public enum ResponseType {
+
+    BALANCE, PRODUCTS, VENDORS, VOUCHER, VOUCHERS, REG_DATA, PAYMENT_METHODS,
+    REG_RESPONSE, AUTH_RESPONSE, WALLET_RESPONSE, LOYALTY_POINTS;
+}

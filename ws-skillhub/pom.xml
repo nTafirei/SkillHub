@@ -12,8 +12,8 @@
     <groupId>com.marotech.skillhub</groupId>
     <artifactId>ws-skillhub</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Skillhub Web Services</name>
-    <description>Skillhub Web Services</description>
+    <name>SkillHub Web Services</name>
+    <description>SkillHub Web Services</description>
     <properties>
         <java.version>17</java.version>
         <springdoc.version>2.8.13</springdoc.version>

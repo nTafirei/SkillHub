@@ -43,6 +43,13 @@ public class RepositoryService {
         return fetchUsersWithRoleIds(roleIds);
     }
 
+    public List<User> fetchAllUsersByRoleNames(List<String> roleNames) {
+        String jpql = "SELECT DISTINCT u FROM User u JOIN u.userRoles r WHERE r.roleName IN :roleNames";
+        TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
+        query.setParameter("roleNames", roleNames);
+        return query.getResultList();
+    }
+
     public List<UserRole> findRolesByNames(List<String> roleNames) {
         return entityManager.createQuery(
                         "SELECT r FROM UserRole r WHERE r.roleName IN :roleNames", UserRole.class)
@@ -380,6 +387,15 @@ public class RepositoryService {
         }
         return null;
     }
+    public AuthUser fetchAuthUserByMobileNumber(String mobilePhone) {
+        try {
+            return entityManager.createQuery("SELECT u from AuthUser u WHERE u.user..mobilePhone =?1", AuthUser.class).
+                    setParameter(1, mobilePhone).getSingleResult();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
 
     public User findUserByMobilePhone(String mobilePhone) {
         try {
@@ -407,6 +423,9 @@ public class RepositoryService {
         }
     }
 
+    public UserRole fetchUserRoleByRoleName(String roleName) {
+        return findUserRoleByRoleName(roleName);
+    }
     public UserRole findUserRoleByRoleName(String roleName) {
         if (StringUtils.isBlank(roleName)) {
             return null;

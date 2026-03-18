@@ -15,6 +15,7 @@ public class RegisterRequest {
     private String address;
     private String town;
     private String country;
+    private String suburb;
     private String mobileNumber;
     private String vendorId;
     private LocalDate dateOfBirth;

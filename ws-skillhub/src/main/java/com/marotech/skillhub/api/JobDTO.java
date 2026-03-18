@@ -3,7 +3,7 @@ package com.marotech.skillhub.api;
 import lombok.Data;
 
 @Data
-public class RecordingDTO extends BaseRequest {
+public class JobDTO extends BaseRequest {
     private String name;
     private String deviceLocation;
     private String id;

@@ -2,7 +2,7 @@ package com.marotech.skillhub.ws;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.marotech.skillhub.config.Config;
+import com.marotech.skillhub.components.config.Config;
 import com.marotech.skillhub.gson.CustomExclusionStrategy;
 import com.marotech.skillhub.gson.LocalDateTimeAdapter;
 import org.springframework.beans.factory.annotation.Autowired;

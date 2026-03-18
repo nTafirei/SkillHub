@@ -2,18 +2,18 @@ package com.marotech.skillhub.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marotech.skillhub.gson.GsonExcludeField;
-import com.marotech.skillhub.util.Page;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @ToString
-public class RecordingsRequest extends BaseRequest {
+public class JobsRequest extends BaseRequest {
 
     private LocalDate startDate;
     private LocalDate endDate;

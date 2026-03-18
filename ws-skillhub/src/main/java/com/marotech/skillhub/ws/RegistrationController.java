@@ -1,17 +1,17 @@
 package com.marotech.skillhub.ws;
 
-import com.marotech.skillhub.api.RegisterRequest;
 import com.marotech.skillhub.api.HttpCode;
+import com.marotech.skillhub.api.RegisterRequest;
 import com.marotech.skillhub.api.ResponseType;
 import com.marotech.skillhub.api.ServiceResponse;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.*;
-import com.marotech.skillhub.service.RepositoryService;
 import com.marotech.skillhub.util.Constants;
-import com.marotech.skillhub.util.EmailValidator;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.validator.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +117,7 @@ public class RegistrationController extends BaseController{
         User user = new User(request.getFirstName(),
                 request.getMiddleName(), request.getLastName(), theAddress,
                 request.getMobileNumber(), request.getNationalId());
-        UserRole role = repositoryService.fetchUserRoleByRoleName("User");
+        UserRole role = repositoryService.fetchUserRoleByRoleName(Constants.USER);
         user.getUserRoles().add(role);
         user.setDateOfBirth(request.getDateOfBirth());
         user.setEmail(request.getEmail());
@@ -153,7 +153,7 @@ public class RegistrationController extends BaseController{
         for (User staff : list) {
             Notification notification = new Notification();
             notification.setBody(config.getProperty(Constants.REG_BODY));
-            notification.setFrom(request.getEmail());
+            //notification.setFrom(request.getEmail());
             notification.setSubject(config.getProperty(Constants.REG_SUBJECT));
             notification.setRecipient(staff);
             repositoryService.save(notification);
@@ -169,12 +169,27 @@ public class RegistrationController extends BaseController{
     }
 
     private Address createUserAddress(RegisterRequest request) {
+
+        City city = repositoryService.fetchCityByName(request.getTown(), request.getCountry());
+        if(city == null){
+            city = new City();
+            city.setName(request.getTown());
+            city.setCountry(request.getCountry());
+            repositoryService.save(city);
+        }
+        Suburb suburb = repositoryService.fetchSuburbByName(city, request.getSuburb());
+        if(suburb == null) {
+            suburb = new Suburb();
+            suburb.setCity(city);
+            suburb.setName(request.getSuburb());
+            repositoryService.save(suburb);
+        }
+
         Address theAddress = new Address();
+        theAddress.setSuburb(suburb);
         theAddress.setAddress(request.getAddress());
-        theAddress.setCity(request.getTown());
-        theAddress.setCountry(request.getCountry());
-        theAddress.setAddressType(AddressType.HOME);
         repositoryService.save(theAddress);
+
         return theAddress;
     }
 
@@ -187,7 +202,7 @@ public class RegistrationController extends BaseController{
         authUser.setUserName(mobileNumber.toLowerCase());
         String newPassword = AuthUser.encodedPassword(request.getPassword());
         authUser.setPassword(newPassword);
-        authUser.setMobileNumber(mobileNumber);
+        //authUser.setMobileNumber(mobileNumber);
         repositoryService.save(authUser);
         return  authUser;
     }
@@ -195,7 +210,7 @@ public class RegistrationController extends BaseController{
     private void validateData(RegisterRequest request, StringBuilder builder) {
         builder.append(validateDateField(DATE_OF_BIRTH, request.getDateOfBirth()));
         if(StringUtils.isNotBlank(request.getEmail())) {
-            if(!EmailValidator.isValidEmail(request.getEmail())) {
+            if(!EmailValidator.getInstance().isValid(request.getEmail())) {
                 builder.append("Invalid email found");
             }
         }

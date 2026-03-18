@@ -3,7 +3,7 @@ package com.marotech.skillhub.ws;
 import com.marotech.skillhub.api.HttpCode;
 import com.marotech.skillhub.api.ResponseType;
 import com.marotech.skillhub.api.ServiceResponse;
-import com.marotech.skillhub.service.RepositoryService;
+import com.marotech.skillhub.components.service.RepositoryService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

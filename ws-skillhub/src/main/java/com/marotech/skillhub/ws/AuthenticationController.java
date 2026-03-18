@@ -1,15 +1,14 @@
 package com.marotech.skillhub.ws;
 
-import com.marotech.skillhub.api.OTPVerificationRequest;
-import com.marotech.skillhub.api.PasswordVerificationRequest;
 import com.marotech.skillhub.api.HttpCode;
+import com.marotech.skillhub.api.PasswordVerificationRequest;
 import com.marotech.skillhub.api.ResponseType;
 import com.marotech.skillhub.api.ServiceResponse;
+import com.marotech.skillhub.components.service.RepositoryService;
 import com.marotech.skillhub.model.Activity;
 import com.marotech.skillhub.model.ActivityType;
 import com.marotech.skillhub.model.AppSession;
 import com.marotech.skillhub.model.AuthUser;
-import com.marotech.skillhub.service.RepositoryService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 
 @RestController
@@ -97,62 +94,6 @@ public class AuthenticationController extends BaseController{
             LOG.error("Error", ex);
             createActivityLog(request.getMobileNumber(), null,
                     request.getMobileNumber() + " failed to log in online on using web service");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
-    }
-
-    @PostMapping(value = "/verifyMobileAndOneTimePasscode", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Verify mobile number and one time passcode",
-            notes = "Verifies mobile number and a one time passcode")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Mobile number and one time passcode have been verified"),
-            @ApiResponse(code = 400, message = "Bad request. Adjust values before retrying again", response =
-                    ServiceResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = ServiceResponse.class)
-    })
-
-    public ResponseEntity<ServiceResponse>
-    verifyMobileAndOneTimePasscode(@RequestBody OTPVerificationRequest request) {
-        ServiceResponse response = new ServiceResponse();
-        response.setResponseType(ResponseType.AUTH_RESPONSE);
-        try {
-            if (request == null || !request.isValid()) {
-                response.setCode(HttpCode.BAD_REQUEST);
-                response.setMessage("Either mobile number or password was not specified");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-            }
-            try {
-                AppSession appSession = repositoryService.
-                        fetchAppSessionByMobileNumberAndOTP(request.getMobileNumber(), request.getOtp());
-                if (appSession == null) {
-                    response.setCode(HttpCode.BAD_REQUEST);
-                    response.setMessage("Specified otp and mobile number were not found in our system");
-                    createActivityLog(request.getMobileNumber(), null, request.getMobileNumber() + " failed to log in online on using web services");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-                }
-                LocalDateTime updatedTime = appSession.getDateCreated();
-                LocalDateTime expiryTime = updatedTime.plusSeconds(config.getIntegerProperty("app.otp.ttl"));
-                if (LocalDateTime.now().isAfter(expiryTime)) {
-                    response.setCode(HttpCode.BAD_REQUEST);
-                    createActivityLog(request.getMobileNumber(), null, request.getMobileNumber() + " failed to log in online on using web services");
-                    response.setMessage("Specified otp has expired. Please contact our customer service team");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-                }
-                response.setToken(appSession.getToken());
-                response.getAdditionalInfo().put(TTL, config.getProperty(APP_SESSION_TTL));
-                createActivityLog(request.getMobileNumber(), null, request.getMobileNumber() + " logged in online on using web services");
-                return ResponseEntity.status(HttpStatus.OK).body(response);
-            } catch (Exception ex) {
-                response.setCode(HttpCode.INTERNAL_SERVER_ERROR);
-                response.setMessage("An error occurred in the system. Please contact customer service team");
-                LOG.error("Error encoding password for " + request.getMobileNumber(), ex);
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-            }
-        } catch (Exception ex) {
-            response.setCode(HttpCode.INTERNAL_SERVER_ERROR);
-            response.setMessage("An error occurred in the system. Please contact our customer service team");
-            LOG.error("Error", ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
