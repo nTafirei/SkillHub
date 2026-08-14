@@ -1,5 +1,6 @@
 package com.marotech.skillhub.components.security;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -65,7 +66,18 @@ public class ProtectedElementParser extends DefaultHandler {
 
         if (tagName.equalsIgnoreCase("protected-element")) {
             element = new ProtectedElement();
-            String name = attributes.getValue(0).trim();
+            String name = attributes.getValue("name");
+
+            if (StringUtils.isBlank(name)) {
+                log.error(
+                        "Security/Feature error : "
+                                + " could not find name of protected-element tag. Please make sure "
+                                + fileName + " and "
+                                + featureValidator.getFileName()
+                                + " match for : " + tagName);
+                System.exit(0);
+            }
+
             if (!featureValidator.isValidFeature(name)) {
                 log.error(
                         "Security/Feature error : "
@@ -76,12 +88,20 @@ public class ProtectedElementParser extends DefaultHandler {
                                 + " match for " + name);
                 System.exit(0);
             }
-            element.setName(attributes.getValue(0));
+            element.setName(name);
             elements.add(element);
-        }
 
-        if (tagName.equalsIgnoreCase("role")) {
-            String role = attributes.getValue(0).trim();
+            String enabled = attributes.getValue("enabled");
+            if (StringUtils.isNotBlank(enabled)) {
+                element.setEnabled(Boolean.valueOf(enabled));
+            }
+
+            String allowGuest = attributes.getValue("allowGuest");
+            if (StringUtils.isNotBlank(allowGuest)) {
+                element.setAllowGuest(Boolean.valueOf(allowGuest));
+            }
+        } else if (tagName.equalsIgnoreCase("role")) {
+            String role = attributes.getValue("name");
 
             if (!isValidRole(role)) {
                 log.error(
@@ -94,10 +114,6 @@ public class ProtectedElementParser extends DefaultHandler {
                 System.exit(0);
             }
             element.addRole(role);
-        }
-        if (tagName.equalsIgnoreCase("allowGuest")) {
-            String allowGuest = attributes.getValue(0).trim();
-            element.setAllowGuest(Boolean.valueOf(allowGuest));
         }
     }
 

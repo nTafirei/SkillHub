@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <protected-elements>
-    <protected-element name="manage-showcases">
+    <protected-element name="manage-showcases" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="manage-talent">
+    <protected-element name="manage-talent" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="manage-roles">
+    <protected-element name="manage-roles" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="edit-talent">
+    <protected-element name="edit-talent" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="delete-jobs">
+    <protected-element name="delete-jobs" allowGuest="false" enabled="true">>
         <role name="Customer Service"/>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="disable-users">
+    <protected-element name="disable-users" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="view-talent-details">
+    <protected-element name="view-talent-details" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
         <allowGuest value="true"/>
     </protected-element>
-    <protected-element name="generate-reports">
+    <protected-element name="generate-reports" allowGuest="false" enabled="true">>
         <role name="Customer Service"/>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="view-deeper-user-details">
+    <protected-element name="view-deeper-user-details" allowGuest="false" enabled="true">>
         <role name="Customer Service"/>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="verify-users">
+    <protected-element name="verify-users" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="list-users">
+    <protected-element name="list-users" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="list-reports">
+    <protected-element name="list-reports" allowGuest="false" enabled="true">>
         <role name="User"/>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>
-    <protected-element name="assign-roles">
+    <protected-element name="assign-roles" allowGuest="false" enabled="true">>
         <role name="Administrator"/>
         <role name="System Administrator"/>
     </protected-element>

@@ -12,6 +12,7 @@ public class ProtectedElement {
 
     private String name;
     private boolean allowGuest;
+    private boolean enabled;
     private List<String> roles;
     private Set<String> roleSet = new HashSet<String>();
 
@@ -23,6 +24,14 @@ public class ProtectedElement {
     public void addRole(String roleName) {
         roles.add(roleName);
         roleSet.add(roleName);
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public ProtectedElement(String name, List<String> roles) {

@@ -16,7 +16,7 @@ import java.util.List;
 public class Embedding extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Article publication;
+    private User talent;
     @Column
    // @JdbcTypeCode(SqlTypes.VECTOR)
     //@Array(length = 512) // dimensions

@@ -103,7 +103,6 @@ public class CommentActionBean extends UserBaseActionBean {
                     "-", fromLastName, theAddress,
                     fromMobile, "-");
             authUser.setUser(currentUser);
-            System.out.println(theAddress);
             UserRole role = repositoryService.findUserRoleByRoleName(Constants.USER);
             currentUser.getUserRoles().add(role);
 

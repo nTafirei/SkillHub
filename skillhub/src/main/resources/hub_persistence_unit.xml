@@ -23,9 +23,12 @@
         <class>com.marotech.skillhub.model.Embedding</class>
         <class>com.marotech.skillhub.model.LanguageModel</class>
         <class>com.marotech.skillhub.model.Address</class>
-        <class>com.marotech.skillhub.model.City</class>
-        <class>com.marotech.skillhub.model.Suburb</class>
+        <class>com.marotech.skillhub.model.District</class>
+        <class>com.marotech.skillhub.model.Area</class>
         <class>com.marotech.skillhub.model.Job</class>
+        <class>com.marotech.skillhub.model.Suburb</class>
+        <class>com.marotech.skillhub.model.City</class>
+        <class>com.marotech.skillhub.model.SecurityQuestion</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>

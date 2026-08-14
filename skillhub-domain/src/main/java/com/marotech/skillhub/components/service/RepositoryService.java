@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -236,11 +235,6 @@ public class RepositoryService {
                 setParameter(1, id).getSingleResult();
     }
 
-    public Article findPublicationById(String id) {
-        return entityManager.createQuery("SELECT u from Publication u where u.id = ?1", Article.class).
-                setParameter(1, id).getSingleResult();
-    }
-
     public List<Comment> fetchReviewsForTalent(User talent) {
         return entityManager.createQuery(
                         "SELECT c FROM Comment c JOIN FETCH c.createdBy " +
@@ -250,6 +244,7 @@ public class RepositoryService {
                 .setParameter("pubType", PubType.THIRD_PARTY_REVIEW)
                 .getResultList();
     }
+
     public List<Comment> getCompleteReviewsTree(User talent) {
         List<Comment> allComments = entityManager.createQuery(
                         "SELECT DISTINCT c FROM Comment c " +
@@ -305,13 +300,6 @@ public class RepositoryService {
                 .getResultList();
     }
 
-    public List<Article> findPublicationsForUser(User worker) {
-        return entityManager.createQuery(
-                        "SELECT p FROM Publication p JOIN p.workers a WHERE a = :worker", Article.class)
-                .setParameter("worker", worker)
-                .getResultList();
-    }
-
     public User findUserById(String id) {
         return entityManager.createQuery("SELECT u from User u where u.id = ?1", User.class).
                 setParameter(1, id).getSingleResult();
@@ -345,10 +333,6 @@ public class RepositoryService {
     public Notification findNotificationById(String id) {
         return entityManager.createQuery("SELECT u from Notification u where u.id = ?1", Notification.class).
                 setParameter(1, id).getSingleResult();
-    }
-
-    public Iterable<Article> findAllPublications() {
-        return entityManager.createQuery("SELECT u from Publication u", Article.class).getResultList();
     }
 
     public List<UserRole> findAllRoles() {
@@ -387,6 +371,7 @@ public class RepositoryService {
         }
         return null;
     }
+
     public AuthUser fetchAuthUserByMobileNumber(String mobilePhone) {
         try {
             return entityManager.createQuery("SELECT u from AuthUser u WHERE u.user..mobilePhone =?1", AuthUser.class).
@@ -426,6 +411,7 @@ public class RepositoryService {
     public UserRole fetchUserRoleByRoleName(String roleName) {
         return findUserRoleByRoleName(roleName);
     }
+
     public UserRole findUserRoleByRoleName(String roleName) {
         if (StringUtils.isBlank(roleName)) {
             return null;
@@ -902,11 +888,11 @@ public class RepositoryService {
         }
     */
 
-    public List<Article> findShowcasedPublications(int start, int limit) {
+    public List<User> findShowcasedTalent(int start, int limit) {
         try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE " +
+            return entityManager.createQuery("SELECT u from User u WHERE " +
                                     " u.activeStatus =?1 AND u.showcase =?2",
-                            Article.class).
+                            User.class).
                     setParameter(1, ActiveStatus.ACTIVE).
                     setParameter(2, Showcase.YES).
                     getResultList();
@@ -928,41 +914,14 @@ public class RepositoryService {
         }
     }
 
-    public List<Article> findShowcasedByCategory(Category category, int start, int limit) {
+    public List<User> findShowcasedTalentByCategory(Category category, int start, int limit) {
         try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE u.category =?1 AND " +
-                                    " u.activeStatus =?2 AND u.showcase =?3",
-                            Article.class).
+            return entityManager.createQuery("SELECT DISTINCT u FROM User u " +
+                                    "JOIN u.skills s  WHERE u.showcase = 'YES' " +
+                                    "AND s.category = :category ORDER BY u.lastName",
+                            User.class).
                     setParameter(1, category).
-                    setParameter(2, ActiveStatus.ACTIVE).
-                    setParameter(3, Showcase.YES).
-                    getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public List<Article> findPublicationsByCategory(Category category, int start, int limit, ActiveStatus activeStatus) {
-        try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE u.category =?1 AND " +
-                                    " u.activeStatus =?2",
-                            Article.class).
-                    setParameter(1, category).
-                    setParameter(2, activeStatus).
-                    getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public List<Article> findPublications(int start, int limit, ActiveStatus activeStatus) {
-        try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE " +
-                                    " u.activeStatus =?1",
-                            Article.class).
-                    setParameter(1, activeStatus).
+                    setFirstResult(start).setMaxResults(limit).
                     getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1025,19 +984,6 @@ public class RepositoryService {
         }
     }
 
-    public List<Article> findPublicationBySource(String source) {
-        if (StringUtils.isBlank(source)) {
-            return new ArrayList<>();
-        }
-        try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE u.source LIKE?1", Article.class).
-                    setParameter(1, "%" + source + "%").
-                    getResultList();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     public List<Suburb> fetchSuburbsForCity(City city) {
         if (city == null) {
             return new ArrayList<>();
@@ -1059,25 +1005,6 @@ public class RepositoryService {
             return null;
         }
     }
-
-    public List<Article> findPublicationByTitle(String title) {
-        if (StringUtils.isBlank(title)) {
-            return new ArrayList<>();
-        }
-        try {
-            return entityManager.createQuery("SELECT u from Publication u WHERE u.title LIKE?1", Article.class).
-                    setParameter(1, "%" + title + "%").
-                    getResultList();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public List<Article> findPublicationByName(String firstName, String lastName) {
-        //TODO: implement method
-        return null;
-    }
-
     public GenericRepository<BaseEntity> getRepository() {
         return repository;
     }

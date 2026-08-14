@@ -50,8 +50,8 @@ public class OrgDataSet {
             if (superAdmin == null) {
                 String country = config.getProperty("country");
                 AuthUser authUser = new AuthUser();
-                authUser.setUserName("system_admin@skillhub.co." + ext);
-                String newPassword = AuthUser.encodedPassword("test");
+                authUser.setUserName("0712374658");
+                String newPassword = AuthUser.encodedPassword("0712374658");
                 authUser.setPassword(newPassword);
 
                 repository.save(authUser);

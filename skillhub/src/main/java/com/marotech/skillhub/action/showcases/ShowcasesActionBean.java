@@ -2,10 +2,9 @@ package com.marotech.skillhub.action.showcases;
 
 import com.marotech.skillhub.action.UserBaseActionBean;
 import com.marotech.skillhub.action.converters.EnumConverter;
-import com.marotech.skillhub.action.converters.PublicationConverter;
 import com.marotech.skillhub.components.service.RepositoryService;
-import com.marotech.skillhub.model.Article;
 import com.marotech.skillhub.model.Category;
+import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.repository.ShowcaseRepository;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,15 +26,10 @@ public class ShowcasesActionBean extends UserBaseActionBean {
     @Validate(converter = EnumConverter.class)
     private Category category;
     @Getter
-    private List<Article> publications;
+    private List<User> showcasedTalent;
     @Getter
     @Setter
     private int currPage = 0;
-    @Getter
-    @Setter
-    @Validate(required = true, on = {REMOVE, ADD}, converter = PublicationConverter.class)
-    private Article publication;
-
 
     @DefaultHandler
     public Resolution list() {
@@ -54,17 +48,17 @@ public class ShowcasesActionBean extends UserBaseActionBean {
             start = 1;
         }
         if (category != null) {
-            publications = repositoryService.findShowcasedByCategory(category, start, perPage);
+            showcasedTalent = repositoryService.findShowcasedTalentByCategory(category, start, perPage);
         }else{
-            publications = repositoryService.findShowcasedPublications(start, perPage);
+            showcasedTalent = repositoryService.findShowcasedTalent(start, perPage);
         }
     }
 
-    public long getPublicationsSize() {
-        if (publications == null) {
+    public long getShowcasedTalentSize() {
+        if (showcasedTalent == null) {
             return 0;
         }
-        return publications.size();
+        return showcasedTalent.size();
     }
 
     @Override
