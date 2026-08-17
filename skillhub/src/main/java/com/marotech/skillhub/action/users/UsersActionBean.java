@@ -32,14 +32,8 @@ public class UsersActionBean extends UserBaseActionBean {
     @DefaultHandler
     public Resolution list() {
 
-        Iterable<User> temp =
+        users =
                 repositoryService.fetchAllUsersWithRoles(Arrays.asList(ROLES));
-
-        for (User user1 : temp) {
-            if (!user1.hasRole(AGENT) && !user1.hasRole(AGENT_SUPERVISOR)) {
-                users.add(user1);
-            }
-        }
         users.sort(Comparator.comparing(User::getLastName));
         return new ForwardResolution(USERS_LIST_JSP);
     }

@@ -32,14 +32,7 @@ public class TalentActionBean extends UserBaseActionBean {
     @DefaultHandler
     public Resolution list() {
 
-        Iterable<User> temp =
-                repositoryService.fetchAllUsersWithRoles(Arrays.asList(ROLES));
-
-        for (User user1 : temp) {
-            if (!user1.hasRole(AGENT) && !user1.hasRole(AGENT_SUPERVISOR)) {
-                users.add(user1);
-            }
-        }
+        users = repositoryService.fetchAllUsersWithRoles(Arrays.asList(ROLES));
         users.sort(Comparator.comparing(User::getLastName));
         return new ForwardResolution(USERS_LIST_JSP);
     }

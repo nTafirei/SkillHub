@@ -207,8 +207,6 @@ public abstract class BaseActionBean extends SecurityAwareActionBean implements
         return getContext().getRequest().getContextPath() + getScriptDir();
     }
 
-    protected static final String AGENT = "Agent";
-    protected static final String AGENT_SUPERVISOR = "Agent Supervisor";
     @SpringBean
     protected Config config;
 

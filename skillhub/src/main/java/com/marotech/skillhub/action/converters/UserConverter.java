@@ -20,7 +20,7 @@ public class UserConverter extends ConverterBase implements TypeConverter<User> 
             return null;
         }
 
-        User user = null;
+        User user;
         try {
             user = repositoryService.findUserById(input);
         } catch (Exception e) {

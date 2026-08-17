@@ -6,10 +6,7 @@ import com.marotech.skillhub.action.converters.UserConverter;
 import com.marotech.skillhub.model.User;
 import lombok.Getter;
 import lombok.Setter;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrors;
 
@@ -23,7 +20,10 @@ public class UserDetailsActionBean extends UserBaseActionBean {
 
     @DefaultHandler
     public Resolution view() {
-            return new ForwardResolution(USER_DETAIL_JSP);
+        if (user == null) {
+            return new RedirectResolution("/web/talent");
+        }
+        return new ForwardResolution(USER_DETAIL_JSP);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UserDetailsActionBean extends UserBaseActionBean {
 
     @Override
     public String getNavSection() {
-        if(user.getIsTalent()){
+        if (user != null && user.getIsTalent()) {
             return "talent";
         }
         return "users";

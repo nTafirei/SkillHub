@@ -11,6 +11,7 @@
         <div id="main-wrapper main-contents">
             <div class="container">
                 <div id="content">
+                    <s:errors/>
                         <table class="alternating">
                             <thead>
                                 <tr>

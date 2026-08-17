@@ -18,8 +18,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.8.5</aspectj.version>
-        <camel.quartz2.version>3.4.0</camel.quartz2.version>
-        <camel.version>4.0.0</camel.version>
+        <camel.version>4.22.0</camel.version>
         <jodreports.version>2.4.0</jodreports.version>
         <jodconverter.version>2.2.1</jodconverter.version>
         <fest.assert.version>1.4</fest.assert.version>
@@ -40,12 +39,11 @@
         <logback.version>1.5.6</logback.version>
         <stripes.version>1.6.0-JakartaEE10</stripes.version>
         <xerces.version>2.11.0</xerces.version>
-        <spring.version>6.2.2</spring.version>
+        <spring.version>7.0.8</spring.version>
         <classgraph.version>4.8.179</classgraph.version>
-        <spring.data.version>3.4.3</spring.data.version>
-        <hibernate.version>6.6.8.Final</hibernate.version>
+        <spring.data.version>4.1.0</spring.data.version>
+        <hibernate.version>7.4.5.Final</hibernate.version>
         <proguard.version>7.0.0</proguard.version>
-        <spring-ai.version>1.0.0-M6</spring-ai.version>
         <ollama4j.version>1.9.0-local</ollama4j.version>
         <javafaker.version>0.12</javafaker.version>
         <gson.version>2.12.1</gson.version>
@@ -64,8 +62,7 @@
         <jobrunr.version>7.4.1</jobrunr.version>
         <pgvector.version>0.1.6</pgvector.version>
         <tika.version>3.2.0</tika.version>
-        <hibernate-vector.version>6.4.0.Final</hibernate-vector.version>
-        <commons-validator.version>1.2.0</commons-validator.version>
+         <commons-validator.version>1.2.0</commons-validator.version>
         <commons-lang.version>2.3</commons-lang.version>
         <jakarta.annotation-api.version>2.0.0</jakarta.annotation-api.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
@@ -103,7 +100,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-vector</artifactId>
-            <version>${hibernate-vector.version}</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jodreports</groupId>
@@ -284,32 +281,6 @@
             <version>${logback.version}</version>
         </dependency>
 
-        <!--TEST-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <!--CAMEL-->
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -396,6 +367,38 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>jakarta.mail</artifactId>
             <version>${jakarta.mail.version}</version>
+        </dependency>
+
+        <!--TEST-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
