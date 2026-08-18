@@ -14,7 +14,9 @@ import net.sourceforge.stripes.exception.StripesRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Intercepts({LifecycleStage.CustomValidation})
 public class RoleInterceptor implements Interceptor, ConfigurableComponent {
@@ -42,45 +44,52 @@ public class RoleInterceptor implements Interceptor, ConfigurableComponent {
             ExecutionContext executionContext) throws Exception {
 
         if (!executionContext.getActionBean().getClass()
-                .isAnnotationPresent(RequiresOneRoleOf.class)) {
+                .isAnnotationPresent(RequiresOneRoleOf.class)
+                && !executionContext.getHandler().
+                isAnnotationPresent(RequiresOneRoleOf.class)) {
             return executionContext.proceed();
         }
-        if (!executionContext.getHandler()
-                .isAnnotationPresent(RequiresOneRoleOf.class)) {
-            return executionContext.proceed();
-        }
+        BaseActionBean baseActionBean = (BaseActionBean) executionContext.getActionBean();
 
-        User user = (User) executionContext.getActionBean().getContext()
-                .getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER);
+        User user = baseActionBean.getCurrentUser();
 
         if (user == null) {
             LOG.error("No user was found in the session for role validation");
             return new RedirectResolution(WEB_USER_LOGIN);
         } else {
-            String[] roleNames = executionContext.getActionBean().
-                    getClass().getAnnotation(RequiresOneRoleOf.class).value();
 
-            boolean show = ((BaseActionBean)executionContext.getActionBean()).showRoles();
-
-            if(show){
-                LOG.debug("RoleInterceptorRoles found: " +
-                        user.getRoleNames());
-                LOG.debug("RoleInterceptor: Class : " + executionContext.getActionBean().
-                        getClass().getName() + " requires these roles: " +
-                        Arrays.asList(roleNames));
+            List<String> theRoles = new ArrayList<>();
+            String[] roleNames = null;
+            RequiresOneRoleOf annotation = executionContext.getActionBean().
+                    getClass().getAnnotation(RequiresOneRoleOf.class);
+            if (annotation != null) {
+                roleNames = annotation.value();
+                if (roleNames != null && roleNames.length > 0) {
+                    theRoles.addAll(Arrays.asList(roleNames));
+                }
             }
 
-            if(roleNames != null && roleNames.length > 0) {
-                if (!user.hasOneRoleOf(roleNames)) {
+            annotation = executionContext.getHandler().
+                    getClass().getAnnotation(RequiresOneRoleOf.class);
 
+            if (annotation != null) {
+                roleNames = annotation.value();
+                if (roleNames != null && roleNames.length > 0) {
+                    theRoles.addAll(Arrays.asList(roleNames));
+                }
+            }
+
+            if (!theRoles.isEmpty()) {
+                if (!user.hasOneRoleOf(roleNames)) {
+                    LOG.debug("Class : " + executionContext.getActionBean().
+                            getClass().getName() + " requires these roles: " +
+                            theRoles);
                     LOG.debug("User has these roles : " + user.getRoleNames());
 
                     executionContext.getActionBean().getContext()
                             .getValidationErrors().clear();
-                    executionContext.getActionBean().getContext()
-                            .getRequest().getSession()
-                            .setAttribute(Constants.LOGGED_IN_USER, null);
+
+                    baseActionBean.setCurrentUser(null);
 
                     String message = executionContext.getActionBean().
                             getClass().getName() + " requires these roles: " +
@@ -98,6 +107,7 @@ public class RoleInterceptor implements Interceptor, ConfigurableComponent {
         }
         return executionContext.proceed();
     }
+
 
     public static final String WEB_USER_LOGIN = "/web/login";
     private static final Logger LOG = LoggerFactory.getLogger(RoleInterceptor.class);

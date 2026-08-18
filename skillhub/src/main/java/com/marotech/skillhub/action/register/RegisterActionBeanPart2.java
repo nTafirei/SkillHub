@@ -72,8 +72,7 @@ public class RegisterActionBeanPart2 extends UserBaseActionBean {
 
     @DefaultHandler
     public Resolution view() {
-        getContext().getRequest().getSession()
-                .setAttribute(Constants.LOGGED_IN_USER, null);
+        setCurrentUser(null);
         return new ForwardResolution(REGISTER2_JSP);
     }
 
@@ -123,8 +122,7 @@ public class RegisterActionBeanPart2 extends UserBaseActionBean {
         repositoryService.save(user);
         authUser.setUser(user);
 
-        getContext().getRequest().getSession()
-                .setAttribute(Constants.LOGGED_IN_USER, user);
+        setCurrentUser(user);
 
         try {
             repositoryService.save(user);

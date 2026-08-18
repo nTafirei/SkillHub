@@ -32,7 +32,15 @@ public class RepositoryService {
 
     @Autowired
     private GenericRepository<BaseEntity> repository;
-
+    public <T> T fetchObjectById(Class<T> clazz, String objId) {
+        try {
+            return entityManager.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t " +
+                            "WHERE t.id =: objId", clazz)
+                    .setParameter("objId", objId).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     public List<User> fetchAllUsersWithRoles(List<String> roleNames) {
         List<UserRole> roles = findRolesByNames(roleNames);
         List<String> roleIds = new ArrayList<>();

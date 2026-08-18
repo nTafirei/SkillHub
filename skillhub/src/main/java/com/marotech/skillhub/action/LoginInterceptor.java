@@ -47,9 +47,7 @@ public class LoginInterceptor implements Interceptor, ConfigurableComponent {
         String target = ((HubActionBeanContext) executionContext
                 .getActionBean().getContext()).getTarget();
 
-        User user = (User) executionContext.getActionBean().getContext()
-                .getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER);
+        User user = baseActionBean.getCurrentUser();
 
         if (user == null) {
             if (StringUtils.isBlank(target)) {

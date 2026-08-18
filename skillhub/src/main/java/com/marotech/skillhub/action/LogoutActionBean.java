@@ -12,8 +12,7 @@ public class LogoutActionBean extends UserBaseActionBean {
 
     @DefaultHandler
     public Resolution view() {
-        getContext().getRequest().getSession()
-                .setAttribute(Constants.LOGGED_IN_USER, null);
+        setCurrentUser(null);
         getContext().getRequest().getSession()
                 .setAttribute(Constants.ROLE_ERROR_MESSAGE, null);
         return new RedirectResolution("/web/login");

@@ -20,8 +20,7 @@ public class RegisterActionBeanPart1 extends UserBaseActionBean {
     private RegType regType;
     @DefaultHandler
     public Resolution view() {
-        getContext().getRequest().getSession()
-                .setAttribute(Constants.LOGGED_IN_USER, null);
+        setCurrentUser(null);
         return new ForwardResolution(REGISTER1_JSP);
     }
 

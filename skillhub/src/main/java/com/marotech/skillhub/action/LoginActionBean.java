@@ -68,8 +68,7 @@ public class LoginActionBean extends UserBaseActionBean {
         }
 
         user = authUser.getUser();
-        getContext().getRequest().getSession()
-                .setAttribute(Constants.LOGGED_IN_USER, user);
+        setCurrentUser(user);
 
         if (!StringUtils.isBlank(target)) {
             return new RedirectResolution(target);

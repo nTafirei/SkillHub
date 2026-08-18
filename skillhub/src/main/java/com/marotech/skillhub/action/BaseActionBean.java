@@ -3,6 +3,7 @@ package com.marotech.skillhub.action;
 
 import com.marotech.skillhub.components.config.Config;
 import com.marotech.skillhub.components.security.SecurityAwareActionBean;
+import com.marotech.skillhub.components.service.HazelcastService;
 import com.marotech.skillhub.model.User;
 import com.marotech.skillhub.util.Constants;
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -79,17 +80,26 @@ public abstract class BaseActionBean extends SecurityAwareActionBean implements
 
 
     public User getCurrentUser() {
-        User user = (User) getContext().getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER);
-        if (user == null) {
-            return null;
+        if (config.getBooleanProperty(Constants.USE_HAZELCAST)) {
+            return hazelcastService.
+                    getCurrentUser(getContext().getRequest().getSession().getId());
         }
-        return user;
+        return (User) getContext().getRequest().getSession()
+                .getAttribute(LOGGED_IN_USER);
+    }
+
+    public void setCurrentUser(User user) {
+        if (config.getBooleanProperty(Constants.USE_HAZELCAST)) {
+            hazelcastService.setCurrentUser(user, getContext().
+                    getRequest().getSession().getId());
+        } else {
+            getContext().getRequest().getSession()
+                    .setAttribute(LOGGED_IN_USER, user);
+        }
     }
 
     public User getLoggedInUser() {
-        return (User) getContext().getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER);
+        return getCurrentUser();
     }
 
     protected String getDeploymentEnv() {
@@ -119,8 +129,7 @@ public abstract class BaseActionBean extends SecurityAwareActionBean implements
     }
 
     public boolean getIsLoggedIn() {
-        return getContext().getRequest().getSession()
-                .getAttribute(Constants.LOGGED_IN_USER) != null;
+        return getCurrentUser() != null;
     }
 
     public int getYear() {
@@ -209,7 +218,8 @@ public abstract class BaseActionBean extends SecurityAwareActionBean implements
 
     @SpringBean
     protected Config config;
-
+    @SpringBean
+    private HazelcastService hazelcastService;
     protected String target;
 
     public boolean showRoles(){
@@ -227,6 +237,6 @@ public abstract class BaseActionBean extends SecurityAwareActionBean implements
     public Config getConfig() {
         return config;
     }
-
+    public static final String LOGGED_IN_USER = "logged-in-user";
     private static final Logger LOG = LoggerFactory.getLogger(BaseActionBean.class);
 }
